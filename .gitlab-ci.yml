@@ -6,6 +6,7 @@ cache:
     - node_modules/
 
 before_script:
+  - cd workspace
   - yarn install
 
 stages:
