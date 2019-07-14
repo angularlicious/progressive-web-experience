@@ -307,3 +307,10 @@ warning "@nrwl/angular > @nrwl/cypress > @cypress/webpack-preprocessor@4.1.0" ha
 ```ts
 ng generate application lms --directory --style=scss --prefix=lms --routing --dry-run
 ```
+
+## CI Setup
+
+Follow the instructions in:
+
+- yaml.md
+- prettier.md
