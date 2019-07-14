@@ -227,7 +227,7 @@ publish:
   script:
     - pkg=$(ls lms.*.zip)
     - echo $pkg
-    # - curl -v -k --upload-file $pkg https://pacman.tcdevops.com/repository/Angular/$pkg
+    # - curl -v -k --upload-file $pkg https://SOMEWHERE-OUT-THERE/$pkg
 
 deploy:test:
   stage: deploy
