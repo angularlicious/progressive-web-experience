@@ -29,6 +29,9 @@ restore:
     - yarn install
   cache:
     # Preparing to set/retrieve node_modules cache.
+    key: nodemodules
+    paths:
+      - workspace/node_modules
 
 build:snapshot:
   stage: build
