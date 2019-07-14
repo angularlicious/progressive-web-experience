@@ -35,9 +35,6 @@ restore:
     - if [[ $fits ]]; then echo "Found fits!" && echo $fits && exit 1; else echo "No fits found"; fi;
   cache:
     # Preparing to set/retrieve node_modules cache.
-    key: nodemodules
-    paths:
-      - workspace/node_modules
 
 build:snapshot:
   stage: build
