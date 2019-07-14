@@ -1,3 +1,4 @@
+```yml
 before_script:
   - ng --version
   - yarn --version
@@ -141,6 +142,8 @@ test:unit:
     - /^.*\/release\/.*$/
   script:
     - cd workspace;
+    - rm karma.conf.js;
+    - mv karma.conf.js.build karma.conf.js;
     - yarn test;
   cache:
     key: nodemodules
@@ -225,7 +228,7 @@ publish:
   script:
     - pkg=$(ls lms.*.zip)
     - echo $pkg
-    # - curl -v -k --upload-file $pkg https://pacman.tcdevops.com/repository/Angular/$pkg
+    - curl -v -k --upload-file $pkg https://pacman.tcdevops.com/repository/Angular/$pkg
 
 deploy:test:
   stage: deploy
@@ -240,8 +243,14 @@ deploy:test:
     - source $appVars;
     - echo $PROJECT_NAME;
     - echo $PACKAGE_VERSION;
-    # - git clone
-    # - url="SOMEWHERE-OUT-THERE";
+    - git clone http://gitlab.tcdevops.com/ansible/Deploy.AngularApp.git
+    - url="https://serverinventory.tcdevops.com/ansible_inventory?Tags=$PROJECT_NAME&Tags=TestEnv&Tags=linux";
+      curl -v -X GET --header "Accept:text/plain" $url      > inventory;
+      echo "[target_servers:vars]"                          >> inventory;
+      echo "ansible_user=ansible_rm"                        >> inventory;
+      echo "ansible_connection=ssh"                         >> inventory;
+      export ANSIBLE_FORCE_COLOR=true;
+      ansible-playbook ./Deploy.AngularApp/deploy_angular_app_svc_registration.yml -i inventory --extra-vars "TARGET_MACHINE=target_servers ANGULAR_APP_NAME=$PROJECT_NAME ANGULAR_APP_VERSION=$PACKAGE_VERSION URL_PREFIX=testnextgen.dropcatch.com/";
   cache:
     key: packagevars
     policy: pull
@@ -259,8 +268,14 @@ deploy:stage:
     - source $appVars;
     - echo $PROJECT_NAME;
     - echo $PACKAGE_VERSION;
-    # - git clone
-    # - url="SOMEWHERE-OUT-THERE";
+    - git clone http://gitlab.tcdevops.com/ansible/Deploy.AngularApp.git
+    - url="https://serverinventory.tcdevops.com/ansible_inventory?Tags=$PROJECT_NAME&Tags=Staging&Tags=linux";
+      curl -v -X GET --header "Accept:text/plain" $url      > inventory;
+      echo "[target_servers:vars]"                          >> inventory;
+      echo "ansible_user=ansible_rm"                        >> inventory;
+      echo "ansible_connection=ssh"                         >> inventory;
+      export ANSIBLE_FORCE_COLOR=true;
+      ansible-playbook ./Deploy.AngularApp/deploy_angular_app_svc_registration.yml -i inventory --extra-vars "TARGET_MACHINE=target_servers ANGULAR_APP_NAME=$PROJECT_NAME ANGULAR_APP_VERSION=$PACKAGE_VERSION URL_PREFIX=stgnextgen.dropcatch.com/";
   cache:
     key: packagevars
     policy: pull
@@ -277,11 +292,18 @@ deploy:production:
     - source $appVars;
     - echo $PROJECT_NAME;
     - echo $PACKAGE_VERSION;
-    # - git clone
-    # - url="SOMEWHERE-OUT-THERE";
+    - git clone http://gitlab.tcdevops.com/ansible/Deploy.AngularApp.git
+    - url="https://serverinventory.tcdevops.com/ansible_inventory?Tags=$PROJECT_NAME&Tags=Production&Tags=linux";
+      curl -v -X GET --header "Accept:text/plain" $url      > inventory;
+      echo "[target_servers:vars]"                          >> inventory;
+      echo "ansible_user=ansible_rm"                        >> inventory;
+      echo "ansible_connection=ssh"                         >> inventory;
+      export ANSIBLE_FORCE_COLOR=true;
+      ansible-playbook ./Deploy.AngularApp/deploy_angular_app_svc_registration.yml -i inventory --extra-vars "TARGET_MACHINE=target_servers ANGULAR_APP_NAME=$PROJECT_NAME ANGULAR_APP_VERSION=$PACKAGE_VERSION URL_PREFIX=nextgen.dropcatch.com/";
   cache:
     key: packagevars
     policy: pull
     paths:
-      - workspace/env.propsenv.props
+      - workspace/env.props
   when: manual
+```
