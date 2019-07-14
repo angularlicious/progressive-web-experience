@@ -1,6 +1,6 @@
 ```yml
 before_script:
-  - ng --version
+  # - ng --version
   - yarn --version
   - date
 
