@@ -1,7 +1,7 @@
 image: node:10.16.0
 
 before_script:
-  - ng --version
+  - ng version
   - yarn --version
   - date
 
@@ -26,13 +26,13 @@ restore:
     - /^.*\/release\/.*$/
   script:
     - cd workspace
+    - yarn install
     - fdescribes=""
     - fdescribes=$(grep -R --include \*.spec* --exclude-dir=node_modules -w "fdescribe('*" ./ || true)
     - if [[ $fdescribes ]]; then echo "Found fdescribes!" && echo $fdescribes && exit 1; else echo "No fdscribes found"; fi;
     - fits=""
     - fits=$(grep -R --include \*.spec* --exclude-dir=node_modules -w "fit('*" ./ || true)
     - if [[ $fits ]]; then echo "Found fits!" && echo $fits && exit 1; else echo "No fits found"; fi;
-    - yarn install
   cache:
     key: nodemodules
     paths:
