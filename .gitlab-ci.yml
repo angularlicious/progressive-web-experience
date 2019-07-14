@@ -36,7 +36,7 @@ restore:
   cache:
     key: nodemodules
     paths:
-      - workspace/node_modules
+      - node_modules
 
 build:snapshot:
   stage: build
