@@ -1,9 +1,9 @@
-image: node:latest
+image: node:10.16.0
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}
   paths:
-    - node_modules/
+    - workspace/node_modules/
 
 before_script:
   - cd workspace
