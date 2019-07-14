@@ -26,7 +26,7 @@ restore:
     - /^.*\/release\/.*$/
   script:
     - cd workspace
-    - yarn global add @angular/cli
+    - yarn add @angular/cli --dev
     - yarn install
   cache:
     # Preparing to set/retrieve node_modules cache.
