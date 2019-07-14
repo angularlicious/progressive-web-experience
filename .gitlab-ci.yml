@@ -37,7 +37,7 @@ restore:
     # Preparing to set/retrieve node_modules cache.
     key: nodemodules
     paths:
-      - node_modules
+      - workspace/node_modules
 
 build:snapshot:
   stage: build
