@@ -28,7 +28,6 @@ restore:
     - cd workspace
     - yarn add @angular/cli
     - yarn install
-    - .\node_modules\.bin\ng version
   cache:
     # Preparing to set/retrieve node_modules cache.
     key: nodemodules
