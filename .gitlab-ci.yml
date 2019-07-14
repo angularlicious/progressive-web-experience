@@ -34,10 +34,10 @@ restore:
     - fits=$(grep -R --include \*.spec* --exclude-dir=node_modules -w "fit('*" ./ || true)
     - if [[ $fits ]]; then echo "Found fits!" && echo $fits && exit 1; else echo "No fits found"; fi;
   cache:
+    # Preparing to set/retrieve node_modules cache.
     key: nodemodules
-    policy: pull
     paths:
-      - workspace/node_modules
+      - node_modules
 
 build:snapshot:
   stage: build
