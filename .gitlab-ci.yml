@@ -45,9 +45,9 @@ build:snapshot:
     - /^.*\/release\/.*$/
   script:
     - cd workspace
-    - ng build lms --aot --no-progress
+    - yarn build lms --aot --no-progress
     - rm -rf dist
-    - ng build lms --no-progress
+    - yarn build lms --no-progress
   artifacts:
     expire_in: 1 day
     paths:
