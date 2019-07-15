@@ -1,7 +1,7 @@
 image: node:10.16.0
 
 before_script:
-  - ng --version
+  # - ng version
   - yarn --version
   - date
 
@@ -26,14 +26,11 @@ restore:
     - /^.*\/release\/.*$/
   script:
     - cd workspace
-    - fdescribes=""
-    - fdescribes=$(grep -R --include \*.spec* --exclude-dir=node_modules -w "fdescribe('*" ./ || true)
-    - if [[ $fdescribes ]]; then echo "Found fdescribes!" && echo $fdescribes && exit 1; else echo "No fdscribes found"; fi;
-    - fits=""
-    - fits=$(grep -R --include \*.spec* --exclude-dir=node_modules -w "fit('*" ./ || true)
-    - if [[ $fits ]]; then echo "Found fits!" && echo $fits && exit 1; else echo "No fits found"; fi;
+    - yarn add @angular/cli@8.0.0 --save
+    # - yarn add node-jq --save
     - yarn install
   cache:
+    # Preparing to set/retrieve node_modules cache.
     key: nodemodules
     paths:
       - workspace/node_modules
@@ -49,9 +46,9 @@ build:snapshot:
     - /^.*\/release\/.*$/
   script:
     - cd workspace
-    - ng build lms --aot --no-progress
+    - yarn build lms --aot --no-progress
     - rm -rf dist
-    - ng build lms --no-progress
+    - yarn build lms --no-progress
   artifacts:
     expire_in: 1 day
     paths:
@@ -162,27 +159,19 @@ package:snapshot:
   script:
     - cd workspace
     - echo "Package here"
-    - cleanver=$(cat package.json | jq '.version' | cut -d '"' -f 2)
-    - packageVer="$cleanver-$CI_COMMIT_REF_NAME-$CI_BUILD_ID"
-    - cleanPackageVer=$(echo $packageVer | tr / _)
-    - echo $cleanPackageVer
-    - echo "PACKAGE_VERSION=$cleanPackageVer"    > env.props
-    - echo "PROJECT_NAME=lms"           >> env.props
-    - cat env.props
-    - mv dist/apps/lms/* dist/
+    - mkdir -p $CI_PROJECT_DIR/artifacts/lms-$CI_PIPELINE_ID
+    - mv dist/apps/lms/* $CI_PROJECT_DIR/artifacts/lms-$CI_PIPELINE_ID/
     - rm -rf dist/apps/
-    - zip -r lms.$cleanPackageVer.zip dist/
-    - ls lms.*.zip
-    - mv lms.*.zip ../
-  cache:
-    key: packagevars
-    paths:
-      - workspace/env.props
+    - cd $CI_PROJECT_DIR/artifacts/lms-$CI_PIPELINE_ID
+    - echo $CI_PROJECT_DIR/artifacts/lms-$CI_PIPELINE_ID
+    - ls -l
+    - date
+    - date -u
+    - date -R
   artifacts:
     expire_in: 1 day
     paths:
-      - lms.*.zip
-      - workspace/env.props
+      - $CI_PROJECT_DIR/artifacts/lms-$CI_PIPELINE_ID
   dependencies:
     - build:snapshot
     - build:rc
@@ -194,25 +183,19 @@ package:release:
   script:
     - cd workspace
     - echo "Package here"
-    - cleanver=$(cat package.json | jq '.version' | cut -d '"' -f 2)
-    - echo $cleanver
-    - echo "PACKAGE_VERSION=$cleanver"    > env.props
-    - echo "PROJECT_NAME=lms"    >> env.props
-    - cat env.props
     - mv dist/apps/lms/* dist/
     - rm -rf dist/apps/
-    - zip -r lms.$cleanver.zip dist/
-    - ls lms.*.zip
-    - mv lms.*.zip ../
-  cache:
-    key: packagevars
-    paths:
-      - workspace/env.props
+    - mkdir -p $CI_PROJECT_DIR/artifacts/lms-$CI_PIPELINE_ID
+    - cp dist/* $CI_PROJECT_DIR/artifacts/lms-$CI_PIPELINE_ID
+    - cd $CI_PROJECT_DIR/artifacts/lms-$CI_PIPELINE_ID
+    - ls -l
+    - date
+    - date -u
+    - date -R
   artifacts:
     expire_in: 1 day
     paths:
-      - lms.*.zip
-      - workspace/env.props
+      - $CI_PROJECT_DIR/artifacts/lms-$CI_PIPELINE_ID
   dependencies:
     - build:release
 
@@ -225,7 +208,7 @@ publish:
     - develop
     - /^.*\/release\/.*$/
   script:
-    - pkg=$(ls lms.*.zip)
+    - pkg=$(ls $CI_PROJECT_DIR/artifacts/lms-$CI_PIPELINE_ID)
     - echo $pkg
     # - curl -v -k --upload-file $pkg https://SOMEWHERE-OUT-THERE/$pkg
 
@@ -238,17 +221,10 @@ deploy:test:
     - master
     - /^.*\/release\/.*$/
   script:
-    - appVars=$(find . -type f \( -iname "env.props" \));
-    - source $appVars;
-    - echo $PROJECT_NAME;
-    - echo $PACKAGE_VERSION;
+    - pkg=$(ls $CI_PROJECT_DIR/artifacts/lms-$CI_PIPELINE_ID)
+    - echo $pkg
     # - git clone
     # - url="SOMEWHERE-OUT-THERE";
-  cache:
-    key: packagevars
-    policy: pull
-    paths:
-      - workspace/env.props
   when: manual
 
 deploy:stage:
@@ -285,5 +261,5 @@ deploy:production:
     key: packagevars
     policy: pull
     paths:
-      - workspace/env.propsenv.props
+      - workspace/env.props
   when: manual

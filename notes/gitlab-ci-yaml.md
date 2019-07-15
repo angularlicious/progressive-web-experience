@@ -1,6 +1,6 @@
 ```yml
 before_script:
-  - ng --version
+  # - ng --version
   - yarn --version
   - date
 
@@ -306,4 +306,90 @@ deploy:production:
     paths:
       - workspace/env.props
   when: manual
+```
+
+## restore
+
+```ts
+Running with gitlab-runner 12.1.0-rc1 (6da35412)
+  on docker-auto-scale 72989761
+Using Docker executor with image node:10.16.0 ...
+Pulling docker image node:10.16.0 ...
+Using docker image sha256:4ae749096a479ec364232587395b5ef29bbc0c4f026d6875d9672e0c680f44c6 for node:10.16.0 ...
+Running on runner-72989761-project-13311542-concurrent-0 via runner-72989761-srm-1563149552-65e97ea9...
+Fetching changes with git depth set to 50...
+Initialized empty Git repository in /builds/angularlicious/lms/.git/
+Created fresh repository.
+From https://gitlab.com/angularlicious/lms
+ * [new branch]      20170714a/feature/ci-setup-and-configuration -> origin/20170714a/feature/ci-setup-and-configuration
+Checking out c91ac06b as 20170714a/feature/ci-setup-and-configuration...
+
+Skipping Git submodules setup
+Checking cache for nodemodules...
+Downloading cache.zip from https://storage.googleapis.com/gitlab-com-runners-cache/project/13311542/nodemodules
+Successfully extracted cache
+$ yarn --version
+1.16.0
+$ date
+Mon Jul 15 00:14:22 UTC 2019
+$ cd workspace
+$ yarn add @angular/cli@8.0.0 --save
+yarn add v1.16.0
+[1/4] Resolving packages...
+[2/4] Fetching packages...
+info fsevents@1.2.9: The platform "linux" is incompatible with this module.
+info "fsevents@1.2.9" is an optional dependency and failed compatibility check. Excluding it from installation.
+[3/4] Linking dependencies...
+warning "@nrwl/angular > @nrwl/cypress > @cypress/webpack-preprocessor@4.1.0" has unmet peer dependency "webpack@^4.18.1".
+warning "@nrwl/angular > @nrwl/cypress > @cypress/webpack-preprocessor > babel-loader@8.0.6" has unmet peer dependency "webpack@>=2".
+[4/4] Building fresh packages...
+warning "@angular/cli" is already in "devDependencies". Please remove existing entry first before adding it to "dependencies".
+success Saved 0 new dependencies.
+Done in 106.69s.
+$ yarn install
+yarn install v1.16.0
+[1/4] Resolving packages...
+success Already up-to-date.
+Done in 1.04s.
+Running after script...
+$ date
+Mon Jul 15 00:16:13 UTC 2019
+Creating cache nodemodules...
+workspace/node_modules: found 57979 matching files
+Uploading cache.zip to https://storage.googleapis.com/gitlab-com-runners-cache/project/13311542/nodemodules
+Created cache
+Job succeeded
+```
+
+## build:snapshot
+
+```ts
+Running with gitlab-runner 12.1.0-rc1 (6da35412)
+  on docker-auto-scale ed2dce3a
+Using Docker executor with image node:10.16.0 ...
+Pulling docker image node:10.16.0 ...
+Using docker image sha256:4ae749096a479ec364232587395b5ef29bbc0c4f026d6875d9672e0c680f44c6 for node:10.16.0 ...
+Running on runner-ed2dce3a-project-13311542-concurrent-0 via runner-ed2dce3a-srm-1563149749-9f9310ff...
+Fetching changes with git depth set to 50...
+Initialized empty Git repository in /builds/angularlicious/lms/.git/
+Created fresh repository.
+From https://gitlab.com/angularlicious/lms
+ * [new branch]      20170714a/feature/ci-setup-and-configuration -> origin/20170714a/feature/ci-setup-and-configuration
+Checking out c91ac06b as 20170714a/feature/ci-setup-and-configuration...
+
+Skipping Git submodules setup
+Checking cache for nodemodules...
+Downloading cache.zip from https://storage.googleapis.com/gitlab-com-runners-cache/project/13311542/nodemodules
+Successfully extracted cache
+$ yarn --version
+1.16.0
+$ date
+Mon Jul 15 00:18:01 UTC 2019
+$ cd workspace
+$ ng build lms --aot --no-progress
+/bin/bash: line 88: ng: command not found
+Running after script...
+$ date
+Mon Jul 15 00:18:02 UTC 2019
+ERROR: Job failed: exit code 1
 ```
