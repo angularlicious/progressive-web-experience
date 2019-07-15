@@ -221,17 +221,10 @@ deploy:test:
     - master
     - /^.*\/release\/.*$/
   script:
-    - appVars=$(find . -type f \( -iname "env.props" \));
-    - source $appVars;
-    - echo $PROJECT_NAME;
-    - echo $PACKAGE_VERSION;
+    - pkg=$(ls $CI_PROJECT_DIR/artifacts/lms-$CI_PIPELINE_ID)
+    - echo $pkg
     # - git clone
     # - url="SOMEWHERE-OUT-THERE";
-  cache:
-    key: packagevars
-    policy: pull
-    paths:
-      - workspace/env.props
   when: manual
 
 deploy:stage:
