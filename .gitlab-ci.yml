@@ -1,6 +1,7 @@
 image: node:10.16.0
 
 before_script:
+  # - ng version
   - yarn --version
   - date
 
@@ -26,8 +27,10 @@ restore:
   script:
     - cd workspace
     - yarn add @angular/cli@8.0.0 --save
+    # - yarn add node-jq --save
     - yarn install
   cache:
+    # Preparing to set/retrieve node_modules cache.
     key: nodemodules
     paths:
       - workspace/node_modules
