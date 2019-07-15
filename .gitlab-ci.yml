@@ -27,7 +27,7 @@ restore:
   script:
     - cd workspace
     - yarn add @angular/cli@8.0.0 --save
-    - yarn add node-jq --save
+    # - yarn add node-jq --save
     - yarn install
   cache:
     # Preparing to set/retrieve node_modules cache.
@@ -159,8 +159,7 @@ package:snapshot:
   script:
     - cd workspace
     - echo "Package here"
-    - echo $yarn get-version
-    - cleanver=$yarn get-version
+    - cleanver=0.0.1
     - packageVer="$cleanver-$CI_COMMIT_REF_NAME-$CI_BUILD_ID"
     - cleanPackageVer=$(echo $packageVer | tr / _)
     - echo $cleanPackageVer
@@ -192,7 +191,8 @@ package:release:
   script:
     - cd workspace
     - echo "Package here"
-    - cleanver=$(cat package.json | jq '.version' | cut -d '"' -f 2)
+    # - cleanver=$(cat package.json | jq '.version' | cut -d '"' -f 2)
+    - cleanver=0.0.1
     - echo $cleanver
     - echo "PACKAGE_VERSION=$cleanver"    > env.props
     - echo "PROJECT_NAME=lms"    >> env.props
@@ -283,5 +283,5 @@ deploy:production:
     key: packagevars
     policy: pull
     paths:
-      - workspace/env.propsenv.props
+      - workspace/env.props
   when: manual
