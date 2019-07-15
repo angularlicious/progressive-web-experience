@@ -183,7 +183,7 @@ package:snapshot:
   artifacts:
     expire_in: 1 day
     paths:
-      - lms.*.zip
+      - $CI_PROJECT_DIR/artifacts/lms.$pipelineID
       - workspace/env.props
   dependencies:
     - build:snapshot
@@ -218,7 +218,7 @@ package:release:
   artifacts:
     expire_in: 1 day
     paths:
-      - lms.*.zip
+      - $CI_PROJECT_DIR/artifacts/lms.$pipelineID
       - workspace/env.props
   dependencies:
     - build:release
