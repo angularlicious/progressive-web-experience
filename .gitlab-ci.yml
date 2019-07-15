@@ -160,12 +160,6 @@ package:snapshot:
     - cd workspace
     - echo "Package here"
     - pipelineID=$CI_PIPELINE_ID
-    - packageVer="$pipelineID-$CI_COMMIT_REF_NAME-$CI_BUILD_ID"
-    - cleanPackageVer=$(echo $packageVer | tr / _)
-    - echo $cleanPackageVer
-    - echo "PACKAGE_VERSION=$cleanPackageVer"    > env.props
-    - echo "PROJECT_NAME=lms"           >> env.props
-    - cat env.props
     - mv dist/apps/lms/* dist/
     - rm -rf dist/apps/
     - mkdir -p $CI_PROJECT_DIR/artifacts/lms.$pipelineID
@@ -175,16 +169,10 @@ package:snapshot:
     - date
     - date -u
     - date -R
-
-  cache:
-    key: packagevars
-    paths:
-      - workspace/env.props
   artifacts:
     expire_in: 1 day
     paths:
       - $CI_PROJECT_DIR/artifacts/lms.$pipelineID
-      - workspace/env.props
   dependencies:
     - build:snapshot
     - build:rc
@@ -196,12 +184,7 @@ package:release:
   script:
     - cd workspace
     - echo "Package here"
-    # - pipelineID=$(cat package.json | jq '.version' | cut -d '"' -f 2)
     - pipelineID=$CI_PIPELINE_ID
-    - echo $pipelineID
-    - echo "PACKAGE_VERSION=$pipelineID"    > env.props
-    - echo "PROJECT_NAME=lms"    >> env.props
-    - cat env.props
     - mv dist/apps/lms/* dist/
     - rm -rf dist/apps/
     - mkdir -p $CI_PROJECT_DIR/artifacts/lms.$pipelineID
@@ -211,15 +194,10 @@ package:release:
     - date
     - date -u
     - date -R
-  cache:
-    key: packagevars
-    paths:
-      - workspace/env.props
   artifacts:
     expire_in: 1 day
     paths:
       - $CI_PROJECT_DIR/artifacts/lms.$pipelineID
-      - workspace/env.props
   dependencies:
     - build:release
 
