@@ -27,6 +27,7 @@ restore:
   script:
     - cd workspace
     - yarn add @angular/cli@8.0.0 --save
+    - yarn add node-jq --save
     - yarn install
   cache:
     # Preparing to set/retrieve node_modules cache.
