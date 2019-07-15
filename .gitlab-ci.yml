@@ -159,7 +159,8 @@ package:snapshot:
   script:
     - cd workspace
     - echo "Package here"
-    - cleanver=$(cat package.json | jq '.version' | cut -d '"' -f 2)
+    - echo $yarn get-version
+    - cleanver=$yarn get-version
     - packageVer="$cleanver-$CI_COMMIT_REF_NAME-$CI_BUILD_ID"
     - cleanPackageVer=$(echo $packageVer | tr / _)
     - echo $cleanPackageVer

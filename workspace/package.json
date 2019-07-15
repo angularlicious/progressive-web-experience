@@ -32,6 +32,7 @@
     "format:fix-libs": "prettier --config ./.prettierrc --write --list-different \"libs/**/src/**/*{.ts,.js,.json}\"",
     "update": "ng update @nrwl/workspace",
     "update:check": "ng update",
+    "version": "jq -r '.version' package.json",
     "workspace-schematic": "nx workspace-schematic",
     "dep-graph": "nx dep-graph",
     "help": "nx help"
