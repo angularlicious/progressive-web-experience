@@ -159,8 +159,8 @@ package:snapshot:
   script:
     - cd workspace
     - echo "Package here"
-    - cleanver=0.0.1
-    - packageVer="$cleanver-$CI_COMMIT_REF_NAME-$CI_BUILD_ID"
+    - pipelineID=$CI_PIPELINE_ID
+    - packageVer="$pipelineID-$CI_COMMIT_REF_NAME-$CI_BUILD_ID"
     - cleanPackageVer=$(echo $packageVer | tr / _)
     - echo $cleanPackageVer
     - echo "PACKAGE_VERSION=$cleanPackageVer"    > env.props
@@ -168,9 +168,14 @@ package:snapshot:
     - cat env.props
     - mv dist/apps/lms/* dist/
     - rm -rf dist/apps/
-    - zip -r lms.$cleanPackageVer.zip dist/
-    - ls lms.*.zip
-    - mv lms.*.zip ../
+    - mkdir -p $CI_PROJECT_DIR/artifacts/lms.$pipelineID
+    - cp dist/lms $CI_PROJECT_DIR/artifacts/lms.$pipelineID
+    - cd $CI_PROJECT_DIR/artifacts/lms.$pipelineID
+    - ls -l
+    - date
+    - date -u
+    - date -R
+
   cache:
     key: packagevars
     paths:
@@ -191,17 +196,21 @@ package:release:
   script:
     - cd workspace
     - echo "Package here"
-    # - cleanver=$(cat package.json | jq '.version' | cut -d '"' -f 2)
-    - cleanver=0.0.1
-    - echo $cleanver
-    - echo "PACKAGE_VERSION=$cleanver"    > env.props
+    # - pipelineID=$(cat package.json | jq '.version' | cut -d '"' -f 2)
+    - pipelineID=$CI_PIPELINE_ID
+    - echo $pipelineID
+    - echo "PACKAGE_VERSION=$pipelineID"    > env.props
     - echo "PROJECT_NAME=lms"    >> env.props
     - cat env.props
     - mv dist/apps/lms/* dist/
     - rm -rf dist/apps/
-    - zip -r lms.$cleanver.zip dist/
-    - ls lms.*.zip
-    - mv lms.*.zip ../
+    - mkdir -p $CI_PROJECT_DIR/artifacts/lms.$pipelineID
+    - cp dist/lms $CI_PROJECT_DIR/artifacts/lms.$pipelineID
+    - cd $CI_PROJECT_DIR/artifacts/lms.$pipelineID
+    - ls -l
+    - date
+    - date -u
+    - date -R
   cache:
     key: packagevars
     paths:
