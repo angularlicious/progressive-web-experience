@@ -160,11 +160,11 @@ package:snapshot:
     - cd workspace
     - echo "Package here"
     - pipelineID=$CI_PIPELINE_ID
-    - mkdir -p $CI_PROJECT_DIR/artifacts/lms.$pipelineID
-    - mv dist/apps/lms/* $CI_PROJECT_DIR/artifacts/lms.$pipelineID/
+    - mkdir -p $CI_PROJECT_DIR/artifacts/lms-pipelineID
+    - mv dist/apps/lms/* $CI_PROJECT_DIR/artifacts/lms-pipelineID/
     - rm -rf dist/apps/
-    - cd $CI_PROJECT_DIR/artifacts/lms.$pipelineID
-    - echo $CI_PROJECT_DIR/artifacts/lms.$pipelineID
+    - cd $CI_PROJECT_DIR/artifacts/lms-pipelineID
+    - echo $CI_PROJECT_DIR/artifacts/lms-pipelineID
     - ls -l
     - date
     - date -u
@@ -172,7 +172,7 @@ package:snapshot:
   artifacts:
     expire_in: 1 day
     paths:
-      - $CI_PROJECT_DIR/artifacts/lms.$pipelineID
+      - $CI_PROJECT_DIR/artifacts/lms-pipelineID
   dependencies:
     - build:snapshot
     - build:rc
@@ -187,9 +187,9 @@ package:release:
     - pipelineID=$CI_PIPELINE_ID
     - mv dist/apps/lms/* dist/
     - rm -rf dist/apps/
-    - mkdir -p $CI_PROJECT_DIR/artifacts/lms.$pipelineID
-    - cp dist/* $CI_PROJECT_DIR/artifacts/lms.$pipelineID
-    - cd $CI_PROJECT_DIR/artifacts/lms.$pipelineID
+    - mkdir -p $CI_PROJECT_DIR/artifacts/lms-$pipelineID
+    - cp dist/* $CI_PROJECT_DIR/artifacts/lms-$pipelineID
+    - cd $CI_PROJECT_DIR/artifacts/lms-$pipelineID
     - ls -l
     - date
     - date -u
@@ -197,7 +197,7 @@ package:release:
   artifacts:
     expire_in: 1 day
     paths:
-      - $CI_PROJECT_DIR/artifacts/lms.$pipelineID
+      - $CI_PROJECT_DIR/artifacts/lms-$pipelineID
   dependencies:
     - build:release
 
