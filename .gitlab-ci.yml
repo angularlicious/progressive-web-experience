@@ -169,7 +169,7 @@ package:snapshot:
     - mv dist/apps/lms/* dist/
     - rm -rf dist/apps/
     - mkdir -p $CI_PROJECT_DIR/artifacts/lms.$pipelineID
-    - cp dist/lms $CI_PROJECT_DIR/artifacts/lms.$pipelineID
+    - cp dist/* $CI_PROJECT_DIR/artifacts/lms.$pipelineID
     - cd $CI_PROJECT_DIR/artifacts/lms.$pipelineID
     - ls -l
     - date
@@ -205,7 +205,7 @@ package:release:
     - mv dist/apps/lms/* dist/
     - rm -rf dist/apps/
     - mkdir -p $CI_PROJECT_DIR/artifacts/lms.$pipelineID
-    - cp dist/lms $CI_PROJECT_DIR/artifacts/lms.$pipelineID
+    - cp dist/* $CI_PROJECT_DIR/artifacts/lms.$pipelineID
     - cd $CI_PROJECT_DIR/artifacts/lms.$pipelineID
     - ls -l
     - date
