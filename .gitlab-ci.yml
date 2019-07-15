@@ -67,7 +67,7 @@ build:rc:
     - /^.*\/release\/.*$/
   script:
     - cd workspace
-    - ng build lms --aot --no-progress
+    - yarn build lms --aot --no-progress
   artifacts:
     expire_in: 1 day
     paths:
@@ -85,7 +85,7 @@ build:release:
     - master
   script:
     - cd workspace
-    - ng build lms --aot --prod --no-progress
+    - yarn build lms --aot --prod --no-progress
   artifacts:
     expire_in: 1 day
     paths:
