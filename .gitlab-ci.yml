@@ -46,7 +46,7 @@ build:snapshot:
     - /^.*\/release\/.*$/
   script:
     - cd workspace
-    - yarn build lms --aot --no-progress
+    # - yarn build lms --aot --no-progress
     - rm -rf dist
     - yarn build lms --no-progress
   artifacts:
@@ -106,7 +106,7 @@ test:lint:
     - /^.*\/release\/.*$/
   script:
     - cd workspace
-    - yarn lint
+    # - yarn lint
   cache:
     key: nodemodules
     policy: pull
@@ -123,7 +123,7 @@ test:lintformatting:
     - /^.*\/release\/.*$/
   script:
     - cd workspace
-    - yarn format:check
+    # - yarn format:check
   cache:
     key: nodemodules
     policy: pull
@@ -140,7 +140,7 @@ test:unit:
     - /^.*\/release\/.*$/
   script:
     - cd workspace;
-    - yarn test;
+    # - yarn test;
   cache:
     key: nodemodules
     policy: pull

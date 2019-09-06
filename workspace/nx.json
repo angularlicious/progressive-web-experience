@@ -13,6 +13,27 @@
     },
     "lms": {
       "tags": []
+    },
+    "logging": {
+      "tags": []
+    },
+    "error-handling": {
+      "tags": []
+    },
+    "configuration": {
+      "tags": []
+    },
+    "rules-engine": {
+      "tags": []
+    },
+    "actions": {
+      "tags": []
+    },
+    "http-service": {
+      "tags": []
+    },
+    "foundation": {
+      "tags": []
     }
   }
 }

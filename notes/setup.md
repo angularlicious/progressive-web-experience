@@ -1,17 +1,27 @@
-- [Setup](#Setup)
-  - [Install Node Version Manager (LTS)](#Install-Node-Version-Manager-LTS)
-  - [Install Node (LTS)](#Install-Node-LTS)
-  - [Install Angular CLI](#Install-Angular-CLI)
-  - [Power Up a New Nrwl Nx Workspace (version 8)](#Power-Up-a-New-Nrwl-Nx-Workspace-version-8)
-  - [Create Nrwl Nx Workspace](#Create-Nrwl-Nx-Workspace)
-  - [Add Power-Up](#Add-Power-Up)
-  - [Create LMS Application](#Create-LMS-Application)
+- [Setup](#setup)
+  - [Install Node Version Manager (LTS)](#install-node-version-manager-lts)
+  - [Install Yarn](#install-yarn)
+  - [Install Node (LTS)](#install-node-lts)
+  - [Install Angular CLI](#install-angular-cli)
+  - [Power Up a New Nrwl Nx Workspace (version 8)](#power-up-a-new-nrwl-nx-workspace-version-8)
+  - [Create Nrwl Nx Workspace](#create-nrwl-nx-workspace)
+  - [Add Power-Up](#add-power-up)
+  - [Create LMS Application](#create-lms-application)
+  - [CI Setup](#ci-setup)
 
 # Setup
 
 ## Install Node Version Manager (LTS)
 
-The development environment is using `nvm` (Node Version Manager) - the latest LTS version. The package manager installed and configured is _Yarn_.
+The development environment is using `nvm` (Node Version Manager) - the latest LTS version. Download and install the LTS version for your Mac/PC. Verify your installation:
+
+```ts
+nvm vesiosn
+```
+
+## Install Yarn
+
+The package manager installed and configured is _Yarn_.
 
 Yarn:
 
@@ -22,7 +32,7 @@ yarn --version
 
 ## Install Node (LTS)
 
-Node information.
+With NVM, you can use commands to install and use specific versions of node.
 
 ```ts
 nvm install 10.16.0
@@ -68,13 +78,13 @@ rxjs                         6.4.0
 
 ## Power Up a New Nrwl Nx Workspace (version 8)
 
-Install the Nrwl tools.
+Install the Nrwl tools (optional). Nrwl Nx provides some additional enhancements to the Angular Workspace. It is not required, but there are some nice features that will be discussed in the workshop.
 
 ```ts
 yarn global add @nrwl/workspace
 ```
 
-Verify the installation using `yarn global list` command.
+Verify the installation using `yarn global list` command. You should see the `@nrwl/workspace` item listed.
 
 ```ts
 yarn global list
@@ -88,7 +98,7 @@ info "@nrwl/workspace@8.0.1" has binaries:
 
 ## Create Nrwl Nx Workspace
 
-Create a new workspace.
+Use Nrwl.io Nx to create a new workspace.
 
 ```ts
 npx --ignore-existing create-nx-workspace workspace --npm-scope=angularlicious
