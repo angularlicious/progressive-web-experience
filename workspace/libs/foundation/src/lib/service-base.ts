@@ -14,7 +14,6 @@ import { HttpRequestOptions } from './models/http-request-options';
  */
 export class ServiceBase {
   accessToken = '';
-  serviceName: string;
   serviceContext: ServiceContext = new ServiceContext();
 
   /**
@@ -25,7 +24,7 @@ export class ServiceBase {
    * this base class. It will allow the members of the base class to log information
    * using the common LoggingService.
    */
-  constructor(public loggingService: LoggingService) {}
+  constructor(public serviceName, public loggingService: LoggingService) {}
 
   /**
    * Use to extract the contents of the HTTP body and return a JSON

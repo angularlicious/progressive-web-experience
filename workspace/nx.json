@@ -34,6 +34,12 @@
     },
     "foundation": {
       "tags": []
+    },
+    "lms-common": {
+      "tags": []
+    },
+    "lms-business-courses": {
+      "tags": []
     }
   }
 }

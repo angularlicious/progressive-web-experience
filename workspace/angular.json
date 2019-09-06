@@ -375,6 +375,62 @@
           "styleext": "scss"
         }
       }
+    },
+    "lms-common": {
+      "projectType": "library",
+      "root": "libs/lms-common",
+      "sourceRoot": "libs/lms-common/src",
+      "prefix": "angularlicious",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/lms-common/tsconfig.lib.json", "libs/lms-common/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/lms-common/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/lms-common/jest.config.js",
+            "tsConfig": "libs/lms-common/tsconfig.spec.json",
+            "setupFile": "libs/lms-common/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "lms-business-courses": {
+      "projectType": "library",
+      "root": "libs/lms/business/courses",
+      "sourceRoot": "libs/lms/business/courses/src",
+      "prefix": "angularlicious",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/lms/business/courses/tsconfig.lib.json", "libs/lms/business/courses/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/lms/business/courses/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/lms/business/courses/jest.config.js",
+            "tsConfig": "libs/lms/business/courses/tsconfig.spec.json",
+            "setupFile": "libs/lms/business/courses/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "cli": {

@@ -22,7 +22,9 @@
       "@angularlicious/rules-engine": ["libs/rules-engine/src/index.ts"],
       "@angularlicious/actions": ["libs/actions/src/index.ts"],
       "@angularlicious/http-service": ["libs/http-service/src/index.ts"],
-      "@angularlicious/foundation": ["libs/foundation/src/index.ts"]
+      "@angularlicious/foundation": ["libs/foundation/src/index.ts"],
+      "@angularlicious/lms-common": ["libs/lms-common/src/index.ts"],
+      "@angularlicious/lms/business/courses": ["libs/lms/business/courses/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
