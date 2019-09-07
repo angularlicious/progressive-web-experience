@@ -1,4 +1,5 @@
 export class Author {
+  id: number;
   name: string;
   bio: string;
   email: string;
@@ -7,4 +8,8 @@ export class Author {
   instagram: string;
   blogUrl: string;
   photoUrl: string;
+
+  constructor(name: string) {
+    this.name = name;
+  }
 }

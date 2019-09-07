@@ -6,10 +6,14 @@
   </div>
 
   <!-- DISPLAY A LIST OF COURSES :: START -->
-  <div class=" row">
-    <div class=" col-12">
+  <div class="row">
+    <div class=" col-12" *ngIf="showVideos$ | async">
+      <p>Here are some videos.</p>
       <!-- ADD CARDS HERE -->
+      <ng-container *ngFor="let course of latestCourses$ | async">
+        <lms-video-card [course]="course"></lms-video-card>
+      </ng-container>
     </div>
   </div>
-  <!-- DISPLAY A LIST OF COURSES :: END -->
 </div>
+<!-- DISPLAY A LIST OF COURSES :: END -->

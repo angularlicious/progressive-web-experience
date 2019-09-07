@@ -16,5 +16,6 @@ import { RouterModule } from '@angular/router';
   declarations: [],
   imports: [CommonModule, RouterModule],
   exports: [RouterModule],
+  bootstrap: [],
 })
 export class SharedModule {}
