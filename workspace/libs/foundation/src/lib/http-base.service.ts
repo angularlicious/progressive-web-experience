@@ -4,7 +4,6 @@ import { HttpClient, HttpEvent, HttpHeaders, HttpParams, HttpResponse } from '@a
 
 import { Observable } from 'rxjs';
 import { BehaviorSubject } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 
 import { HttpRequestOptions } from './models/http-request-options';
 import { HttpRequestMethod } from './models/http-request-methods.enum';

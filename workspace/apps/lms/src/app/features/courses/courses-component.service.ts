@@ -13,9 +13,7 @@ import { CoursesService } from '@angularlicious/lms/business/courses';
  *
  * It will coordinate the calls to the application's core domain service.
  */
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class CoursesComponentService extends ServiceBase {
   latestCoursesSubscription: Subscription;
   latestCourses$: ReplaySubject<VideoCourse[]> = new ReplaySubject<VideoCourse[]>(1);

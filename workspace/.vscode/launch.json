@@ -12,13 +12,6 @@
       "webRoot": "${workspaceFolder}",
       "pathMapping": {
         "/": "${workspaceFolder}"
-      },
-      "sourceMapPathOverrides": {
-        "webpack:///./*": "${webRoot}/*",
-        "webpack:///src/*": "${webRoot}/*",
-        "webpack:///*": "*",
-        "webpack:///./~/*": "${webRoot}/node_modules/*",
-        "meteor://💻app/*": "${webRoot}/*"
       }
     }
   ]

@@ -11,12 +11,13 @@ import { Severity } from '@angularlicious/logging';
  * serviceContext: This is initialized for each instance of a business provider - its purpose is to collect information during the processing of business logic.
  */
 export class BusinessProviderBase {
-  serviceName: string;
+  providerName: string;
   serviceContext: ServiceContext;
   accessToken: string;
 
-  constructor(public loggingService: LoggingService) {
-    this.loggingService.log(this.serviceName, Severity.Information, `Running constructor for the [BusinessProviderBase].`);
+  constructor(providerName: string, public loggingService: LoggingService) {
+    this.providerName = providerName;
+    this.loggingService.log(this.providerName, Severity.Information, `Running constructor for the [${this.providerName}].`);
   }
 
   /**
@@ -35,20 +36,20 @@ export class BusinessProviderBase {
     const message = new ServiceMessage(error.name, error.message)
       .WithDisplayToUser(true)
       .WithMessageType(MessageType.Error)
-      .WithSource(this.serviceName);
+      .WithSource(this.providerName);
 
     const logItem = `${message.toString()}; ${error.stack}`;
-    this.loggingService.log(this.serviceName, Severity.Error, logItem);
+    this.loggingService.log(this.providerName, Severity.Error, logItem);
 
     this.serviceContext.addMessage(message);
   }
 
   finishRequest(sourceName: string): void {
-    this.loggingService.log(this.serviceName, Severity.Information, `Request for [${sourceName}] by ${this.serviceName} is complete.`);
+    this.loggingService.log(this.providerName, Severity.Information, `Request for [${sourceName}] by ${this.providerName} is complete.`);
     if (this.serviceContext.hasErrors()) {
-      this.loggingService.log(this.serviceName, Severity.Information, `Preparing to write out the errors.`);
+      this.loggingService.log(this.providerName, Severity.Information, `Preparing to write out the errors.`);
       this.serviceContext.Messages.filter(f => f.DisplayToUser && f.MessageType === MessageType.Error).forEach(e =>
-        this.loggingService.log(this.serviceName, Severity.Error, e.toString())
+        this.loggingService.log(this.providerName, Severity.Error, e.toString())
       );
     }
   }
