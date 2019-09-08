@@ -4,6 +4,7 @@ import { LoggingService, LoggingModule, LogglyWriter } from '@angularlicious/log
 import { ConfigurationService, ConfigurationModule } from '@angularlicious/configuration';
 import { ConsoleWriter } from '@angularlicious/logging';
 import { ErrorHandlingModule, ErrorHandlingService } from '@angularlicious/error-handling';
+import { SecurityModule, AuthenticationService } from '@angularlicious/security';
 import { environment } from './../../../environments/environment';
 
 /**
@@ -21,7 +22,7 @@ export function initializeLogWriter(consoleWriter: ConsoleWriter) {
 }
 @NgModule({
   declarations: [],
-  imports: [CommonModule, ErrorHandlingModule, LoggingModule, ConfigurationModule.forRoot({ config: environment.appConfig })],
+  imports: [CommonModule, ErrorHandlingModule, LoggingModule, ConfigurationModule.forRoot({ config: environment.appConfig }), SecurityModule],
   providers: [
     ConfigurationService,
     LoggingService,
@@ -42,6 +43,7 @@ export function initializeLogWriter(consoleWriter: ConsoleWriter) {
       useClass: ErrorHandlingService,
       deps: [ConfigurationService, LoggingService],
     },
+    AuthenticationService,
   ],
 })
 export class CrossCuttingModule {}

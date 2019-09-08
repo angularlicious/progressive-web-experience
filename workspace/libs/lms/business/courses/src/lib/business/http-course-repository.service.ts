@@ -40,7 +40,7 @@ export class HttpCourseRepositoryService extends ServiceBase {
       'Learn how to use the Angular `DevKit` to create custom schematics that will generate and update code for your Angular applications. Schematics provides the mechanism for enhanced developer workflow that includes consistency and convention. It is the power behind the Angular CLI.';
     course2.id = 2;
     course2.title = 'Angular Schematics for a Better Workflow';
-    course2.videoUrl = 'https://youtu.be/-uu_v6bazLs';
+    course2.videoUrl = 'https://youtube.com/embed/-uu_v6bazLs';
     course2.videoImageUrl = 'http://i3.ytimg.com/vi/-uu_v6bazLs/hqdefault.jpg';
     courses.push(course2);
 

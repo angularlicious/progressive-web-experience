@@ -24,6 +24,7 @@
             "tsConfig": "apps/lms/tsconfig.app.json",
             "assets": ["apps/lms/src/favicon.ico", "apps/lms/src/assets"],
             "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
               "apps/lms/src/styles.scss",
               "apps/lms/src/assets/css/nucleo-icons.css",
               "apps/lms/src/assets/css/blk-design-system.css",
@@ -423,6 +424,41 @@
             "jestConfig": "libs/lms/business/courses/jest.config.js",
             "tsConfig": "libs/lms/business/courses/tsconfig.spec.json",
             "setupFile": "libs/lms/business/courses/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "security": {
+      "projectType": "library",
+      "root": "libs/security",
+      "sourceRoot": "libs/security/src",
+      "prefix": "angularlicious",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/security/tsconfig.lib.json",
+            "project": "libs/security/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/security/tsconfig.lib.json", "libs/security/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/security/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/security/jest.config.js",
+            "tsConfig": "libs/security/tsconfig.spec.json",
+            "setupFile": "libs/security/src/test-setup.ts"
           }
         }
       },

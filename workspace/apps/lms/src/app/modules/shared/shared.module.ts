@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { MaterialDesignModule } from '../material-design/material-design.module';
 
 /**
  * Use the [SharedModule] to manage Angular and other 3rd-party modules/libraries/packages
@@ -14,8 +15,8 @@ import { RouterModule } from '@angular/router';
  */
 @NgModule({
   declarations: [],
-  imports: [CommonModule, RouterModule],
-  exports: [RouterModule],
+  imports: [CommonModule, MaterialDesignModule, RouterModule],
+  exports: [MaterialDesignModule, RouterModule],
   bootstrap: [],
 })
 export class SharedModule {}

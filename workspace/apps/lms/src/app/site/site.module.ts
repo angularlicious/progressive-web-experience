@@ -9,9 +9,10 @@ import { AboutUsComponent } from './about-us/about-us.component';
 import { BlogComponent } from './blog/blog.component';
 import { LicenseComponent } from './license/license.component';
 import { SharedModule } from '../modules/shared/shared.module';
+import { UserImageComponent } from './user-image/user-image.component';
 
 @NgModule({
-  declarations: [NavbarComponent, SidebarComponent, FooterComponent, LoginComponent, ContactUsComponent, AboutUsComponent, BlogComponent, LicenseComponent],
+  declarations: [NavbarComponent, SidebarComponent, FooterComponent, LoginComponent, ContactUsComponent, AboutUsComponent, BlogComponent, LicenseComponent, UserImageComponent],
   exports: [NavbarComponent, SidebarComponent, FooterComponent],
   imports: [CommonModule, SharedModule],
 })

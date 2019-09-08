@@ -40,6 +40,9 @@
     },
     "lms-business-courses": {
       "tags": []
+    },
+    "security": {
+      "tags": []
     }
   }
 }

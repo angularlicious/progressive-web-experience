@@ -12,11 +12,9 @@
       <a [routerLink]="['/courses/video', course.id]">
         <img src="{{ course.videoImageUrl }}" />
       </a>
-      <!-- width="777" height="437" -->
-      <!-- <iframe width="560" height="315" [src]="safeUrl" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
     </ng-container>
   </div>
   <div class="card-footer">
-    <a href="javascript:void(0)" class="btn btn-info btn-round btn-lg">Watch</a>
+    <a [routerLink]="['/courses/video', course.id]" class="btn btn-simple btn-primary btn-round">View</a>
   </div>
 </div>
