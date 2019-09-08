@@ -1225,6 +1225,11 @@
   dependencies:
     "@babel/types" "^7.3.0"
 
+"@types/core-js@^2.5.2":
+  version "2.5.2"
+  resolved "https://registry.yarnpkg.com/@types/core-js/-/core-js-2.5.2.tgz#d4c25420044d4a5b65e00a82fc04b7824b62691f"
+  integrity sha512-+NPqjXgyA02xTHKJDeDca9u8Zr42ts6jhdND4C3PrPeQ35RJa0dmfAedXW7a9K4N1QcBbuWI1nSfGK4r1eVFCQ==
+
 "@types/estree@0.0.39":
   version "0.0.39"
   resolved "https://registry.yarnpkg.com/@types/estree/-/estree-0.0.39.tgz#e177e699ee1b8c22d23174caaa7422644389509f"
@@ -11434,6 +11439,11 @@ verror@1.10.0:
     assert-plus "^1.0.0"
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
+
+videogular2@^7.0.1:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/videogular2/-/videogular2-7.0.1.tgz#f13306a21396e32f775b9910e7b85dc943f3d4d6"
+  integrity sha512-nWsOGmyZEodK61ahF7EzWWoKn9DqsBdNRmvsZ5uz7jDgbEavABxWwgf4fWrHDgbizBNc9/VuyG5OwPZqkaW56w==
 
 viz.js@^1.8.1:
   version "1.8.2"

@@ -8,9 +8,8 @@ import { ApiResponse } from '@angularlicious/foundation';
 import { ErrorApiResponse } from '@angularlicious/foundation';
 import { ApiErrorMessage } from '@angularlicious/foundation';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
+// { providedIn: 'root', }
 export class HttpService {
   constructor(private httpClient: HttpClient) {}
 
@@ -46,7 +45,7 @@ export class HttpService {
    * Use to execute an HTTP request using the specified options in the [HttpRequestOptions].
    * @param requestOptions
    */
-  execute<T>(requestOptions: HttpRequestOptions): Observable<HttpResponse<ApiResponse<T>>> {
+  execute<T>(requestOptions: HttpRequestOptions): Observable<ApiResponse<T>> {
     console.log(`Preparing to perform request to: ${requestOptions.requestUrl}`);
     return this.httpClient
       .request<T>(requestOptions.requestMethod.toString(), requestOptions.requestUrl, {
