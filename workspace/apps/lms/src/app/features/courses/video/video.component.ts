@@ -5,7 +5,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { CoursesComponentService } from '../courses-component.service';
 import { BehaviorSubject, ReplaySubject, Subscription } from 'rxjs';
 import { VideoCourse } from '@angularlicious/lms-common';
-import { tap, map } from 'rxjs/operators';
 
 @Component({
   selector: 'lms-video',
