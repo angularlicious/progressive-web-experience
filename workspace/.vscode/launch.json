@@ -10,8 +10,12 @@
       "name": "LMS",
       "url": "http://localhost:4200",
       "webRoot": "${workspaceFolder}",
-      "pathMapping": {
-        "/": "${workspaceFolder}"
+      "sourceMapPathOverrides": {
+        "webpack:///./*": "${webRoot}/*",
+        "webpack:///src/*": "${webRoot}/*",
+        "webpack:///*": "*",
+        "webpack:///./~/*": "${webRoot}/node_modules/*",
+        "meteor://💻app/*": "${webRoot}/*"
       }
     }
   ]

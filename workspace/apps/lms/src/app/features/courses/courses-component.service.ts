@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ReplaySubject, Observable, Subscription } from 'rxjs';
+import { ReplaySubject, Observable, Subscription, BehaviorSubject } from 'rxjs';
 import { VideoCourse } from '@angularlicious/lms-common';
 import { ServiceBase, ApiResponse, SuccessApiResponse } from '@angularlicious/foundation';
 import { LoggingService } from '@angularlicious/logging';
@@ -21,17 +21,33 @@ import { CoursesService } from '@angularlicious/lms/business/courses';
  */
 @Injectable()
 export class CoursesComponentService extends ServiceBase {
+  video$: BehaviorSubject<VideoCourse> = new BehaviorSubject<VideoCourse>(null);
+  private videos: VideoCourse[] = []; // use to manage video state;
+
   latestCoursesSubscription: Subscription;
   latestCourses$: ReplaySubject<VideoCourse[]> = new ReplaySubject<VideoCourse[]>(1);
   showVideos$: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
+  showVideo$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private coursesService: CoursesService, loggingService: LoggingService) {
     super('CoursesComponentService', loggingService);
     this.initialize();
   }
 
-  initialize() {
+  retrieveVideo(videoId: number) {
+    this.showVideo$.next(false);
+
+    const targetVideo = this.videos.find(item => item.id === videoId);
+    if (targetVideo) {
+      this.showVideo$.next(true);
+      this.video$.next(targetVideo);
+    }
+  }
+
+  private initialize() {
     this.showVideos$.next(false);
+    this.showVideo$.next(false);
+
     this.coursesService.retrieveLatestVideoCourses<VideoCourse[]>().subscribe(
       response => this.handleLatestCoursesResponse<ApiResponse<VideoCourse[]>>(response),
       error => this.handleError(error),
@@ -41,9 +57,10 @@ export class CoursesComponentService extends ServiceBase {
     );
   }
 
-  handleLatestCoursesResponse<T>(response: ApiResponse<T>): void {
+  private handleLatestCoursesResponse<T>(response: ApiResponse<T>): void {
     if (response && response.IsSuccess && response instanceof SuccessApiResponse) {
-      this.latestCourses$.next(response.Data);
+      this.videos = response.Data;
+      this.latestCourses$.next(this.videos);
       this.showVideos$.next(true);
     } else {
       //@@WORK HANDLE/SHOW/DISPLAY RESPONSE MESSAGES/ERROR(S) ETC.
