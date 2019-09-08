@@ -1,10 +1,22 @@
 import { Injectable, Inject } from '@angular/core';
-import { ServiceBase } from '@angularlicious/foundation';
+import { ServiceBase, ApiResponse } from '@angularlicious/foundation';
 import { LoggingService } from '@angularlicious/logging';
 import { Observable } from 'rxjs';
 import { VideoCourse } from '@angularlicious/lms-common';
 import { BusinessProviderService } from './business/business-provider.service';
 
+/**
+ * The [CoursesService] is a member of the core domain business logic implementation
+ * for [Courses]. It provides the API for all course domain operations. The domain
+ * module is for business logic implementation only.
+ *
+ * Note: there are no UI concerns in this module or service.
+ *
+ * This service is provided at the scope of a feature module within the application. This
+ * service has a dependency on the [BusinessProviderService] - which is internal and scoped
+ * to the business domain module. The [LmsBusinessCoursesModule] provides this service and
+ * all other internal/dependency services for the business domain implementation.
+ */
 @Injectable()
 export class CoursesService extends ServiceBase {
   constructor(@Inject(BusinessProviderService) private businessProvider: BusinessProviderService, loggingService: LoggingService) {
@@ -17,7 +29,7 @@ export class CoursesService extends ServiceBase {
     this.businessProvider.serviceContext = this.serviceContext;
   }
 
-  retrieveLatestVideoCourses(): Observable<VideoCourse[]> {
-    return this.businessProvider.retrieveLatestVideoCourses();
+  retrieveLatestVideoCourses<T>(): Observable<ApiResponse<T>> {
+    return this.businessProvider.retrieveLatestVideoCourses<T>();
   }
 }
