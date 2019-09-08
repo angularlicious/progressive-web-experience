@@ -544,6 +544,12 @@ mark,
   height: auto;
 }
 
+.img-fluid-sm {
+  max-width: 12%;
+  height: auto;
+  text-align: right;
+}
+
 .img-thumbnail {
   padding: 0.25rem;
   background-color: #171941;
