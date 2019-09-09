@@ -2,7 +2,6 @@ import { Injectable, Inject } from '@angular/core';
 import { ServiceBase, ApiResponse } from '@angularlicious/foundation';
 import { LoggingService } from '@angularlicious/logging';
 import { Observable } from 'rxjs';
-import { VideoCourse } from '@angularlicious/lms-common';
 import { BusinessProviderService } from './business/business-provider.service';
 
 /**
@@ -29,7 +28,7 @@ export class CoursesService extends ServiceBase {
     this.businessProvider.serviceContext = this.serviceContext;
   }
 
-  retrieveLatestVideoCourses<T>(): Observable<ApiResponse<T>> {
+  retrieveLatestVideoCourses<T>(): Observable<T> {
     return this.businessProvider.retrieveLatestVideoCourses<T>();
   }
 }

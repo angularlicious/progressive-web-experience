@@ -34,7 +34,7 @@ export class CoursesComponentService extends ServiceBase {
     this.initialize();
   }
 
-  retrieveVideo(videoId: number) {
+  retrieveVideo(videoId: string) {
     this.showVideo$.next(false);
 
     const targetVideo = this.videos.find(item => item.id === videoId);
@@ -49,7 +49,7 @@ export class CoursesComponentService extends ServiceBase {
     this.showVideo$.next(false);
 
     this.coursesService.retrieveLatestVideoCourses<VideoCourse[]>().subscribe(
-      response => this.handleLatestCoursesResponse<ApiResponse<VideoCourse[]>>(response),
+      response => this.handleLatestCoursesResponse<Observable<VideoCourse[]>>(response),
       error => this.handleError(error),
       () => {
         this.finishRequest(`Finished request for latest video courses.`);
@@ -57,9 +57,9 @@ export class CoursesComponentService extends ServiceBase {
     );
   }
 
-  private handleLatestCoursesResponse<T>(response: ApiResponse<T>): void {
-    if (response && response.IsSuccess && response instanceof SuccessApiResponse) {
-      this.videos = response.Data;
+  private handleLatestCoursesResponse<T>(response: VideoCourse[]): void {
+    if (response && response.length > 0) {
+      this.videos = response;
       this.latestCourses$.next(this.videos);
       this.showVideos$.next(true);
     } else {

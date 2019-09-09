@@ -12,7 +12,7 @@ import { VideoCourse } from '@angularlicious/lms-common';
   styleUrls: ['./video.component.css'],
 })
 export class VideoComponent extends ComponentBase implements OnInit {
-  videoId: number;
+  videoId: string;
   video$: BehaviorSubject<VideoCourse> = new BehaviorSubject<VideoCourse>(null);
   showVideo$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
   video;
@@ -22,8 +22,14 @@ export class VideoComponent extends ComponentBase implements OnInit {
   }
 
   ngOnInit() {
-    // https://angular.io/api/router/ActivatedRouteSnapshot
-    this.videoId = Number(this.route.snapshot.params['id']);
+    this.coursesComponentService.latestCourses$.subscribe(() => {
+      if (this.videoId) {
+        this.coursesComponentService.retrieveVideo(this.videoId);
+      }
+    });
+
+    // https://angular.io/api/router/ActivatedRouteSnapshot)
+    this.videoId = this.route.snapshot.params['id'];
 
     // setup the observables;
     // this.coursesComponentService.video$.subscribe(video => {
@@ -32,7 +38,7 @@ export class VideoComponent extends ComponentBase implements OnInit {
     this.video$ = this.coursesComponentService.video$;
     this.showVideo$ = this.coursesComponentService.showVideo$;
 
-    // retrieve the video from the component service using the identifier;
-    this.coursesComponentService.retrieveVideo(this.videoId);
+    // // retrieve the video from the component service using the identifier;
+    // this.coursesComponentService.retrieveVideo(this.videoId);
   }
 }

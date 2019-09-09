@@ -5,22 +5,23 @@ import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { HttpService } from '@angularlicious/http-service';
 import { VideoCourse, Author, CourseCategory } from '@angularlicious/lms-common';
-import { ICourseRepositoryService } from './i-course-repository.service';
-
 @Injectable()
-export class HttpCourseRepositoryService extends ServiceBase implements ICourseRepositoryService {
+export class HttpCourseRepositoryService extends ServiceBase {
   baseUrl = 'http://mybackend.com/api/'; //@@TODO: USE CONFIGURATION HERE;
   noCredentials = false;
   credentialsRequired = true;
-
-  constructor(@Inject(HttpClient) public http: HttpClient, @Inject(HttpService) public httpService: HttpService, loggingService: LoggingService) {
+  constructor(
+    @Inject(HttpClient)
+    public http: HttpClient,
+    @Inject(HttpService)
+    public httpService: HttpService,
+    loggingService: LoggingService
+  ) {
     super('HttpCourseRepositoryService', loggingService);
   }
-
   retrieveLatestCourses<T>(): Observable<ApiResponse<T>> {
     this.loggingService.log(this.serviceName, Severity.Information, `Preparing to execute the API call for the latest video courses.`);
     const courses: VideoCourse[] = [];
-
     const course = new VideoCourse();
     course.author = new Author('Matt Vaughn');
     course.author.bio = 'Loves tacos, jazz, and Angular. Building enterprise applications using CLEAN principles and patterns.';
@@ -32,7 +33,6 @@ export class HttpCourseRepositoryService extends ServiceBase implements ICourseR
     course.videoUrl = 'https://youtube.com/embed/E4IocEOK1II';
     course.videoImageUrl = 'http://i3.ytimg.com/vi/E4IocEOK1II/hqdefault.jpg';
     courses.push(course);
-
     const course2 = new VideoCourse();
     course2.author = new Author('Matt Vaughn');
     course2.author.bio = 'Loves tacos, jazz, and Angular. Building enterprise applications using CLEAN principles and patterns.';
@@ -44,7 +44,6 @@ export class HttpCourseRepositoryService extends ServiceBase implements ICourseR
     course2.videoUrl = 'https://youtube.com/embed/-uu_v6bazLs';
     course2.videoImageUrl = 'http://i3.ytimg.com/vi/-uu_v6bazLs/hqdefault.jpg';
     courses.push(course2);
-
     const course3 = new VideoCourse();
     course3.author = new Author('Matt Vaughn');
     course3.author.bio = 'Loves tacos, jazz, and Angular. Building enterprise applications using CLEAN principles and patterns.';
@@ -56,15 +55,12 @@ export class HttpCourseRepositoryService extends ServiceBase implements ICourseR
     course3.videoUrl = 'https://youtube.com/embed/E4IocEOK1II';
     course3.videoImageUrl = 'http://i3.ytimg.com/vi/E4IocEOK1II/hqdefault.jpg';
     courses.push(course3);
-
     const apiResponse = new SuccessApiResponse();
     apiResponse.Data = courses;
     apiResponse.IsSuccess = true;
     apiResponse.Message = `Successfully retrieved latest video courses.`;
     apiResponse.Timestamp = new Date(Date.now());
-
     return of(apiResponse);
-
     // const requestUrl = this.baseUrl.concat('courses/latest');
     // const options = this.httpService.createOptions(HttpRequestMethod.get, this.httpService.createHeader(), requestUrl, null, this.noCredentials);
     // return this.httpService.execute<T>(options);

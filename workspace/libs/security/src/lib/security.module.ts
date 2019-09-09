@@ -4,7 +4,6 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AuthProviderDialog } from './components/auth-provider-dialog/auth-provider-dialog.component';
-import { AuthenticationService } from './authentication.service';
 
 const firebaseOptions = {
   apiKey: 'AIzaSyCcPPAdpUUuO3Kczc3LWyrYmwC8Ghxiwr0',
