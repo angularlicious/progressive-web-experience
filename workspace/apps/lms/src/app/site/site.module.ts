@@ -10,9 +10,21 @@ import { BlogComponent } from './blog/blog.component';
 import { LicenseComponent } from './license/license.component';
 import { SharedModule } from '../modules/shared/shared.module';
 import { UserImageComponent } from './user-image/user-image.component';
+import { ErrorComponent } from './error/error.component';
 
 @NgModule({
-  declarations: [NavbarComponent, SidebarComponent, FooterComponent, LoginComponent, ContactUsComponent, AboutUsComponent, BlogComponent, LicenseComponent, UserImageComponent],
+  declarations: [
+    NavbarComponent,
+    SidebarComponent,
+    FooterComponent,
+    LoginComponent,
+    ContactUsComponent,
+    AboutUsComponent,
+    BlogComponent,
+    LicenseComponent,
+    UserImageComponent,
+    ErrorComponent,
+  ],
   exports: [NavbarComponent, SidebarComponent, FooterComponent],
   imports: [CommonModule, SharedModule],
 })

@@ -5,6 +5,7 @@ import { ContactUsComponent } from './site/contact-us/contact-us.component';
 import { AboutUsComponent } from './site/about-us/about-us.component';
 import { LicenseComponent } from './site/license/license.component';
 import { BlogComponent } from './site/blog/blog.component';
+import { ErrorComponent } from './site/error/error.component';
 
 const routes: Routes = [
   {
@@ -40,6 +41,10 @@ const routes: Routes = [
   {
     path: 'blog',
     component: BlogComponent,
+  },
+  {
+    path: 'error',
+    component: ErrorComponent,
   },
 ];
 
