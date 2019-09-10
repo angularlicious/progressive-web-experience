@@ -15,7 +15,18 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@angularlicious/configuration": ["libs/configuration/src/index.ts"],
+      "@angularlicious/error-handling": ["libs/error-handling/src/index.ts"],
+      "@angularlicious/logging": ["libs/logging/src/index.ts"],
+      "@angularlicious/rules-engine": ["libs/rules-engine/src/index.ts"],
+      "@angularlicious/actions": ["libs/actions/src/index.ts"],
+      "@angularlicious/http-service": ["libs/http-service/src/index.ts"],
+      "@angularlicious/foundation": ["libs/foundation/src/index.ts"],
+      "@angularlicious/lms-common": ["libs/lms-common/src/index.ts"],
+      "@angularlicious/lms/business/courses": ["libs/lms/business/courses/src/index.ts"],
+      "@angularlicious/security": ["libs/security/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }

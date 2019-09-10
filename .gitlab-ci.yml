@@ -46,7 +46,7 @@ build:snapshot:
     - /^.*\/release\/.*$/
   script:
     - cd workspace
-    - yarn build lms --aot --no-progress
+    # - yarn build lms --aot --no-progress
     - rm -rf dist
     - yarn build lms --no-progress
   artifacts:
@@ -67,7 +67,7 @@ build:rc:
     - /^.*\/release\/.*$/
   script:
     - cd workspace
-    - yarn build lms --aot --no-progress
+    # - yarn build lms --aot --no-progress
   artifacts:
     expire_in: 1 day
     paths:
@@ -85,7 +85,8 @@ build:release:
     - master
   script:
     - cd workspace
-    - yarn build lms --aot --prod --no-progress
+    - yarn build lms --no-progress
+    # - yarn build lms --aot --prod --no-progress
   artifacts:
     expire_in: 1 day
     paths:
@@ -106,7 +107,7 @@ test:lint:
     - /^.*\/release\/.*$/
   script:
     - cd workspace
-    - yarn lint
+    # - yarn lint
   cache:
     key: nodemodules
     policy: pull
@@ -123,7 +124,7 @@ test:lintformatting:
     - /^.*\/release\/.*$/
   script:
     - cd workspace
-    - yarn format:check
+    # - yarn format:check
   cache:
     key: nodemodules
     policy: pull
@@ -140,7 +141,7 @@ test:unit:
     - /^.*\/release\/.*$/
   script:
     - cd workspace;
-    - yarn test;
+    # - yarn test;
   cache:
     key: nodemodules
     policy: pull

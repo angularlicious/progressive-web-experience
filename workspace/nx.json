@@ -13,6 +13,36 @@
     },
     "lms": {
       "tags": []
+    },
+    "logging": {
+      "tags": []
+    },
+    "error-handling": {
+      "tags": []
+    },
+    "configuration": {
+      "tags": []
+    },
+    "rules-engine": {
+      "tags": []
+    },
+    "actions": {
+      "tags": []
+    },
+    "http-service": {
+      "tags": []
+    },
+    "foundation": {
+      "tags": []
+    },
+    "lms-common": {
+      "tags": []
+    },
+    "lms-business-courses": {
+      "tags": []
+    },
+    "security": {
+      "tags": []
     }
   }
 }

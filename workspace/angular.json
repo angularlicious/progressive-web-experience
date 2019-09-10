@@ -23,8 +23,26 @@
             "polyfills": "apps/lms/src/polyfills.ts",
             "tsConfig": "apps/lms/tsconfig.app.json",
             "assets": ["apps/lms/src/favicon.ico", "apps/lms/src/assets"],
-            "styles": ["apps/lms/src/styles.scss"],
-            "scripts": []
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
+              "apps/lms/src/styles.scss",
+              "apps/lms/src/assets/css/nucleo-icons.css",
+              "apps/lms/src/assets/css/blk-design-system.css",
+              "apps/lms/src/assets/demo/demo.css"
+            ],
+            "scripts": [
+              "apps/lms/src/assets/js/core/jquery.min.js",
+              "apps/lms/src/assets/js/core/popper.min.js",
+              "apps/lms/src/assets/js/core/bootstrap.min.js",
+              "apps/lms/src/assets/js/plugins/perfect-scrollbar.jquery.min.js",
+              "apps/lms/src/assets/js/plugins/bootstrap-switch.js",
+              "apps/lms/src/assets/js/plugins/nouislider.min.js",
+              "apps/lms/src/assets/js/plugins/chartjs.min.js",
+              "apps/lms/src/assets/js/plugins/moment.min.js",
+              "apps/lms/src/assets/js/plugins/bootstrap-datetimepicker.js",
+              "apps/lms/src/assets/demo/demo.js",
+              "apps/lms/src/assets/js/blk-design-system.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -73,10 +91,7 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": [
-              "apps/lms/tsconfig.app.json",
-              "apps/lms/tsconfig.spec.json"
-            ],
+            "tsConfig": ["apps/lms/tsconfig.app.json", "apps/lms/tsconfig.spec.json"],
             "exclude": ["**/node_modules/**", "!apps/lms/**"]
           }
         },
@@ -114,6 +129,342 @@
             "tsConfig": "apps/lms-e2e/tsconfig.e2e.json",
             "exclude": ["**/node_modules/**", "!apps/lms-e2e/**"]
           }
+        }
+      }
+    },
+    "logging": {
+      "projectType": "library",
+      "root": "libs/logging",
+      "sourceRoot": "libs/logging/src",
+      "prefix": "angularlicious",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/logging/tsconfig.lib.json",
+            "project": "libs/logging/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/logging/tsconfig.lib.json", "libs/logging/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/logging/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/logging/jest.config.js",
+            "tsConfig": "libs/logging/tsconfig.spec.json",
+            "setupFile": "libs/logging/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "error-handling": {
+      "projectType": "library",
+      "root": "libs/error-handling",
+      "sourceRoot": "libs/error-handling/src",
+      "prefix": "angularlicious",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/error-handling/tsconfig.lib.json",
+            "project": "libs/error-handling/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/error-handling/tsconfig.lib.json", "libs/error-handling/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/error-handling/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/error-handling/jest.config.js",
+            "tsConfig": "libs/error-handling/tsconfig.spec.json",
+            "setupFile": "libs/error-handling/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "configuration": {
+      "projectType": "library",
+      "root": "libs/configuration",
+      "sourceRoot": "libs/configuration/src",
+      "prefix": "angularlicious",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/configuration/tsconfig.lib.json",
+            "project": "libs/configuration/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/configuration/tsconfig.lib.json", "libs/configuration/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/configuration/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/configuration/jest.config.js",
+            "tsConfig": "libs/configuration/tsconfig.spec.json",
+            "setupFile": "libs/configuration/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "rules-engine": {
+      "projectType": "library",
+      "root": "libs/rules-engine",
+      "sourceRoot": "libs/rules-engine/src",
+      "prefix": "angularlicious",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/rules-engine/tsconfig.lib.json",
+            "project": "libs/rules-engine/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/rules-engine/tsconfig.lib.json", "libs/rules-engine/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/rules-engine/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/rules-engine/jest.config.js",
+            "tsConfig": "libs/rules-engine/tsconfig.spec.json",
+            "setupFile": "libs/rules-engine/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "actions": {
+      "projectType": "library",
+      "root": "libs/actions",
+      "sourceRoot": "libs/actions/src",
+      "prefix": "angularlicious",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/actions/tsconfig.lib.json",
+            "project": "libs/actions/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/actions/tsconfig.lib.json", "libs/actions/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/actions/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/actions/jest.config.js",
+            "tsConfig": "libs/actions/tsconfig.spec.json",
+            "setupFile": "libs/actions/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "http-service": {
+      "projectType": "library",
+      "root": "libs/http-service",
+      "sourceRoot": "libs/http-service/src",
+      "prefix": "angularlicious",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/http-service/tsconfig.lib.json",
+            "project": "libs/http-service/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/http-service/tsconfig.lib.json", "libs/http-service/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/http-service/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/http-service/jest.config.js",
+            "tsConfig": "libs/http-service/tsconfig.spec.json",
+            "setupFile": "libs/http-service/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "foundation": {
+      "projectType": "library",
+      "root": "libs/foundation",
+      "sourceRoot": "libs/foundation/src",
+      "prefix": "angularlicious",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/foundation/tsconfig.lib.json",
+            "project": "libs/foundation/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/foundation/tsconfig.lib.json", "libs/foundation/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/foundation/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/foundation/jest.config.js",
+            "tsConfig": "libs/foundation/tsconfig.spec.json",
+            "setupFile": "libs/foundation/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "lms-common": {
+      "projectType": "library",
+      "root": "libs/lms-common",
+      "sourceRoot": "libs/lms-common/src",
+      "prefix": "angularlicious",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/lms-common/tsconfig.lib.json", "libs/lms-common/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/lms-common/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/lms-common/jest.config.js",
+            "tsConfig": "libs/lms-common/tsconfig.spec.json",
+            "setupFile": "libs/lms-common/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "lms-business-courses": {
+      "projectType": "library",
+      "root": "libs/lms/business/courses",
+      "sourceRoot": "libs/lms/business/courses/src",
+      "prefix": "angularlicious",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/lms/business/courses/tsconfig.lib.json", "libs/lms/business/courses/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/lms/business/courses/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/lms/business/courses/jest.config.js",
+            "tsConfig": "libs/lms/business/courses/tsconfig.spec.json",
+            "setupFile": "libs/lms/business/courses/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "security": {
+      "projectType": "library",
+      "root": "libs/security",
+      "sourceRoot": "libs/security/src",
+      "prefix": "angularlicious",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/security/tsconfig.lib.json",
+            "project": "libs/security/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/security/tsconfig.lib.json", "libs/security/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/security/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/security/jest.config.js",
+            "tsConfig": "libs/security/tsconfig.spec.json",
+            "setupFile": "libs/security/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
         }
       }
     }

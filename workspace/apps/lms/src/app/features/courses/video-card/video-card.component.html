@@ -1,0 +1,19 @@
+<div class="card">
+  <div class="card-header">
+    <h2 class="card-title">{{ course.title }}</h2>
+  </div>
+  <div class="card-body">
+    <ng-container *ngIf="course.author">
+      <h4></h4>
+    </ng-container>
+    <p>{{ course.description }}</p>
+    <ng-container>
+      <a [routerLink]="['/courses/video', course.id]">
+        <img src="{{ course.videoImageUrl }}" />
+      </a>
+    </ng-container>
+  </div>
+  <div class="card-footer">
+    <a [routerLink]="['/courses/video', course.id]" class="btn btn-simple btn-primary btn-round">View</a>
+  </div>
+</div>
