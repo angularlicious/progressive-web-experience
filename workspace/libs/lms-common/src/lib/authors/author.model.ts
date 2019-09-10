@@ -1,18 +1,15 @@
 import { AuthorStatus } from './author-status.enum';
 
 export class Author {
-  id: number;
-  name: string;
   bio: string;
-  email: string;
-  twitter: string;
-  web: string;
+  blog: string;
+  dateCreated: Date;
+  dateUpdated: Date;
+  id: number;
   instagram: string;
-  blogUrl: string;
   photoUrl: string;
   status: AuthorStatus.NotSet;
-
-  constructor(name: string) {
-    this.name = name;
-  }
+  twitter: string;
+  userId: string;
+  web: string;
 }

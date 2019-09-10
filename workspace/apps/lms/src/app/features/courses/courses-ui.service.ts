@@ -20,7 +20,7 @@ import { CoursesService } from '@angularlicious/lms/business/courses';
  * for use by members within the feature module only.
  */
 @Injectable()
-export class CoursesComponentService extends ServiceBase {
+export class CoursesUIService extends ServiceBase {
   video$: BehaviorSubject<VideoCourse> = new BehaviorSubject<VideoCourse>(null);
   private videos: VideoCourse[] = []; // use to manage video state;
 
