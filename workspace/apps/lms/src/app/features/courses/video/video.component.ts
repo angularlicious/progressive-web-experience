@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ComponentBase } from '@angularlicious/foundation';
-import { LoggingService } from '@angularlicious/logging';
+import { LoggingService, Severity } from '@angularlicious/logging';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CoursesComponentService } from '../courses-component.service';
-import { BehaviorSubject, ReplaySubject, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { VideoCourse } from '@angularlicious/lms-common';
 
 @Component({
@@ -13,32 +13,22 @@ import { VideoCourse } from '@angularlicious/lms-common';
 })
 export class VideoComponent extends ComponentBase implements OnInit {
   videoId: string;
-  video$: BehaviorSubject<VideoCourse> = new BehaviorSubject<VideoCourse>(null);
-  showVideo$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
-  video;
+  public readonly showVideo$: Observable<boolean> = this.uiService.showVideo$.asObservable();
+  video: VideoCourse;
 
-  constructor(private route: ActivatedRoute, private coursesComponentService: CoursesComponentService, loggingService: LoggingService, router: Router) {
+  constructor(private route: ActivatedRoute, private uiService: CoursesComponentService, loggingService: LoggingService, router: Router) {
     super('VideoComponent', loggingService, router);
   }
 
   ngOnInit() {
-    this.coursesComponentService.latestCourses$.subscribe(() => {
-      if (this.videoId) {
-        this.coursesComponentService.retrieveVideo(this.videoId);
-      }
+    this.uiService.video$.subscribe(video => {
+      this.video = video;
     });
 
     // https://angular.io/api/router/ActivatedRouteSnapshot)
+    this.loggingService.log(this.componentName, Severity.Information, `Preparing to retrieve video identifer.`);
     this.videoId = this.route.snapshot.params['id'];
-
-    // setup the observables;
-    // this.coursesComponentService.video$.subscribe(video => {
-    //   this.video$.next(video);
-    // });
-    this.video$ = this.coursesComponentService.video$;
-    this.showVideo$ = this.coursesComponentService.showVideo$;
-
-    // // retrieve the video from the component service using the identifier;
-    // this.coursesComponentService.retrieveVideo(this.videoId);
+    this.loggingService.log(this.componentName, Severity.Information, `Preparing to retrieve video with identifier: ${this.videoId}`);
+    this.uiService.retrieveVideo(this.videoId);
   }
 }
