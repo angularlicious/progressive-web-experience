@@ -1,3 +1,5 @@
+import { AuthorStatus } from './author-status.enum';
+
 export class Author {
   id: number;
   name: string;
@@ -8,6 +10,7 @@ export class Author {
   instagram: string;
   blogUrl: string;
   photoUrl: string;
+  status: AuthorStatus.NotSet;
 
   constructor(name: string) {
     this.name = name;

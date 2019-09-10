@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { ReplaySubject, Observable, Subscription, BehaviorSubject } from 'rxjs';
 import { VideoCourse } from '@angularlicious/lms-common';
 import { ServiceBase, ApiResponse, SuccessApiResponse } from '@angularlicious/foundation';
-import { LoggingService } from '@angularlicious/logging';
+import { LoggingService, Severity } from '@angularlicious/logging';
 
 import { CoursesService } from '@angularlicious/lms/business/courses';
 
@@ -34,11 +34,18 @@ export class CoursesComponentService extends ServiceBase {
     this.initialize();
   }
 
-  retrieveVideo(videoId: number) {
+  /**
+   * Use to retrieve a video from the collection.
+   * @param videoId
+   */
+  retrieveVideo(videoId: string) {
+    this.loggingService.log(this.serviceName, Severity.Information, `Setting [showVideo$] to [false]`);
     this.showVideo$.next(false);
 
+    this.loggingService.log(this.serviceName, Severity.Information, `Preparing to find video in collection.`);
     const targetVideo = this.videos.find(item => item.id === videoId);
     if (targetVideo) {
+      this.loggingService.log(this.serviceName, Severity.Information, `Target video found: ${targetVideo.title}.`);
       this.showVideo$.next(true);
       this.video$.next(targetVideo);
     }
@@ -49,7 +56,7 @@ export class CoursesComponentService extends ServiceBase {
     this.showVideo$.next(false);
 
     this.coursesService.retrieveLatestVideoCourses<VideoCourse[]>().subscribe(
-      response => this.handleLatestCoursesResponse<ApiResponse<VideoCourse[]>>(response),
+      response => this.handleLatestCoursesResponse<Observable<VideoCourse[]>>(response),
       error => this.handleError(error),
       () => {
         this.finishRequest(`Finished request for latest video courses.`);
@@ -57,13 +64,20 @@ export class CoursesComponentService extends ServiceBase {
     );
   }
 
-  private handleLatestCoursesResponse<T>(response: ApiResponse<T>): void {
-    if (response && response.IsSuccess && response instanceof SuccessApiResponse) {
-      this.videos = response.Data;
+  /**
+   * Use to handle the response for the latest courses request.
+   * @param response
+   */
+  private handleLatestCoursesResponse<T>(response: VideoCourse[]): void {
+    this.loggingService.log(this.serviceName, Severity.Information, `Preparing to handle request for latest videos.`);
+    if (response && response.length > 0) {
+      this.loggingService.log(this.serviceName, Severity.Information, `Processing valid response with [${response.length}] videos.`);
+      this.videos = response;
       this.latestCourses$.next(this.videos);
       this.showVideos$.next(true);
     } else {
       //@@WORK HANDLE/SHOW/DISPLAY RESPONSE MESSAGES/ERROR(S) ETC.
+      this.loggingService.log(this.serviceName, Severity.Warning, `The response does not contain any videos.`);
       this.showVideos$.next(false);
       this.latestCourses$.next([]);
     }

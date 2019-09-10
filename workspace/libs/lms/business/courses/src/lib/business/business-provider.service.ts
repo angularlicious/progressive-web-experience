@@ -1,10 +1,10 @@
 import { Injectable, Inject } from '@angular/core';
 import { BusinessProviderBase, ApiResponse } from '@angularlicious/foundation';
 import { LoggingService } from '@angularlicious/logging';
-import { VideoCourse, Author, CourseCategory } from '@angularlicious/lms-common';
-import { of, Observable } from 'rxjs';
-import { HttpCourseRepositoryService } from './http-course-repository.service';
+import { Observable } from 'rxjs';
 import { RetrieveLatestVideoCoursesAction } from './actions/retrieve-latest-video-courses.action';
+import { FirestoreCourseRepositoryService } from './firestore-course-repository.service';
+import { VideoCourse } from '@angularlicious/lms-common';
 
 /**
  * This is the coordinator of business operations for the core domain module. It will
@@ -12,14 +12,14 @@ import { RetrieveLatestVideoCoursesAction } from './actions/retrieve-latest-vide
  */
 @Injectable()
 export class BusinessProviderService extends BusinessProviderBase {
-  constructor(@Inject(HttpCourseRepositoryService) public httpApiService: HttpCourseRepositoryService, loggingService: LoggingService) {
+  constructor(@Inject(FirestoreCourseRepositoryService) public apiService: FirestoreCourseRepositoryService, loggingService: LoggingService) {
     super('LmsBusinessCoursesModule', loggingService);
   }
 
   /**
    * Use to retrieve the current/latest video courses.
    */
-  retrieveLatestVideoCourses<T>(): Observable<ApiResponse<T>> {
+  retrieveLatestVideoCourses<T>(): Observable<T> {
     const action = new RetrieveLatestVideoCoursesAction<T>();
     action.Do(this);
     return action.response;

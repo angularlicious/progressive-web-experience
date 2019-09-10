@@ -12,6 +12,6 @@ export class RetrieveLatestVideoCoursesAction<T> extends BusinessActionBase<T> {
 
   performAction() {
     this.loggingService.log(this.actionName, Severity.Information, `Preparing to perform action business logic.`);
-    this.response = this.businessProvider.httpApiService.retrieveLatestCourses();
+    this.response = this.businessProvider.apiService.retrieveLatestCourses<T>();
   }
 }

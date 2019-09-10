@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { HttpCourseRepositoryService } from './http-course-repository.service';
+import { HttpCourseRepositoryService } from './HttpCourseRepositoryService';
 
 describe('HttpCourseRepositoryService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
