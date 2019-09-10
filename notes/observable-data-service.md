@@ -4,7 +4,7 @@ I jotted down some notes while reading some articles on using RxJS Observables f
 
 I like to draw a picture representing the topic and see the relationships between the things discussed. 
 
-![](./ods-notes2.jpg)
+<!-- ![](./ods-notes2.jpg) -->
 
 ## Observations
 

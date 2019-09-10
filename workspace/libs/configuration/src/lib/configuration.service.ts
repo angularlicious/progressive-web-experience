@@ -1,5 +1,5 @@
 import { Injectable, Optional } from '@angular/core';
-import { Subject, ReplaySubject } from 'rxjs';
+import { Subject, ReplaySubject, Observable } from 'rxjs';
 import { IConfiguration } from './i-configuration';
 import { ConfigurationContext } from './configuration-context';
 
@@ -7,11 +7,12 @@ import { ConfigurationContext } from './configuration-context';
   providedIn: 'root',
 })
 export class ConfigurationService {
-  settings$: Subject<IConfiguration> = new ReplaySubject<IConfiguration>(1);
+  private settings: Subject<IConfiguration> = new ReplaySubject<IConfiguration>(1);
+  public readonly settings$: Observable<IConfiguration> = this.settings.asObservable();
 
   constructor(@Optional() context: ConfigurationContext) {
     if (context) {
-      this.settings$.next(context.config);
+      this.settings.next(context.config);
     }
   }
 }
