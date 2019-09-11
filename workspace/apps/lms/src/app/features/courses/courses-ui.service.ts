@@ -5,7 +5,6 @@ import { ServiceBase, ApiResponse, SuccessApiResponse } from '@angularlicious/fo
 import { LoggingService, Severity } from '@angularlicious/logging';
 
 import { CoursesService } from '@angularlicious/lms/business/courses';
-import { resolveNaptr } from 'dns';
 
 /**
  * Use this service as a mediator between feature module components and the core domain
