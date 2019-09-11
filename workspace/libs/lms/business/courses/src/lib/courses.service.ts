@@ -3,6 +3,7 @@ import { ServiceBase, ApiResponse } from '@angularlicious/foundation';
 import { LoggingService } from '@angularlicious/logging';
 import { Observable } from 'rxjs';
 import { BusinessProviderService } from './business/business-provider.service';
+import { Course } from '@angularlicious/lms-common';
 
 /**
  * The [CoursesService] is a member of the core domain business logic implementation
@@ -28,7 +29,15 @@ export class CoursesService extends ServiceBase {
     this.businessProvider.serviceContext = this.serviceContext;
   }
 
-  retrieveLatestVideoCourses<T>(): Observable<T> {
-    return this.businessProvider.retrieveLatestVideoCourses<T>();
+  retrieveLatestCourses<T>(): Observable<T> {
+    return this.businessProvider.retrieveLatestCourses<T>();
+  }
+
+  /**
+   * Use to retrieve the aggregate videos for the specified course.
+   * @param course
+   */
+  retrieveCourseVideos<T>(course: Course): Observable<T> {
+    return this.businessProvider.retrieveCourseVideos<T>(course);
   }
 }

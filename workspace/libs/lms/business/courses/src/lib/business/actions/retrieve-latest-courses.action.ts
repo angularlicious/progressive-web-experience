@@ -1,9 +1,9 @@
 import { BusinessActionBase } from './business-action-base';
 import { Severity } from '@angularlicious/logging';
 
-export class RetrieveLatestVideoCoursesAction<T> extends BusinessActionBase<T> {
+export class RetrieveLatestCoursesAction<T> extends BusinessActionBase<T> {
   constructor() {
-    super('RetrieveLatestVideoCoursesAction');
+    super('RetrieveLatestCoursesAction');
   }
 
   preValidateAction() {

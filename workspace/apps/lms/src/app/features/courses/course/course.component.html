@@ -1,0 +1,21 @@
+<ng-container *ngIf="showCourse$ | async">
+  <div class="section">
+    <!-- DISPLAY A SELECTED/TARGET COURSES :: START -->
+    <div class="row">
+      <div class=" col-12" *ngIf="true">
+        <h3>{{ course.title }}</h3>
+        <p>{{ course.description }}</p>
+        <ng-container *ngIf="showVideos$ | async; else elseTemplate">
+          <ng-container *ngFor="let video of videos$ | async">
+            <lms-video-player [video]="video"></lms-video-player>
+          </ng-container>
+        </ng-container>
+        <ng-template #elseTemplate>
+          // show spinner here;
+        </ng-template>
+
+        <<ng-container *ngIf="showVideos$ | async"> </ng-container>
+      </div>
+    </div>
+  </div>
+</ng-container>

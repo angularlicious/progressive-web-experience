@@ -7,11 +7,11 @@
 
   <!-- DISPLAY A LIST OF COURSES :: START -->
   <div class="row">
-    <div class=" col-7" *ngIf="showVideos$ | async">
+    <div class=" col-7" *ngIf="showCourses$ | async">
       <p>Check out the latest videos.</p>
       <!-- ADD CARDS HERE -->
       <ng-container *ngFor="let course of latestCourses$ | async">
-        <lms-video-card [course]="course"></lms-video-card>
+        <lms-course-card [course]="course"></lms-course-card>
       </ng-container>
     </div>
   </div>

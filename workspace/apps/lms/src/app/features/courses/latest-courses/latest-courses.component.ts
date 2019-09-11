@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 import { CoursesUIService } from '../courses-ui.service';
 import { Observable } from 'rxjs';
 
-import { VideoCourse } from '@angularlicious/lms-common';
+import { Course } from '@angularlicious/lms-common';
 
 @Component({
   selector: 'lms-latest-courses',
@@ -13,8 +13,8 @@ import { VideoCourse } from '@angularlicious/lms-common';
   styleUrls: ['./latest-courses.component.css'],
 })
 export class LatestCoursesComponent extends ComponentBase implements OnInit {
-  public readonly latestCourses$: Observable<VideoCourse[]> = this.coursesComponentService.latestCourses$.asObservable();
-  public readonly showVideos$: Observable<boolean> = this.coursesComponentService.showVideos$.asObservable();
+  public readonly latestCourses$: Observable<Course[]> = this.coursesComponentService.latestCourses$.asObservable();
+  public readonly showCourses$: Observable<boolean> = this.coursesComponentService.showCourses$.asObservable();
 
   constructor(private coursesComponentService: CoursesUIService, loggingService: LoggingService, router: Router) {
     super('LatestCoursesComponent', loggingService, router);

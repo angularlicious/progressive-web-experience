@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LatestCoursesComponent } from './latest-courses/latest-courses.component';
 import { VideoComponent } from './video/video.component';
+import { AddCourseComponent } from './add-course/add-course.component';
+import { CourseComponent } from './course/course.component';
 
 const routes: Routes = [
   {
@@ -9,8 +11,12 @@ const routes: Routes = [
     component: LatestCoursesComponent,
   },
   {
-    path: 'courses/video/:id',
-    component: VideoComponent,
+    path: 'courses/course/:id',
+    component: CourseComponent,
+  },
+  {
+    path: 'courses/add-course',
+    component: AddCourseComponent,
   },
 ];
 

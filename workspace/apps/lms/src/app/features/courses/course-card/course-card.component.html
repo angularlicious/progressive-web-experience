@@ -7,13 +7,13 @@
       <h4></h4>
     </ng-container>
     <p>{{ course.description }}</p>
-    <ng-container>
+    <!-- <ng-container>
       <a [routerLink]="['/courses/video', course.id]">
         <img src="{{ course.videoImageUrl }}" />
       </a>
-    </ng-container>
+    </ng-container> -->
   </div>
   <div class="card-footer">
-    <a [routerLink]="['/courses/video', course.id]" class="btn btn-simple btn-primary btn-round">View</a>
+    <a [routerLink]="['/courses/course', course.id]" class="btn btn-simple btn-primary btn-round">View</a>
   </div>
 </div>
