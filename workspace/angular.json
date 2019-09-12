@@ -22,26 +22,17 @@
             "main": "apps/lms/src/main.ts",
             "polyfills": "apps/lms/src/polyfills.ts",
             "tsConfig": "apps/lms/tsconfig.app.json",
-            "assets": ["apps/lms/src/favicon.ico", "apps/lms/src/assets"],
-            "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
-              "apps/lms/src/styles.scss",
-              "apps/lms/src/assets/css/nucleo-icons.css",
-              "apps/lms/src/assets/css/blk-design-system.css",
-              "apps/lms/src/assets/demo/demo.css"
-            ],
+            "assets": ["apps/lms/src/assets", "apps/lms/src/favicon.ico"],
+            "styles": ["node_modules/perfect-scrollbar/css/perfect-scrollbar.css", "apps/lms/src/assets/scss/material-dashboard.scss", "apps/lms/src/assets/css/demo.css"],
             "scripts": [
-              "apps/lms/src/assets/js/core/jquery.min.js",
-              "apps/lms/src/assets/js/core/popper.min.js",
-              "apps/lms/src/assets/js/core/bootstrap.min.js",
-              "apps/lms/src/assets/js/plugins/perfect-scrollbar.jquery.min.js",
-              "apps/lms/src/assets/js/plugins/bootstrap-switch.js",
-              "apps/lms/src/assets/js/plugins/nouislider.min.js",
-              "apps/lms/src/assets/js/plugins/chartjs.min.js",
-              "apps/lms/src/assets/js/plugins/moment.min.js",
-              "apps/lms/src/assets/js/plugins/bootstrap-datetimepicker.js",
-              "apps/lms/src/assets/demo/demo.js",
-              "apps/lms/src/assets/js/blk-design-system.min.js"
+              "node_modules/jquery/dist/jquery.js",
+              "node_modules/popper.js/dist/umd/popper.js",
+              "node_modules/bootstrap-material-design/dist/js/bootstrap-material-design.min.js",
+              "node_modules/arrive/src/arrive.js",
+              "node_modules/moment/moment.js",
+              "node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js",
+              "node_modules/bootstrap-notify/bootstrap-notify.js",
+              "node_modules/chartist/dist/chartist.js"
             ]
           },
           "configurations": {
@@ -459,6 +450,41 @@
             "jestConfig": "libs/security/jest.config.js",
             "tsConfig": "libs/security/tsconfig.spec.json",
             "setupFile": "libs/security/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "components": {
+      "projectType": "library",
+      "root": "libs/components",
+      "sourceRoot": "libs/components/src",
+      "prefix": "angularlicious",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/components/tsconfig.lib.json",
+            "project": "libs/components/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/components/tsconfig.lib.json", "libs/components/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/components/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/components/jest.config.js",
+            "tsConfig": "libs/components/tsconfig.spec.json",
+            "setupFile": "libs/components/src/test-setup.ts"
           }
         }
       },

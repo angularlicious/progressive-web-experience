@@ -1,17 +1,13 @@
 <div class="card">
-  <div class="card-header">
-    <h2 class="card-title">{{ course.title }}</h2>
+  <div class="card-header card-header-danger">
+    <h4 class="card-title ">{{ course.title }}</h4>
+    <!-- <p class="card-category">Here is a subtitle for this table</p> -->
   </div>
   <div class="card-body">
     <ng-container *ngIf="course.author">
       <h4></h4>
     </ng-container>
     <p>{{ course.description }}</p>
-    <!-- <ng-container>
-      <a [routerLink]="['/courses/video', course.id]">
-        <img src="{{ course.videoImageUrl }}" />
-      </a>
-    </ng-container> -->
   </div>
   <div class="card-footer">
     <a [routerLink]="['/courses/course', course.id]" class="btn btn-simple btn-primary btn-round">View</a>

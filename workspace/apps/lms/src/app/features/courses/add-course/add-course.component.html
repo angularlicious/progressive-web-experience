@@ -1,39 +1,27 @@
 <div class="section">
   <div class=" row">
-    <div class=" col-12">
-      <h2>Latest Courses</h2>
-    </div>
-  </div>
-  <!-- ADD COURSE FORM :: START -->
-  <div class="row">
-    <div class="col-12 form-group">
-      <form [formGroup]="formGroup">
-        <div class="field-container">
-          <mat-form-field>
-            <input matInput placeholder="Enter the title of your course." formControlName="title">
-          </mat-form-field>
-        </div>
+    <form [formGroup]="formGroup" class="material-form">
+      <div class="form-field-section">
+        <mat-form-field class="full-width">
+          <mat-label>Course Category</mat-label>
+          <mat-select formControlName="category">
+            <!-- https://stackoverflow.com/questions/35750059/select-based-on-enum-in-angular2 -->
+            <mat-option *ngFor="let item of categories | enumKeys" [value]="item.value">{{ item.key }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
 
-        <div class="field-container">
-          <mat-form-field>
-            <textarea matInput placeholder="Enter course description." name="description" formControlName="description"
-              rows="10"></textarea>
-          </mat-form-field>
-        </div>
+      <div class="form-field-section">
+        <mat-form-field>
+          <input matInput placeholder="Enter the title of your course." formControlName="title" />
+        </mat-form-field>
+      </div>
 
-        <div class="field-container">
-          <mat-form-field>
-            <mat-label>Favorite food</mat-label>
-            <mat-select>
-                <!-- https://stackoverflow.com/questions/35750059/select-based-on-enum-in-angular2 -->
-              <mat-option *ngFor="let category of CourseCategory | enums" [value]="category">
-                {{food.viewValue}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
-      </form>
-    </div>
+      <div class="form-field-section">
+        <mat-form-field>
+          <textarea matInput placeholder="Enter course description." name="description" formControlName="description" rows="10"></textarea>
+        </mat-form-field>
+      </div>
+    </form>
   </div>
-  <!-- ADD COURSE FORM :: END -->
 </div>

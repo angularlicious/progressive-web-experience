@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MaterialDesignModule } from '../material-design/material-design.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ComponentsModule, EnumKeysPipe } from '@angularlicious/components';
 
 /**
  * Use the [SharedModule] to manage Angular and other 3rd-party modules/libraries/packages
@@ -16,8 +17,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
  */
 @NgModule({
   declarations: [],
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, MaterialDesignModule, RouterModule],
-  exports: [MaterialDesignModule, RouterModule],
+  imports: [CommonModule, ComponentsModule, ReactiveFormsModule, FormsModule, MaterialDesignModule, RouterModule],
+  exports: [ComponentsModule, MaterialDesignModule, RouterModule],
   bootstrap: [],
 })
 export class SharedModule {}

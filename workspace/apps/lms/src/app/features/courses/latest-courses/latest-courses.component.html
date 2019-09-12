@@ -1,19 +1,12 @@
-<div class="section">
-  <div class=" row">
-    <div class=" col-12">
-      <h2>Latest Courses</h2>
-    </div>
-  </div>
-
-  <!-- DISPLAY A LIST OF COURSES :: START -->
-  <div class="row">
-    <div class=" col-7" *ngIf="showCourses$ | async">
-      <p>Check out the latest videos.</p>
-      <!-- ADD CARDS HERE -->
-      <ng-container *ngFor="let course of latestCourses$ | async">
-        <lms-course-card [course]="course"></lms-course-card>
-      </ng-container>
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8" *ngFor="let course of latestCourses$ | async">
+        <!-- ADD CONTENT HERE -->
+        <ng-container>
+          <lms-course-card [course]="course"></lms-course-card>
+        </ng-container>
+      </div>
     </div>
   </div>
 </div>
-<!-- DISPLAY A LIST OF COURSES :: END -->

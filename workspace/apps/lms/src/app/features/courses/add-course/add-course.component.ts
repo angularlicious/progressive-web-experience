@@ -12,6 +12,7 @@ import { CourseCategory } from '@angularlicious/lms-common';
 })
 export class AddCourseComponent extends ComponentBase implements OnInit {
   formGroup: FormGroup;
+  categories = CourseCategory;
 
   constructor(private formBuilder: FormBuilder, loggingService: LoggingService, router: Router) {
     super('AddCourseComponent', loggingService, router);

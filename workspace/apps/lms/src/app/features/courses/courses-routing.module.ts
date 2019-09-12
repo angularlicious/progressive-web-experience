@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LatestCoursesComponent } from './latest-courses/latest-courses.component';
-import { VideoComponent } from './video/video.component';
 import { AddCourseComponent } from './add-course/add-course.component';
 import { CourseComponent } from './course/course.component';
 
