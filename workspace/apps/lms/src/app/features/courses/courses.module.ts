@@ -12,11 +12,25 @@ import { AddCourseComponent } from './add-course/add-course.component';
 import { CourseComponent } from './course/course.component';
 import { SharedModule } from '../../modules/shared/shared.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { CourseDetailsComponent } from './course-details/course-details.component';
+import { MyCoursesComponent } from './my-courses/my-courses.component';
+import { CourseAuthorComponent } from './course-author/course-author.component';
+import { AuthorsService, LmsBusinessAuthorsModule } from '@angularlicious/lms/business/authors';
 
 @NgModule({
-  declarations: [AddCourseComponent, LatestCoursesComponent, CourseCardComponent, VideoComponent, VideoPlayerComponent, CourseComponent],
+  declarations: [
+    AddCourseComponent,
+    LatestCoursesComponent,
+    CourseCardComponent,
+    VideoComponent,
+    VideoPlayerComponent,
+    CourseComponent,
+    CourseDetailsComponent,
+    MyCoursesComponent,
+    CourseAuthorComponent,
+  ],
   exports: [LatestCoursesComponent],
-  imports: [CommonModule, CoursesRoutingModule, LmsBusinessCoursesModule, ReactiveFormsModule, FormsModule, SharedModule],
-  providers: [CoursesUIService, CoursesService],
+  imports: [CommonModule, CoursesRoutingModule, LmsBusinessAuthorsModule, LmsBusinessCoursesModule, ReactiveFormsModule, FormsModule, SharedModule],
+  providers: [CoursesUIService, AuthorsService, CoursesService],
 })
 export class CoursesModule {}

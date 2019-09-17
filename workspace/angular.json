@@ -493,6 +493,34 @@
           "styleext": "scss"
         }
       }
+    },
+    "lms-business-authors": {
+      "projectType": "library",
+      "root": "libs/lms/business/authors",
+      "sourceRoot": "libs/lms/business/authors/src",
+      "prefix": "angularlicious",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/lms/business/authors/tsconfig.lib.json", "libs/lms/business/authors/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/lms/business/authors/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/lms/business/authors/jest.config.js",
+            "tsConfig": "libs/lms/business/authors/tsconfig.spec.json",
+            "setupFile": "libs/lms/business/authors/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "cli": {

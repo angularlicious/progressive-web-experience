@@ -26,7 +26,8 @@
       "@angularlicious/lms-common": ["libs/lms-common/src/index.ts"],
       "@angularlicious/lms/business/courses": ["libs/lms/business/courses/src/index.ts"],
       "@angularlicious/security": ["libs/security/src/index.ts"],
-      "@angularlicious/components": ["libs/components/src/index.ts"]
+      "@angularlicious/components": ["libs/components/src/index.ts"],
+      "@angularlicious/lms/business/authors": ["libs/lms/business/authors/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

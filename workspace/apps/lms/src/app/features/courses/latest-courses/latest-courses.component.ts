@@ -13,10 +13,10 @@ import { Course } from '@angularlicious/lms-common';
   styleUrls: ['./latest-courses.component.css'],
 })
 export class LatestCoursesComponent extends ComponentBase implements OnInit {
-  public readonly latestCourses$: Observable<Course[]> = this.coursesComponentService.latestCourses$.asObservable();
-  public readonly showCourses$: Observable<boolean> = this.coursesComponentService.showCourses$.asObservable();
+  public readonly latestCourses$: Observable<Course[]> = this.courseUiService.latestCourses$.asObservable();
+  public readonly showCourses$: Observable<boolean> = this.courseUiService.showCourses$.asObservable();
 
-  constructor(private coursesComponentService: CoursesUIService, loggingService: LoggingService, router: Router) {
+  constructor(private courseUiService: CoursesUIService, loggingService: LoggingService, router: Router) {
     super('LatestCoursesComponent', loggingService, router);
   }
 

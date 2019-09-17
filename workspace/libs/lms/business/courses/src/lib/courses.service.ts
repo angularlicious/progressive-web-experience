@@ -29,6 +29,10 @@ export class CoursesService extends ServiceBase {
     this.businessProvider.serviceContext = this.serviceContext;
   }
 
+  addCourse<T>(course: Course): Observable<T> {
+    return this.businessProvider.addCourse<T>(course);
+  }
+
   retrieveLatestCourses<T>(): Observable<T> {
     return this.businessProvider.retrieveLatestCourses<T>();
   }
