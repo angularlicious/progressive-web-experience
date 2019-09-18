@@ -21,7 +21,7 @@ export class AuthorsService extends ServiceBase {
   constructor(@Inject(BusinessProviderService) private businessProvider: BusinessProviderService, loggingService: LoggingService) {
     super('AuthorsService', loggingService);
 
-    this.initializeBusinessProvider();
+    this.initializeBusinessProvider(); //always provide the business the current [ServiceContext]cour
   }
 
   initializeBusinessProvider() {

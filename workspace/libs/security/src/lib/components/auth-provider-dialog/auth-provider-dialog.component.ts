@@ -5,6 +5,7 @@ import { AuthenticationService } from '../../authentication.service';
 import { ComponentBase } from '@angularlicious/foundation';
 import { Router } from '@angular/router';
 import { LoggingService } from '@angularlicious/logging';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'angularlicious-auth-provider-dialog',
@@ -12,6 +13,8 @@ import { LoggingService } from '@angularlicious/logging';
   styleUrls: ['./auth-provider-dialog.component.scss'],
 })
 export class AuthProviderDialog extends ComponentBase implements OnInit {
+  isAuthenticated$: Observable<boolean> = this.authService.isAuthenticated$;
+
   constructor(
     public dialogRef: MatDialogRef<AuthProviderDialog>,
     @Inject(MAT_DIALOG_DATA) public data: AuthProviderData,
@@ -23,7 +26,7 @@ export class AuthProviderDialog extends ComponentBase implements OnInit {
   }
 
   ngOnInit() {
-    this.authService.user$.subscribe(
+    this.authService.userSubject.subscribe(
       userUpdate => this.handleUserUpdate(userUpdate),
       error => this.handleServiceErrors(error),
       () => this.finishRequest(`Finished handling changes to user/security.`)

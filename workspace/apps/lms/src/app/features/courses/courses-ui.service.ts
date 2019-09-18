@@ -1,12 +1,13 @@
 import { Injectable } from '@angular/core';
 import { ReplaySubject, Observable, Subscription, BehaviorSubject } from 'rxjs';
-import { Course, Video, Author } from '@angularlicious/lms-common';
-import { ServiceBase, ApiResponse, SuccessApiResponse } from '@angularlicious/foundation';
+import { Course, Video, Author, User } from '@angularlicious/lms-common';
+import { ServiceBase } from '@angularlicious/foundation';
 import { LoggingService, Severity } from '@angularlicious/logging';
 
 import { CoursesService } from '@angularlicious/lms/business/courses';
 import { AuthorsService } from '@angularlicious/lms/business/authors';
 import { Router } from '@angular/router';
+import { UserService } from '@angularlicious/security';
 
 /**
  * Use this service as a mediator between feature module components and the core domain
@@ -49,7 +50,13 @@ export class CoursesUIService extends ServiceBase {
   private showAuthorSubject: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
   public readonly showAuthor$: Observable<boolean> = this.showAuthorSubject.asObservable();
 
-  constructor(private coursesService: CoursesService, private authorsService: AuthorsService, private router: Router, loggingService: LoggingService) {
+  constructor(
+    private userService: UserService,
+    private coursesService: CoursesService,
+    private authorsService: AuthorsService,
+    private router: Router,
+    loggingService: LoggingService
+  ) {
     super('CoursesUIService', loggingService);
     this.initialize();
   }
@@ -107,11 +114,34 @@ export class CoursesUIService extends ServiceBase {
       .subscribe(response => this.handleCourseVideosResponse(response), error => this.handleError(error), () => this.finishRequest(`Finished request for course videos.`));
   }
 
+  /**
+   * A helper method to retrieve the aggregate members of the [current] author.
+   */
+  private retrieveAuthorDetails() {
+    // retrieve user information for the specified author;
+    this.userService
+      .retrieveUser<User>(this.author.userId)
+      .subscribe(response => this.handleUserResponse(response), error => this.handleError(error), () => this.finishRequest(`Finished request for author user information.`));
+  }
+
+  /**
+   * Use to handle the response for the author's user information.
+   * @param response
+   */
+  private handleUserResponse(response: User): void {
+    if (response) {
+      this.author.user = response;
+      this.showAuthorSubject.next(true);
+      this.authorSubject.next(this.author);
+    }
+  }
+
   private handleRetrieveAuthorResponse(response: Author): void {
     if (response) {
       this.author = response;
       this.authorSubject.next(this.author);
       this.showAuthorSubject.next(true);
+      this.retrieveAuthorDetails();
     } else {
       this.authorSubject.next(null);
       this.author = null;

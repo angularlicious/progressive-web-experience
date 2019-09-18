@@ -16,6 +16,7 @@ import { CourseDetailsComponent } from './course-details/course-details.componen
 import { MyCoursesComponent } from './my-courses/my-courses.component';
 import { CourseAuthorComponent } from './course-author/course-author.component';
 import { AuthorsService, LmsBusinessAuthorsModule } from '@angularlicious/lms/business/authors';
+import { UserService, SecurityModule } from '@angularlicious/security';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { AuthorsService, LmsBusinessAuthorsModule } from '@angularlicious/lms/bu
     CourseAuthorComponent,
   ],
   exports: [LatestCoursesComponent],
-  imports: [CommonModule, CoursesRoutingModule, LmsBusinessAuthorsModule, LmsBusinessCoursesModule, ReactiveFormsModule, FormsModule, SharedModule],
-  providers: [CoursesUIService, AuthorsService, CoursesService],
+  imports: [CommonModule, CoursesRoutingModule, LmsBusinessAuthorsModule, LmsBusinessCoursesModule, SecurityModule, ReactiveFormsModule, FormsModule, SharedModule],
+  providers: [CoursesUIService, AuthorsService, CoursesService, UserService],
 })
 export class CoursesModule {}

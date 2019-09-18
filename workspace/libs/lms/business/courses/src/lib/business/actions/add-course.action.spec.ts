@@ -1,7 +1,8 @@
 import { AddCourseAction } from './add-course.action';
+import { Course } from '@angularlicious/lms-common';
 
-describe('AddCourse.Action', () => {
+describe('AddCourseAction', () => {
   it('should create an instance', () => {
-    expect(new AddCourse.Action()).toBeTruthy();
+    expect(new AddCourseAction(new Course())).toBeTruthy();
   });
 });

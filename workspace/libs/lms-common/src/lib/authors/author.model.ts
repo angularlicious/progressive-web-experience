@@ -1,4 +1,5 @@
 import { AuthorStatus } from './author-status.enum';
+import { User } from '@angularlicious/lms-common';
 
 export class Author {
   bio: string;
@@ -10,6 +11,7 @@ export class Author {
   photoUrl: string;
   status: AuthorStatus.NotSet;
   twitter: string;
+  user?: User;
   userId: string;
   web: string;
 }

@@ -45,10 +45,10 @@
           </div>
         </li>
         <li class="nav-item">
-          <lms-login></lms-login>
+          <lms-login [user]="user$ | async" [isAuthenticated]="isAuthenticated$ | async"></lms-login>
         </li>
         <li class="nav-item">
-          <lms-user-image></lms-user-image>
+          <lms-user-image [user]="user$ | async" [isAuthenticated]="isAuthenticated$ | async"></lms-user-image>
         </li>
       </ul>
     </div>
