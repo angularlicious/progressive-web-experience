@@ -12,7 +12,7 @@ export class UserService extends ServiceBase {
     this.businessProvider.serviceContext = this.serviceContext;
   }
 
-  retrieveUsers(): Observable<T> {
+  retrieveUsers<T>(): Observable<T> {
     // return a list of users from Firebase:
     throw new Error('Not implemented...yet.');
   }
