@@ -13,8 +13,8 @@ import { Observable } from 'rxjs';
 })
 export class CourseComponent extends ComponentBase implements OnInit {
   course: Course;
-  loggingService: any;
   courseId: string;
+
   showCourse$: Observable<boolean> = this.uiService.showCourse$.asObservable();
   public readonly videos$: Observable<Video[]> = this.uiService.videos$.asObservable();
   public readonly showVideos$: Observable<boolean> = this.uiService.showVideos$.asObservable();

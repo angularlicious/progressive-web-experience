@@ -24,27 +24,27 @@ import { UserService } from '@angularlicious/security';
  */
 @Injectable()
 export class CoursesUIService extends ServiceBase {
-  // setup for a [Course]
-  private courseSubject: BehaviorSubject<Course> = new BehaviorSubject<Course>(null);
-  course$: Observable<Course> = this.courseSubject.asObservable();
-  showCourse$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
   // use to manage state for the [course] collection and item(s);
   private courses: Course[] = [];
   private course: Course;
   private authors: Author[] = [];
   private author: Author;
 
-  // setup for [Course] collection
+  // setup for a [Course] Observable
+  private courseSubject: BehaviorSubject<Course> = new BehaviorSubject<Course>(null);
+  course$: Observable<Course> = this.courseSubject.asObservable();
+  showCourse$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  // setup for [Course] collection Observable
   latestCoursesSubscription: Subscription;
   latestCourses$: ReplaySubject<Course[]> = new ReplaySubject<Course[]>(1);
   showCourses$: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
 
-  // setup for [Video] collection
+  // setup for [Video] collection Observable
   videos$: ReplaySubject<Video[]> = new ReplaySubject<Video[]>(1);
   showVideos$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  // setup for [Author] associated to the specified [course$/courseSubject]
+  // setup for [Author] Observable
   public authorSubject: ReplaySubject<Author> = new ReplaySubject<Author>(1);
   public readonly author$: Observable<Author> = this.authorSubject.asObservable();
   private showAuthorSubject: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
@@ -92,6 +92,20 @@ export class CoursesUIService extends ServiceBase {
       this.retrieveCourseVideos(this.course);
       this.retrieveCourseAuthor(this.course);
     }
+  }
+
+  private initialize() {
+    this.loggingService.log(this.serviceName, Severity.Information, `Preparing to initialize the [UI] observables.`);
+    this.showCourses$.next(false);
+    this.showCourse$.next(false);
+
+    this.coursesService.retrieveLatestCourses<Course[]>().subscribe(
+      response => this.handleLatestCoursesResponse<Observable<Course[]>>(response),
+      error => this.handleError(error),
+      () => {
+        this.finishRequest(`Finished request for latest video courses.`);
+      }
+    );
   }
 
   private retrieveCourseAuthor(course: Course) {
@@ -173,20 +187,6 @@ export class CoursesUIService extends ServiceBase {
     } else {
       this.showVideos$.next(false);
     }
-  }
-
-  private initialize() {
-    this.loggingService.log(this.serviceName, Severity.Information, `Preparing to initialize the [UI] observables.`);
-    this.showCourses$.next(false);
-    this.showCourse$.next(false);
-
-    this.coursesService.retrieveLatestCourses<Course[]>().subscribe(
-      response => this.handleLatestCoursesResponse<Observable<Course[]>>(response),
-      error => this.handleError(error),
-      () => {
-        this.finishRequest(`Finished request for latest video courses.`);
-      }
-    );
   }
 
   /**

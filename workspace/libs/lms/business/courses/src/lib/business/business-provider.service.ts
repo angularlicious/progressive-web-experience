@@ -15,7 +15,7 @@ import { RetrieveCourseVideosAction } from './actions/retrieve-course-videos.act
 @Injectable()
 export class BusinessProviderService extends BusinessProviderBase {
   constructor(@Inject(FirestoreCourseRepositoryService) public apiService: FirestoreCourseRepositoryService, loggingService: LoggingService) {
-    super('LmsBusinessCoursesModule', loggingService);
+    super('BusinessProviderService', loggingService);
   }
 
   addCourse<T>(course: Course) {
