@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LatestCoursesComponent } from './latest-courses/latest-courses.component';
-import { VideoComponent } from './video/video.component';
 import { AddCourseComponent } from './add-course/add-course.component';
 import { CourseComponent } from './course/course.component';
+import { CourseDetailsComponent } from './course-details/course-details.component';
 
 const routes: Routes = [
   {
@@ -17,6 +17,10 @@ const routes: Routes = [
   {
     path: 'courses/add-course',
     component: AddCourseComponent,
+  },
+  {
+    path: 'courses/course-details/:id',
+    component: CourseDetailsComponent,
   },
 ];
 

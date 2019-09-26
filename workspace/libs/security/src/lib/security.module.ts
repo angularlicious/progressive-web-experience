@@ -4,6 +4,9 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AuthProviderDialog } from './components/auth-provider-dialog/auth-provider-dialog.component';
+import { BusinessProviderService } from './business/business-provider.service';
+import { FirestoreUsersRepositoryService } from './business/firestore-users-repository.service';
+import { HttpService } from '@angularlicious/http-service';
 
 const firebaseOptions = {
   apiKey: 'AIzaSyCcPPAdpUUuO3Kczc3LWyrYmwC8Ghxiwr0',
@@ -19,5 +22,6 @@ const firebaseOptions = {
   declarations: [AuthProviderDialog],
   exports: [AuthProviderDialog],
   entryComponents: [AuthProviderDialog],
+  providers: [BusinessProviderService, FirestoreUsersRepositoryService, HttpService],
 })
 export class SecurityModule {}

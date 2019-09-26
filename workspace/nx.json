@@ -43,6 +43,12 @@
     },
     "security": {
       "tags": []
+    },
+    "components": {
+      "tags": []
+    },
+    "lms-business-authors": {
+      "tags": []
     }
   }
 }

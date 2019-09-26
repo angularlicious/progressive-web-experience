@@ -6,7 +6,7 @@ import { ConfigurationService } from '@angularlicious/configuration';
 import { LogEntry } from './log-entry';
 import { Subject, ReplaySubject } from 'rxjs';
 import { ILogEntry } from './i-log-entry';
-import { LoggingConfig } from '@angularlicious/logging';
+import { LoggingConfig } from './config/logging-config';
 
 @Injectable()
 export class LoggingService {

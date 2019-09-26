@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MaterialDesignModule } from '../material-design/material-design.module';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ComponentsModule } from '@angularlicious/components';
 
 /**
  * Use the [SharedModule] to manage Angular and other 3rd-party modules/libraries/packages
@@ -15,8 +17,8 @@ import { MaterialDesignModule } from '../material-design/material-design.module'
  */
 @NgModule({
   declarations: [],
-  imports: [CommonModule, MaterialDesignModule, RouterModule],
-  exports: [MaterialDesignModule, RouterModule],
+  imports: [CommonModule, ComponentsModule, ReactiveFormsModule, FormsModule, MaterialDesignModule, RouterModule],
+  exports: [ComponentsModule, MaterialDesignModule, RouterModule],
   bootstrap: [],
 })
 export class SharedModule {}

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Course, Video } from '@angularlicious/lms-common';
+import { Course, Video, Author } from '@angularlicious/lms-common';
 import { Severity, LoggingService } from '@angularlicious/logging';
 import { ComponentBase } from '@angularlicious/foundation';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -13,13 +13,16 @@ import { Observable } from 'rxjs';
 })
 export class CourseComponent extends ComponentBase implements OnInit {
   course: Course;
-  loggingService: any;
   courseId: string;
+
   showCourse$: Observable<boolean> = this.uiService.showCourse$.asObservable();
   public readonly videos$: Observable<Video[]> = this.uiService.videos$.asObservable();
   public readonly showVideos$: Observable<boolean> = this.uiService.showVideos$.asObservable();
 
-  constructor(private route: ActivatedRoute, public uiService: CoursesUIService, loggingService: LoggingService, router: Router) {
+  public readonly author$: Observable<Author> = this.uiService.author$;
+  public readonly showAuthor$: Observable<boolean> = this.uiService.showAuthor$;
+
+  constructor(private route: ActivatedRoute, private uiService: CoursesUIService, loggingService: LoggingService, router: Router) {
     super('CourseComponent', loggingService, router);
   }
 
