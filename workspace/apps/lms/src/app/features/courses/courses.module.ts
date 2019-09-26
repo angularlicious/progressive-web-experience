@@ -31,7 +31,16 @@ import { UserService, SecurityModule } from '@angularlicious/security';
     CourseAuthorComponent,
   ],
   exports: [LatestCoursesComponent],
-  imports: [CommonModule, CoursesRoutingModule, LmsBusinessAuthorsModule, LmsBusinessCoursesModule, SecurityModule, ReactiveFormsModule, FormsModule, SharedModule],
+  imports: [
+    CommonModule,
+    CoursesRoutingModule,
+    LmsBusinessAuthorsModule,
+    LmsBusinessCoursesModule,
+    SecurityModule,
+    // ReactiveFormsModule, // ALREADY IMPORTED USING THE SHARED MODULE
+    // FormsModule,
+    SharedModule,
+  ],
   providers: [CoursesUIService, AuthorsService, CoursesService, UserService],
 })
 export class CoursesModule {}

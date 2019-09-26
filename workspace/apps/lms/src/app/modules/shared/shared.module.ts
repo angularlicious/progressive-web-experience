@@ -14,11 +14,26 @@ import { ComponentsModule } from '@angularlicious/components';
  * ReactiveFormsModule
  *
  * Note: DO NOT include any items related to the application features or domain.
+ *
+ * Make sure to [export] items that will be consumed by other modules
  */
 @NgModule({
   declarations: [],
-  imports: [CommonModule, ComponentsModule, ReactiveFormsModule, FormsModule, MaterialDesignModule, RouterModule],
-  exports: [ComponentsModule, MaterialDesignModule, RouterModule],
+  imports: [
+    CommonModule,
+    ComponentsModule,
+    ReactiveFormsModule,
+    FormsModule,
+    MaterialDesignModule,
+    RouterModule,
+  ],
+  exports: [
+    ComponentsModule,
+    FormsModule,
+    MaterialDesignModule,
+    ReactiveFormsModule,
+    RouterModule,
+  ],
   bootstrap: [],
 })
 export class SharedModule {}
