@@ -12,10 +12,11 @@ export class AppConfig implements IConfiguration {
     version: this.version,
   };
   errorHandlingConfig: IErrorHandingConfig = {
-    applicationName: this.applicationName,
+    applicationName: 'Angularlicious.LMS',
     includeDefaultErrorHandling: true,
   };
   logglyConfig: ILogglyConfig = {
+    applicationName: 'Angularlicious.LMS',
     apiKey: '01e4b3aa-f301-43e7-bf60-40ba5d0729d4',
     sendConsoleErrors: true,
   };
