@@ -11,7 +11,6 @@ import { VideoPlayerComponent } from './video-player/video-player.component';
 import { AddCourseComponent } from './add-course/add-course.component';
 import { CourseComponent } from './course/course.component';
 import { SharedModule } from '../../modules/shared/shared.module';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CourseDetailsComponent } from './course-details/course-details.component';
 import { MyCoursesComponent } from './my-courses/my-courses.component';
 import { CourseAuthorComponent } from './course-author/course-author.component';

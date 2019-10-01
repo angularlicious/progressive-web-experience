@@ -10,7 +10,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [AppRoutingModule, BrowserModule, CrossCuttingModule, SharedModule, CoreModule, BrowserAnimationsModule],
+  imports: [
+    AppRoutingModule,
+    BrowserModule,
+    CrossCuttingModule,
+    SharedModule,
+    CoreModule,
+    BrowserAnimationsModule,
+  ],
   exports: [SharedModule],
   providers: [],
   bootstrap: [AppComponent],
