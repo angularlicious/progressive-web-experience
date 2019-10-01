@@ -13,7 +13,8 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: './features/courses/courses.module#CoursesModule',
+        // loadChildren: './features/courses/courses.module#CoursesModule',
+        loadChildren: () => import(`./features/courses/courses.module`).then(m => m.CoursesModule),
       },
     ],
   },
@@ -22,7 +23,11 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: './features/documentation/documentation.module#DocumentationModule',
+        // loadChildren: './features/documentation/documentation.module#DocumentationModule',
+        loadChildren: () =>
+          import(`./features/documentation/documentation.module`).then(
+            module => module.DocumentationModule
+          ),
       },
     ],
   },
