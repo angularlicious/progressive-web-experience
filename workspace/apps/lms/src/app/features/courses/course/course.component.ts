@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Course, Video, Author } from '@angularlicious/lms-common';
+import { Course, Video, Author } from '@angularlicious/lms-core/common';
 import { Severity, LoggingService } from '@angularlicious/logging';
 import { ComponentBase } from '@angularlicious/foundation';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -22,21 +22,39 @@ export class CourseComponent extends ComponentBase implements OnInit {
   public readonly author$: Observable<Author> = this.uiService.author$;
   public readonly showAuthor$: Observable<boolean> = this.uiService.showAuthor$;
 
-  constructor(private route: ActivatedRoute, private uiService: CoursesUIService, loggingService: LoggingService, router: Router) {
+  constructor(
+    private route: ActivatedRoute,
+    private uiService: CoursesUIService,
+    loggingService: LoggingService,
+    router: Router
+  ) {
     super('CourseComponent', loggingService, router);
   }
 
   ngOnInit() {
     this.uiService.course$.subscribe(
       course => this.handleCourseUpdate(course),
-      error => this.loggingService.log(this.componentName, Severity.Error, `Error while retrieving course. ${error.message}`),
+      error =>
+        this.loggingService.log(
+          this.componentName,
+          Severity.Error,
+          `Error while retrieving course. ${error.message}`
+        ),
       () => this.finishRequest(`Finished handling course update from ui service.`)
     );
 
     // https://angular.io/api/router/ActivatedRouteSnapshot)
-    this.loggingService.log(this.componentName, Severity.Information, `Preparing to retrieve video identifer.`);
+    this.loggingService.log(
+      this.componentName,
+      Severity.Information,
+      `Preparing to retrieve video identifer.`
+    );
     this.courseId = this.route.snapshot.params['id'];
-    this.loggingService.log(this.componentName, Severity.Information, `Preparing to retrieve video with identifier: ${this.courseId}`);
+    this.loggingService.log(
+      this.componentName,
+      Severity.Information,
+      `Preparing to retrieve video with identifier: ${this.courseId}`
+    );
     this.uiService.retrieveCourse(this.courseId);
   }
 

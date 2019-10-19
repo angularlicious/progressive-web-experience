@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Course } from '@angularlicious/lms-common';
+import { Course } from '@angularlicious/lms-core/common';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { ComponentBase } from '@angularlicious/foundation';
 import { LoggingService, Severity } from '@angularlicious/logging';

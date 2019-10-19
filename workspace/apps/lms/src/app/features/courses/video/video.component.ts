@@ -4,7 +4,7 @@ import { LoggingService, Severity } from '@angularlicious/logging';
 import { Router, ActivatedRoute } from '@angular/router';
 import { CoursesUIService } from '../courses-ui.service';
 import { Observable } from 'rxjs';
-import { Video } from '@angularlicious/lms-common';
+import { Video } from '@angularlicious/lms-core/common';
 
 @Component({
   selector: 'lms-video',
@@ -16,7 +16,12 @@ export class VideoComponent extends ComponentBase implements OnInit {
   public readonly showVideo$: Observable<boolean> = this.uiService.showCourse$.asObservable();
   video: Video;
 
-  constructor(private route: ActivatedRoute, private uiService: CoursesUIService, loggingService: LoggingService, router: Router) {
+  constructor(
+    private route: ActivatedRoute,
+    private uiService: CoursesUIService,
+    loggingService: LoggingService,
+    router: Router
+  ) {
     super('VideoComponent', loggingService, router);
   }
 

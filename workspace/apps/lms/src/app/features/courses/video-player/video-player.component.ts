@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Video } from '@angularlicious/lms-common';
+import { Video } from '@angularlicious/lms-core/common';
 import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 import { ComponentBase } from '@angularlicious/foundation';
 import { LoggingService, Severity } from '@angularlicious/logging';
@@ -20,10 +20,18 @@ export class VideoPlayerComponent extends ComponentBase implements OnInit {
 
   ngOnInit() {
     if (this.video && this.video.id) {
-      this.loggingService.log(this.componentName, Severity.Information, `Video input is valid for course: ${this.video.title}`);
+      this.loggingService.log(
+        this.componentName,
+        Severity.Information,
+        `Video input is valid for course: ${this.video.title}`
+      );
       this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.video.url);
     } else {
-      this.loggingService.log(this.componentName, Severity.Error, `The video course input is not valid. Cannot load course video.`);
+      this.loggingService.log(
+        this.componentName,
+        Severity.Error,
+        `The video course input is not valid. Cannot load course video.`
+      );
     }
   }
 }

@@ -1,10 +1,14 @@
 import { Injectable } from '@angular/core';
 import { ServiceBase } from '@angularlicious/foundation';
 
-import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from '@angular/fire/firestore';
+import {
+  AngularFirestore,
+  AngularFirestoreDocument,
+  AngularFirestoreCollection,
+} from '@angular/fire/firestore';
 import { LoggingService, Severity } from '@angularlicious/logging';
 import { Observable, from } from 'rxjs';
-import { User } from '@angularlicious/lms-common';
+import { User } from './../models/user.model';
 import { map } from 'rxjs/operators';
 
 @Injectable()

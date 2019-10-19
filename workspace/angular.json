@@ -23,7 +23,11 @@
             "polyfills": "apps/lms/src/polyfills.ts",
             "tsConfig": "apps/lms/tsconfig.app.json",
             "assets": ["apps/lms/src/assets", "apps/lms/src/favicon.ico"],
-            "styles": ["node_modules/perfect-scrollbar/css/perfect-scrollbar.css", "apps/lms/src/assets/scss/material-dashboard.scss", "apps/lms/src/assets/css/demo.css"],
+            "styles": [
+              "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
+              "apps/lms/src/assets/scss/material-dashboard.scss",
+              "apps/lms/src/assets/css/demo.css"
+            ],
             "scripts": [
               "node_modules/jquery/dist/jquery.js",
               "node_modules/popper.js/dist/umd/popper.js",
@@ -174,7 +178,10 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/error-handling/tsconfig.lib.json", "libs/error-handling/tsconfig.spec.json"],
+            "tsConfig": [
+              "libs/error-handling/tsconfig.lib.json",
+              "libs/error-handling/tsconfig.spec.json"
+            ],
             "exclude": ["**/node_modules/**", "!libs/error-handling/**"]
           }
         },
@@ -209,7 +216,10 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/configuration/tsconfig.lib.json", "libs/configuration/tsconfig.spec.json"],
+            "tsConfig": [
+              "libs/configuration/tsconfig.lib.json",
+              "libs/configuration/tsconfig.spec.json"
+            ],
             "exclude": ["**/node_modules/**", "!libs/configuration/**"]
           }
         },
@@ -244,7 +254,10 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/rules-engine/tsconfig.lib.json", "libs/rules-engine/tsconfig.spec.json"],
+            "tsConfig": [
+              "libs/rules-engine/tsconfig.lib.json",
+              "libs/rules-engine/tsconfig.spec.json"
+            ],
             "exclude": ["**/node_modules/**", "!libs/rules-engine/**"]
           }
         },
@@ -314,7 +327,10 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/http-service/tsconfig.lib.json", "libs/http-service/tsconfig.spec.json"],
+            "tsConfig": [
+              "libs/http-service/tsconfig.lib.json",
+              "libs/http-service/tsconfig.spec.json"
+            ],
             "exclude": ["**/node_modules/**", "!libs/http-service/**"]
           }
         },
@@ -349,7 +365,10 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/foundation/tsconfig.lib.json", "libs/foundation/tsconfig.spec.json"],
+            "tsConfig": [
+              "libs/foundation/tsconfig.lib.json",
+              "libs/foundation/tsconfig.spec.json"
+            ],
             "exclude": ["**/node_modules/**", "!libs/foundation/**"]
           }
         },
@@ -370,23 +389,23 @@
     },
     "lms-common": {
       "projectType": "library",
-      "root": "libs/lms-common",
-      "sourceRoot": "libs/lms-common/src",
+      "root": "lms/common",
+      "sourceRoot": "lms/common/src",
       "prefix": "angularlicious",
       "architect": {
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/lms-common/tsconfig.lib.json", "libs/lms-common/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!libs/lms-common/**"]
+            "tsConfig": ["lms/common/tsconfig.lib.json", "lms/common/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!lms/common/**"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/lms-common/jest.config.js",
-            "tsConfig": "libs/lms-common/tsconfig.spec.json",
-            "setupFile": "libs/lms-common/src/test-setup.ts"
+            "jestConfig": "lms/common/jest.config.js",
+            "tsConfig": "lms/common/tsconfig.spec.json",
+            "setupFile": "lms/common/src/test-setup.ts"
           }
         }
       },
@@ -396,25 +415,28 @@
         }
       }
     },
-    "lms-business-courses": {
+    "lms-courses": {
       "projectType": "library",
-      "root": "libs/lms/business/courses",
-      "sourceRoot": "libs/lms/business/courses/src",
+      "root": "libs/lms/courses",
+      "sourceRoot": "libs/lms/courses/src",
       "prefix": "angularlicious",
       "architect": {
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/lms/business/courses/tsconfig.lib.json", "libs/lms/business/courses/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!libs/lms/business/courses/**"]
+            "tsConfig": [
+              "libs/lms/courses/tsconfig.lib.json",
+              "libs/lms/courses/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/lms/courses/**"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/lms/business/courses/jest.config.js",
-            "tsConfig": "libs/lms/business/courses/tsconfig.spec.json",
-            "setupFile": "libs/lms/business/courses/src/test-setup.ts"
+            "jestConfig": "libs/lms/courses/jest.config.js",
+            "tsConfig": "libs/lms/courses/tsconfig.spec.json",
+            "setupFile": "libs/lms/courses/src/test-setup.ts"
           }
         }
       },
@@ -475,7 +497,10 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/components/tsconfig.lib.json", "libs/components/tsconfig.spec.json"],
+            "tsConfig": [
+              "libs/components/tsconfig.lib.json",
+              "libs/components/tsconfig.spec.json"
+            ],
             "exclude": ["**/node_modules/**", "!libs/components/**"]
           }
         },
@@ -494,25 +519,28 @@
         }
       }
     },
-    "lms-business-authors": {
+    "lms-authors": {
       "projectType": "library",
-      "root": "libs/lms/business/authors",
-      "sourceRoot": "libs/lms/business/authors/src",
+      "root": "libs/lms/authors",
+      "sourceRoot": "libs/lms/authors/src",
       "prefix": "angularlicious",
       "architect": {
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/lms/business/authors/tsconfig.lib.json", "libs/lms/business/authors/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!libs/lms/business/authors/**"]
+            "tsConfig": [
+              "libs/lms/authors/tsconfig.lib.json",
+              "libs/lms/authors/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/lms/authors/**"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/lms/business/authors/jest.config.js",
-            "tsConfig": "libs/lms/business/authors/tsconfig.spec.json",
-            "setupFile": "libs/lms/business/authors/src/test-setup.ts"
+            "jestConfig": "libs/lms/authors/jest.config.js",
+            "tsConfig": "libs/lms/authors/tsconfig.spec.json",
+            "setupFile": "libs/lms/authors/src/test-setup.ts"
           }
         }
       },

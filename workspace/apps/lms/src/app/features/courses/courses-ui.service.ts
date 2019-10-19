@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { ReplaySubject, Observable, Subscription, BehaviorSubject } from 'rxjs';
-import { Course, Video, Author, User } from '@angularlicious/lms-common';
+import { Course, Video, Author } from '@angularlicious/lms-core/common';
 import { ServiceBase } from '@angularlicious/foundation';
 import { LoggingService, Severity } from '@angularlicious/logging';
 
-import { CoursesService } from '@angularlicious/lms/business/courses';
-import { AuthorsService } from '@angularlicious/lms/business/authors';
+import { CoursesService } from '@angularlicious/lms-core/courses';
+import { AuthorsService } from '@angularlicious/lms-core/authors';
 import { Router } from '@angular/router';
-import { UserService } from '@angularlicious/security';
+import { UserService, User } from '@angularlicious/security';
 
 /**
  * Use this service as a mediator between feature module components and the core domain
@@ -66,11 +66,19 @@ export class CoursesUIService extends ServiceBase {
    * @param course
    */
   public addCourse(course: Course) {
-    this.loggingService.log(this.serviceName, Severity.Information, `Preparing to call the [Course] Service to process request to add new course.`);
+    this.loggingService.log(
+      this.serviceName,
+      Severity.Information,
+      `Preparing to call the [Course] Service to process request to add new course.`
+    );
 
     this.coursesService
       .addCourse<Course>(course)
-      .subscribe(response => this.handleAddCourseResponse(response), error => this.handleError(error), () => this.finishRequest(`Finished request to add new course.`));
+      .subscribe(
+        response => this.handleAddCourseResponse(response),
+        error => this.handleError(error),
+        () => this.finishRequest(`Finished request to add new course.`)
+      );
   }
 
   /**
@@ -78,13 +86,25 @@ export class CoursesUIService extends ServiceBase {
    * @param courseId
    */
   public retrieveCourse(courseId: string) {
-    this.loggingService.log(this.serviceName, Severity.Information, `Setting [showCourse$] to [false]`);
+    this.loggingService.log(
+      this.serviceName,
+      Severity.Information,
+      `Setting [showCourse$] to [false]`
+    );
     this.showCourse$.next(false);
 
-    this.loggingService.log(this.serviceName, Severity.Information, `Preparing to find course in collection.`);
+    this.loggingService.log(
+      this.serviceName,
+      Severity.Information,
+      `Preparing to find course in collection.`
+    );
     const targetCourse = this.courses.find(item => item.id === courseId);
     if (targetCourse) {
-      this.loggingService.log(this.serviceName, Severity.Information, `Target course found: ${targetCourse.title}.`);
+      this.loggingService.log(
+        this.serviceName,
+        Severity.Information,
+        `Target course found: ${targetCourse.title}.`
+      );
       this.showCourse$.next(true);
       this.courseSubject.next(targetCourse);
       this.course = targetCourse;
@@ -95,7 +115,11 @@ export class CoursesUIService extends ServiceBase {
   }
 
   private initialize() {
-    this.loggingService.log(this.serviceName, Severity.Information, `Preparing to initialize the [UI] observables.`);
+    this.loggingService.log(
+      this.serviceName,
+      Severity.Information,
+      `Preparing to initialize the [UI] observables.`
+    );
     this.showCourses$.next(false);
     this.showCourse$.next(false);
 
@@ -110,7 +134,11 @@ export class CoursesUIService extends ServiceBase {
 
   private retrieveCourseAuthor(course: Course) {
     // use author service in the author core/domain service;
-    this.loggingService.log(this.serviceName, Severity.Information, `Preparing to retrieve course [author] information.`);
+    this.loggingService.log(
+      this.serviceName,
+      Severity.Information,
+      `Preparing to retrieve course [author] information.`
+    );
 
     this.authorsService
       .retrieveAuthor<Author>(course.authorId.id)
@@ -122,10 +150,18 @@ export class CoursesUIService extends ServiceBase {
   }
 
   private retrieveCourseVideos(course: Course) {
-    this.loggingService.log(this.serviceName, Severity.Information, `Preparing to retrieve course videos.`);
+    this.loggingService.log(
+      this.serviceName,
+      Severity.Information,
+      `Preparing to retrieve course videos.`
+    );
     this.coursesService
       .retrieveCourseVideos<Video[]>(course)
-      .subscribe(response => this.handleCourseVideosResponse(response), error => this.handleError(error), () => this.finishRequest(`Finished request for course videos.`));
+      .subscribe(
+        response => this.handleCourseVideosResponse(response),
+        error => this.handleError(error),
+        () => this.finishRequest(`Finished request for course videos.`)
+      );
   }
 
   /**
@@ -135,7 +171,11 @@ export class CoursesUIService extends ServiceBase {
     // retrieve user information for the specified author;
     this.userService
       .retrieveUser<User>(this.author.userId)
-      .subscribe(response => this.handleUserResponse(response), error => this.handleError(error), () => this.finishRequest(`Finished request for author user information.`));
+      .subscribe(
+        response => this.handleUserResponse(response),
+        error => this.handleError(error),
+        () => this.finishRequest(`Finished request for author user information.`)
+      );
   }
 
   /**
@@ -165,7 +205,11 @@ export class CoursesUIService extends ServiceBase {
 
   private handleAddCourseResponse(response: Course): void {
     if (response) {
-      this.loggingService.log(this.serviceName, Severity.Information, `Handling successful l response for adding new course.`);
+      this.loggingService.log(
+        this.serviceName,
+        Severity.Information,
+        `Handling successful l response for adding new course.`
+      );
       this.courseSubject.next(response);
       this.showCourse$.next(true);
       this.course = response;
@@ -173,7 +217,11 @@ export class CoursesUIService extends ServiceBase {
       //redirect user to the course details page; to finish configuration of course;
       this.router.navigate(['courses/course-detail', this.course.id]);
     } else {
-      this.loggingService.log(this.serviceName, Severity.Warning, `Failed to get a valid response for the [add course] request.`);
+      this.loggingService.log(
+        this.serviceName,
+        Severity.Warning,
+        `Failed to get a valid response for the [add course] request.`
+      );
       this.courseSubject.next(null);
       this.showCourse$.next(false);
       this.course = null;
@@ -194,14 +242,26 @@ export class CoursesUIService extends ServiceBase {
    * @param response
    */
   private handleLatestCoursesResponse<T>(response: Course[]): void {
-    this.loggingService.log(this.serviceName, Severity.Information, `Preparing to handle request for latest videos.`);
+    this.loggingService.log(
+      this.serviceName,
+      Severity.Information,
+      `Preparing to handle request for latest videos.`
+    );
     if (response && response.length > 0) {
-      this.loggingService.log(this.serviceName, Severity.Information, `Processing valid response with [${response.length}] videos.`);
+      this.loggingService.log(
+        this.serviceName,
+        Severity.Information,
+        `Processing valid response with [${response.length}] videos.`
+      );
       this.courses = response;
       this.latestCourses$.next(this.courses);
       this.showCourses$.next(true);
     } else {
-      this.loggingService.log(this.serviceName, Severity.Warning, `The response does not contain any videos.`);
+      this.loggingService.log(
+        this.serviceName,
+        Severity.Warning,
+        `The response does not contain any videos.`
+      );
       this.showCourses$.next(false);
       this.latestCourses$.next([]);
     }

@@ -12,11 +12,11 @@ import { Observable } from 'rxjs';
   templateUrl: './auth-provider-dialog.component.html',
   styleUrls: ['./auth-provider-dialog.component.scss'],
 })
-export class AuthProviderDialog extends ComponentBase implements OnInit {
+export class AuthProviderDialogComponent extends ComponentBase implements OnInit {
   isAuthenticated$: Observable<boolean> = this.authService.isAuthenticated$;
 
   constructor(
-    public dialogRef: MatDialogRef<AuthProviderDialog>,
+    public dialogRef: MatDialogRef<AuthProviderDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: AuthProviderData,
     private authService: AuthenticationService,
     router: Router,

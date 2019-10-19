@@ -6,7 +6,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import * as firebase from 'firebase';
 import { from, Subject, ReplaySubject, Observable } from 'rxjs';
-import { User } from '@angularlicious/lms-common';
+import { User } from './models/user.model';
 
 @Injectable({
   providedIn: 'root',
@@ -18,15 +18,24 @@ export class AuthenticationService extends ServiceBase {
 
   isAuthenticated: boolean;
   private isAuthenticatedSubject: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
-  public readonly isAuthenticated$: Observable<boolean> = this.isAuthenticatedSubject.asObservable();
+  public readonly isAuthenticated$: Observable<
+    boolean
+  > = this.isAuthenticatedSubject.asObservable();
 
-  constructor(loggingService: LoggingService, private auth: AngularFireAuth, private firestore: AngularFirestore) {
+  constructor(
+    loggingService: LoggingService,
+    private auth: AngularFireAuth,
+    private firestore: AngularFirestore
+  ) {
     super('AuthenticationService', loggingService);
     this.serviceName = 'AuthService';
 
     this.initializeFirebase();
 
-    auth.authState.subscribe(authState => this.handleAuthState(authState), error => console.log(error));
+    auth.authState.subscribe(
+      authState => this.handleAuthState(authState),
+      error => console.log(error)
+    );
   }
 
   initializeFirebase() {
@@ -39,7 +48,11 @@ export class AuthenticationService extends ServiceBase {
       this.firestore
         .doc<User>(`users/${authState.uid}`)
         .valueChanges()
-        .subscribe(user => this.handleUserValueChanges(user), error => this.handleError(error), () => `Finished handling user changes.`);
+        .subscribe(
+          user => this.handleUserValueChanges(user),
+          error => this.handleError(error),
+          () => `Finished handling user changes.`
+        );
     }
   }
 
@@ -90,7 +103,12 @@ export class AuthenticationService extends ServiceBase {
     from(this.auth.auth.signInWithPopup(provider)).subscribe(
       credential => this.handleSignInResponse(credential),
       error => this.handleError(error),
-      () => this.loggingService.log(this.serviceName, Severity.Information, `Finished handling response from ${provider} provider.`)
+      () =>
+        this.loggingService.log(
+          this.serviceName,
+          Severity.Information,
+          `Finished handling response from ${provider} provider.`
+        )
     );
   }
 
@@ -98,7 +116,12 @@ export class AuthenticationService extends ServiceBase {
     from(this.auth.auth.signOut()).subscribe(
       result => this.handleSignOutResponse(result),
       error => this.handleError(error),
-      () => this.loggingService.log(this.serviceName, Severity.Information, `Finished handling process of logging out.`)
+      () =>
+        this.loggingService.log(
+          this.serviceName,
+          Severity.Information,
+          `Finished handling process of logging out.`
+        )
     );
   }
 
@@ -119,7 +142,11 @@ export class AuthenticationService extends ServiceBase {
         this.isAuthenticatedSubject.next(true);
         this.userSubject.next(credential.user);
       } catch (error) {
-        this.loggingService.log(this.serviceName, Severity.Error, `handleSignInResponse: ${error}`);
+        this.loggingService.log(
+          this.serviceName,
+          Severity.Error,
+          `handleSignInResponse: ${error}`
+        );
         this.handleError(error);
       }
     }

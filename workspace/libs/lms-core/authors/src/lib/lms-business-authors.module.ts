@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpService } from '@angularlicious/http-service';
+import { BusinessProviderService } from './business/business-provider.service';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-import { AuthProviderDialogComponent } from './components/auth-provider-dialog/auth-provider-dialog.component';
-import { BusinessProviderService } from './business/business-provider.service';
-import { FirestoreUsersRepositoryService } from './business/firestore-users-repository.service';
-import { HttpService } from '@angularlicious/http-service';
+import { FirestoreAuthorsRepositoryService } from './business/firestore-authors-repository.service';
 
 const firebaseOptions = {
   apiKey: 'AIzaSyCcPPAdpUUuO3Kczc3LWyrYmwC8Ghxiwr0',
@@ -24,9 +23,7 @@ const firebaseOptions = {
     AngularFireAuthModule,
     AngularFirestoreModule,
   ],
-  declarations: [AuthProviderDialogComponent],
-  exports: [AuthProviderDialogComponent],
-  entryComponents: [AuthProviderDialogComponent],
-  providers: [BusinessProviderService, FirestoreUsersRepositoryService, HttpService],
+  exports: [],
+  providers: [BusinessProviderService, FirestoreAuthorsRepositoryService, HttpService],
 })
-export class SecurityModule {}
+export class LmsBusinessAuthorsModule {}

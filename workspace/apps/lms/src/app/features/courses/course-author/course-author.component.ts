@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Author } from '@angularlicious/lms-common';
+import { Author } from '@angularlicious/lms-core/common';
 import { ComponentBase } from '@angularlicious/foundation';
 import { LoggingService, Severity } from '@angularlicious/logging';
 import { Router } from '@angular/router';
@@ -17,6 +17,10 @@ export class CourseAuthorComponent extends ComponentBase implements OnInit {
   }
 
   ngOnInit() {
-    this.loggingService.log(this.componentName, Severity.Information, `Initializing component: ${this.author.bio}`);
+    this.loggingService.log(
+      this.componentName,
+      Severity.Information,
+      `Initializing component: ${this.author.bio}`
+    );
   }
 }

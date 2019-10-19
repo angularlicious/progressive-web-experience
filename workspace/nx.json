@@ -38,7 +38,7 @@
     "lms-common": {
       "tags": []
     },
-    "lms-business-courses": {
+    "lms-courses": {
       "tags": []
     },
     "security": {
@@ -47,7 +47,7 @@
     "components": {
       "tags": []
     },
-    "lms-business-authors": {
+    "lms-authors": {
       "tags": []
     }
   }
