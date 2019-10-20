@@ -49,6 +49,15 @@
     },
     "lms-authors": {
       "tags": []
+    },
+    "lms-feature-courses": {
+      "tags": []
+    },
+    "lms-admin-e2e": {
+      "tags": []
+    },
+    "lms-admin": {
+      "tags": []
     }
   }
 }
