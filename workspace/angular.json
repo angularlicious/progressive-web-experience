@@ -605,7 +605,8 @@
               "apps/lms-admin/src/styles.scss",
               "node_modules/ngx-toastr/toastr.css",
               "apps/lms-admin/src/assets/scss/black-dashboard.scss",
-              "apps/lms-admin/src/assets/css/nucleo-icons.css"
+              "apps/lms-admin/src/assets/css/nucleo-icons.css",
+              "apps/lms-admin/src/assets/demo/demo.css"
             ],
             "scripts": []
           },

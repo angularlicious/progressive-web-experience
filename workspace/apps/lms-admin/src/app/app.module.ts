@@ -1,12 +1,16 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
-import { RouterModule } from '@angular/router';
+import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
+
+import { AppRoutingModule } from './app-routing.module';
+import { SharedModule } from './modules/shared/shared.module';
+import { SiteModule } from './modules/site/site.module';
 
 @NgModule({
-  declarations: [AppComponent],
-  imports: [BrowserModule, RouterModule.forRoot([], { initialNavigation: 'enabled' })],
+  imports: [SharedModule, SiteModule, AppRoutingModule],
+  declarations: [AppComponent, AdminLayoutComponent],
+  exports: [],
   providers: [],
   bootstrap: [AppComponent],
 })
