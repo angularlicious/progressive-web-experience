@@ -26,24 +26,13 @@
     <div class=" navbar-collapse" [ngbCollapse]="isCollapsed" id="navigation">
       <ul class=" navbar-nav ml-auto">
         <li class=" search-bar input-group">
-          <button
-            class=" btn btn-link"
-            data-target="#searchModal"
-            data-toggle="modal"
-            (click)="open(content)"
-            id="search-button"
-          >
+          <button class=" btn btn-link" data-target="#searchModal" data-toggle="modal" (click)="open(content)" id="search-button">
             <i class=" tim-icons icon-zoom-split"> </i>
             <span class=" d-lg-none d-md-block"> Search </span>
           </button>
         </li>
         <li class=" nav-item" ngbDropdown>
-          <a
-            class=" nav-link"
-            data-toggle="dropdown"
-            href="javascript:void(0)"
-            ngbDropdownToggle
-          >
+          <a class=" nav-link" data-toggle="dropdown" href="javascript:void(0)" ngbDropdownToggle>
             <div class=" notification d-none d-lg-block d-xl-block"></div>
             <i class=" tim-icons icon-sound-wave"> </i>
             <p class=" d-lg-none">Notifications</p>
@@ -76,37 +65,40 @@
             </li>
           </ul>
         </li>
-        <li class=" nav-item" ngbDropdown>
-          <a
-            class=" nav-link"
-            data-toggle="dropdown"
-            href="javascript:void(0)"
-            ngbDropdownToggle
-          >
-            <div class=" photo">
-              <img alt="Profile Photo" src="assets/img/anime3.png" />
-            </div>
-            <b class=" caret d-none d-lg-block d-xl-block"> </b>
-            <p class=" d-lg-none">Log out</p>
-          </a>
-          <ul class=" dropdown-navbar" ngbDropdownMenu>
-            <li class=" nav-link">
-              <a class=" nav-item" href="javascript:void(0)" ngbDropdownItem>
-                Profile
-              </a>
-            </li>
-            <li class=" nav-link">
-              <a class=" nav-item" href="javascript:void(0)" ngbDropdownItem>
-                Settings
-              </a>
-            </li>
-            <li class=" dropdown-divider"></li>
-            <li class=" nav-link">
-              <a class=" nav-item" href="javascript:void(0)" ngbDropdownItem>
+        <!-- <lms-login [user]="user$ | async" [isAuthenticated]="isAuthenticated$ | async"></lms-login> -->
+        <ng-container *ngIf="isAuthenticated$ | async">
+          <li class=" nav-item" ngbDropdown>
+            <a class=" nav-link" data-toggle="dropdown" href="javascript:void(0)" ngbDropdownToggle>
+              <div class=" photo">
+                <!-- <img alt="Profile Photo" src="assets/img/anime3.png" /> -->
+                <angularlicious-user-image [user]="user$ | async" [isAuthenticated]="isAuthenticated$ | async"></angularlicious-user-image>
+              </div>
+              <b class=" caret d-none d-lg-block d-xl-block"> </b>
+              <p class=" d-lg-none">
                 Log out
-              </a>
-            </li>
-          </ul>
+              </p>
+            </a>
+            <ul class=" dropdown-navbar" ngbDropdownMenu>
+              <li class=" nav-link">
+                <a class=" nav-item" href="javascript:void(0)" ngbDropdownItem>
+                  Profile
+                </a>
+              </li>
+              <li class=" nav-link">
+                <a class=" nav-item" href="javascript:void(0)" ngbDropdownItem>
+                  Settings
+                </a>
+              </li>
+              <li class=" dropdown-divider"></li>
+              <li class=" nav-link">
+                <a class="btn btn-default animation-on-hover" (click)="logout()">Logout</a>
+              </li>
+            </ul>
+          </li>
+        </ng-container>
+
+        <li class=" nav-item">
+          <angularlicious-login [user]="user$ | async" [isAuthenticated]="isAuthenticated$ | async"></angularlicious-login>
         </li>
         <li class=" separator d-lg-none"></li>
       </ul>
@@ -116,22 +108,10 @@
 
 <ng-template #content let-modal>
   <div class=" modal-header">
-    <input
-      class=" form-control"
-      id="inlineFormInputGroup"
-      placeholder="SEARCH"
-      type="text"
-    />
+    <input class=" form-control" id="inlineFormInputGroup" placeholder="SEARCH" type="text" />
 
-    <button
-      aria-label="Close"
-      class=" close"
-      data-dismiss="modal"
-      type="button"
-      (click)="modal.dismiss('Cross click')"
-    >
+    <button aria-label="Close" class=" close" data-dismiss="modal" type="button" (click)="modal.dismiss('Cross click')">
       <i class=" tim-icons icon-simple-remove"> </i>
     </button>
   </div>
-
 </ng-template>

@@ -7,6 +7,7 @@ import { LogEntry } from './log-entry';
 import { Subject, ReplaySubject } from 'rxjs';
 import { ILogEntry } from './i-log-entry';
 import { LoggingConfig } from './config/logging-config';
+import { Guid } from 'guid-typescript';
 
 @Injectable()
 export class LoggingService {
@@ -19,6 +20,7 @@ export class LoggingService {
   version = '0.0.0';
   isProduction: boolean;
   config: LoggingConfig;
+  id: Guid;
 
   logEntries$: Subject<ILogEntry> = new ReplaySubject<ILogEntry>(1);
 
@@ -27,7 +29,8 @@ export class LoggingService {
    */
   constructor(@Optional() public configService: ConfigurationService) {
     this.timestamp = new Date(Date.now());
-    this.log(this.serviceName, Severity.Information, `Starting logging service at: ${this.timestamp}`);
+    this.id = Guid.create();
+    this.log(this.serviceName, Severity.Information, `Starting logging service [${this.id.toString()}] at: ${this.timestamp}`);
 
     if (configService) {
       this.configService.settings$.subscribe(settings => this.handleSettings(settings));
@@ -36,7 +39,8 @@ export class LoggingService {
 
   handleSettings(settings: IConfiguration) {
     this.config = settings as LoggingConfig;
-    this.applicationName = this.config && this.config.loggingConfig.applicationName ? this.config.loggingConfig.applicationName : 'application';
+    this.applicationName =
+      this.config && this.config.loggingConfig.applicationName ? this.config.loggingConfig.applicationName : 'application';
     this.version = this.config && this.config.loggingConfig.version ? this.config.loggingConfig.version : '0.0.0';
     this.isProduction = this.config && this.config.loggingConfig.isProduction ? this.config.loggingConfig.isProduction : false;
   }
@@ -57,6 +61,12 @@ export class LoggingService {
     this.severity = severity;
     this.message = message;
     this.timestamp = new Date(Date.now());
+
+    if (tags) {
+      tags.push(`LoggerId:${this.id.toString()}`);
+    } else {
+      tags = [`LoggerId:${this.id.toString()}`];
+    }
 
     const logEntry = new LogEntry(this.applicationName, this.source, this.severity, this.message, tags);
     this.logEntries$.next(logEntry);

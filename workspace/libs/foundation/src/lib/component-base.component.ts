@@ -61,18 +61,18 @@ export class ComponentBase {
    * @param event
    */
   private googleAnalyticsPageview(event: NavigationEnd) {
-    if (event && event.urlAfterRedirects) {
-      this.loggingService.log(this.componentName, Severity.Information, `Preparing to set [Google Analytics] page view for [${event.urlAfterRedirects}].`);
-      // https://blog.thecodecampus.de/angular-2-google-analytics-google-tag-manager/
-      // https://developers.google.com/analytics/devguides/collection/gtagjs/pages
-      const GA_TRACKING_ID = 'UA-110194344-1';
-      (<any>window).ga('config', GA_TRACKING_ID, {
-        page_title: this.componentName,
-        page_path: event.urlAfterRedirects,
-      });
-    } else {
-      this.loggingService.log(this.componentName, Severity.Warning, `Failed to set [Google Analytics] page view.`);
-    }
+    // if (event && event.urlAfterRedirects) {
+    //   this.loggingService.log(this.componentName, Severity.Information, `Preparing to set [Google Analytics] page view for [${event.urlAfterRedirects}].`);
+    //   // https://blog.thecodecampus.de/angular-2-google-analytics-google-tag-manager/
+    //   // https://developers.google.com/analytics/devguides/collection/gtagjs/pages
+    //   const GA_TRACKING_ID = 'UA-110194344-1';
+    //   (<any>window).ga('config', GA_TRACKING_ID, {
+    //     page_title: this.componentName,
+    //     page_path: event.urlAfterRedirects,
+    //   });
+    // } else {
+    //   this.loggingService.log(this.componentName, Severity.Warning, `Failed to set [Google Analytics] page view.`);
+    // }
   }
 
   /**
@@ -99,7 +99,11 @@ export class ComponentBase {
   handleServiceErrors(errorResponse: ErrorResponse, serviceContext?: ServiceContext) {
     this.loggingService.log(this.componentName, Severity.Information, `Preparing to handle service errors for component.`);
     if (serviceContext && serviceContext.hasErrors()) {
-      this.loggingService.log(this.componentName, Severity.Information, `Retrieving error messages from the ServiceContext/ValidationContext;`);
+      this.loggingService.log(
+        this.componentName,
+        Severity.Information,
+        `Retrieving error messages from the ServiceContext/ValidationContext;`
+      );
       const messages = this.retrieveServiceContextErrorMessages(serviceContext);
       this.alertNotification = new AlertNotification('Errors', errorResponse.Message, messages, AlertTypes.Warning);
     } else {

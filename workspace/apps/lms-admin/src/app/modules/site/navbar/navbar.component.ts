@@ -3,6 +3,8 @@ import { ROUTES } from '../sidebar/sidebar.component';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { AuthenticationService, User } from '@angularlicious/security';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'angularlicious-navbar',
@@ -10,6 +12,9 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./navbar.component.css'],
 })
 export class NavbarComponent implements OnInit, OnDestroy {
+  user$: Observable<User> = this.authService.user$;
+  isAuthenticated$: Observable<boolean> = this.authService.isAuthenticated$;
+
   private listTitles: any[];
   location: Location;
   mobile_menu_visible: any = 0;
@@ -22,6 +27,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   constructor(
     location: Location,
+    private authService: AuthenticationService,
     private element: ElementRef,
     private router: Router,
     private modalService: NgbModal
@@ -83,6 +89,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
     this.sidebarVisible = true;
   }
+
   sidebarClose() {
     const html = document.getElementsByTagName('html')[0];
     this.toggleButton.classList.remove('toggled');
@@ -96,6 +103,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.sidebarVisible = false;
     html.classList.remove('nav-open');
   }
+
   sidebarToggle() {
     // const toggleButton = this.toggleButton;
     // const html = document.getElementsByTagName('html')[0];
@@ -187,7 +195,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
       return `with: ${reason}`;
     }
   }
+
   ngOnDestroy() {
     window.removeEventListener('resize', this.updateColor);
+  }
+
+  logout(): void {
+    this.authService.logout();
   }
 }

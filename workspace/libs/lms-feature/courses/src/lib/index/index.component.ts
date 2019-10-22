@@ -8,11 +8,10 @@ import { LoggingService } from '@angularlicious/logging';
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.scss'],
 })
-// export class IndexComponent extends ComponentBase implements OnInit {
-export class IndexComponent implements OnInit {
-  // constructor(loggingService: LoggingService, router: Router) {
-  //   super('IndexComponent', loggingService, router);
-  // }
+export class IndexComponent extends ComponentBase implements OnInit {
+  constructor(loggingService: LoggingService, router: Router) {
+    super('IndexComponent', loggingService, router);
+  }
 
   ngOnInit() {}
 }

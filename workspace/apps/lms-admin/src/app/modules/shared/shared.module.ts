@@ -6,14 +6,20 @@ import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SecurityModule } from '@angularlicious/security';
+import { MaterialDesignModule } from '../material-design/material-design.module';
+import { FoundationModule } from '@angularlicious/foundation';
 
 const modules = [
-  RouterModule,
-  NgbModule,
   BrowserAnimationsModule,
   FormsModule,
-  ReactiveFormsModule,
+  FoundationModule,
   HttpClientModule,
+  MaterialDesignModule,
+  NgbModule,
+  ReactiveFormsModule,
+  RouterModule,
+  SecurityModule,
 ];
 
 @NgModule({

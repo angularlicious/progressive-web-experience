@@ -7,11 +7,13 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { SharedModule } from '../shared/shared.module';
 import { HomeComponent } from './home/home.component';
+import { LoginComponent } from './login/login.component';
+import { UserImageComponent } from './user-image/user-image.component';
 
-const components = [FooterComponent, NavbarComponent, SidebarComponent];
+const components = [FooterComponent, LoginComponent, NavbarComponent, SidebarComponent];
 
 @NgModule({
-  declarations: [...components, HomeComponent],
+  declarations: [...components, HomeComponent, UserImageComponent],
   exports: [...components],
   imports: [CommonModule, RouterModule, SharedModule, SiteRoutingModule],
 })
