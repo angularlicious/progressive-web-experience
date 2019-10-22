@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ComponentBase } from '@angularlicious/foundation';
 import { Router } from '@angular/router';
 import { LoggingService } from '@angularlicious/logging';
+import { Observable } from 'rxjs';
+import { Course } from '@angularlicious/lms-core/common';
+import { UiService } from './../ui-service.service';
 
 @Component({
   selector: 'angularlicious-index',
@@ -9,7 +12,10 @@ import { LoggingService } from '@angularlicious/logging';
   styleUrls: ['./index.component.scss'],
 })
 export class IndexComponent extends ComponentBase implements OnInit {
-  constructor(loggingService: LoggingService, router: Router) {
+  public readonly latestCourses$: Observable<Course[]> = this.uiService.latestCourses$.asObservable();
+  public readonly showCourses$: Observable<boolean> = this.uiService.showCourses$.asObservable();
+
+  constructor(private uiService: UiService, loggingService: LoggingService, router: Router) {
     super('IndexComponent', loggingService, router);
   }
 

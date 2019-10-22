@@ -3,6 +3,17 @@
     <div class=" col-12">
       <h1>Course Administration</h1>
       <p>Lazy-loaded Feature Library</p>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-8">
+            <ul>
+              <li *ngFor="let course of latestCourses$ | async">
+                {{ course.title }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
