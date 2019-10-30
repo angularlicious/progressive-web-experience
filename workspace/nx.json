@@ -58,6 +58,9 @@
     },
     "lms-admin": {
       "tags": []
+    },
+    "lms-authors-e2e": {
+      "tags": []
     }
   }
 }
