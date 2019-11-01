@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AdminLayoutComponent } from '../../layouts/admin-layout/admin-layout.component';
 import { HomeComponent } from '../site/home/home.component';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthenticatedGuard } from '@angularlicious/security';
+import { AuthenticatedGuard, LoginComponent, NotAuthenticatedComponent, NotAuthorizedComponent } from '@angularlicious/security';
 
 const routes: Routes = [
   {
@@ -18,7 +18,7 @@ const routes: Routes = [
   },
   {
     path: 'courses',
-    component: AdminLayoutComponent,
+    component: AdminLayoutComponent, // use to wrap the application
     children: [
       {
         path: '',
@@ -26,6 +26,36 @@ const routes: Routes = [
       },
     ],
     canActivate: [AuthenticatedGuard],
+  },
+  {
+    path: 'security/login',
+    component: AdminLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: LoginComponent,
+      },
+    ],
+  },
+  {
+    path: 'security/not-authenticated',
+    component: AdminLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: NotAuthenticatedComponent,
+      },
+    ],
+  },
+  {
+    path: 'security/not-authorized',
+    component: AdminLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: NotAuthorizedComponent,
+      },
+    ],
   },
   {
     path: '**',

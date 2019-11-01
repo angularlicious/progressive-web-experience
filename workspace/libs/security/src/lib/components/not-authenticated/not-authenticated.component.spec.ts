@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SidebarComponent } from './sidebar.component';
+import { NotAuthenticatedComponent } from './not-authenticated.component';
 
-describe('SidebarComponent', () => {
-  let component: SidebarComponent;
-  let fixture: ComponentFixture<SidebarComponent>;
+describe('NotAuthenticatedComponent', () => {
+  let component: NotAuthenticatedComponent;
+  let fixture: ComponentFixture<NotAuthenticatedComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [SidebarComponent],
+      declarations: [NotAuthenticatedComponent],
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SidebarComponent);
+    fixture = TestBed.createComponent(NotAuthenticatedComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

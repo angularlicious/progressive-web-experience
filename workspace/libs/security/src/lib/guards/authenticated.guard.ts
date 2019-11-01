@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router, RouterState } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthenticationService } from '../authentication.service';
 import { LoggingService, Severity } from '@angularlicious/logging';
@@ -8,7 +8,7 @@ import { LoggingService, Severity } from '@angularlicious/logging';
   providedIn: 'root',
 })
 export class AuthenticatedGuard implements CanActivate {
-  constructor(private authenticationService: AuthenticationService, private loggingService: LoggingService) {}
+  constructor(private authenticationService: AuthenticationService, private loggingService: LoggingService, private router: Router) {}
 
   canActivate(
     next: ActivatedRouteSnapshot,
@@ -26,7 +26,13 @@ export class AuthenticatedGuard implements CanActivate {
       Severity.Information,
       `The user is NOT authenticated - access to secure resource is denied.`
     );
-    // TODO: ROUTE THE USER TO LOGIN OR ACCESS DENIED PAGE;
+    const url = 'security/login';
+    // this.router.parseUrl(url)
+    this.router.navigate([url], {
+      queryParams: {
+        return: state.url,
+      },
+    });
     return false;
   }
 }

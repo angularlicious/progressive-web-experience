@@ -10,5 +10,5 @@ export class User implements firebase.UserInfo {
   email: string;
   photoURL: string;
   uid: string;
-  roles: Roles;
+  // roles: Roles;
 }
