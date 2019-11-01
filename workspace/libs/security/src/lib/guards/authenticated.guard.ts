@@ -27,7 +27,6 @@ export class AuthenticatedGuard implements CanActivate {
       `The user is NOT authenticated - access to secure resource is denied.`
     );
     const url = 'security/login';
-    // this.router.parseUrl(url)
     this.router.navigate([url], {
       queryParams: {
         return: state.url,
