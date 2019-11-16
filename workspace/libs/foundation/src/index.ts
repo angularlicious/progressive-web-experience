@@ -14,7 +14,7 @@ export { AlertTypes } from './lib/models/alert-types.constants';
 export { HttpRequestOptions } from './lib/models/http-request-options';
 export { HttpRequestMethod } from './lib/models/http-request-methods.enum';
 
-export { ApiErrorMessage } from './lib/models/api/api-error-message';
+export { ApiMessage as ApiErrorMessage } from './lib/models/api/api-message';
 export { ApiResponse } from './lib/models/api/api-response';
 export { ErrorApiResponse } from './lib/models/api/error-api-response';
 export { SuccessApiResponse } from './lib/models/api/success-api-response';

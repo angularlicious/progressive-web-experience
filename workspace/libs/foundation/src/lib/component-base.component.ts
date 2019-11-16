@@ -1,11 +1,16 @@
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { MessageType, ServiceContext, ServiceMessage } from '@angularlicious/rules-engine';
+import {
+  MessageType,
+  ServiceContext,
+  ServiceMessage,
+} from '@angularlicious/rules-engine';
 import { ErrorResponse } from './models/error-response.model';
 import { LoggingService, Severity } from '@angularlicious/logging';
 import { AlertNotification } from './models/alert-notification.model';
 import { AlertTypes } from './models/alert-types.constants';
+import { Guid } from 'guid-typescript';
 
 export class ComponentBase {
   componentName: string;
@@ -13,11 +18,22 @@ export class ComponentBase {
   navSubscription: Subscription;
   currentUrl: string;
   previousUrl: string;
+  id: Guid = Guid.create();
 
-  constructor(componentName: string, public loggingService: LoggingService, public router: Router) {
+  constructor(
+    componentName: string,
+    public loggingService: LoggingService,
+    public router: Router
+  ) {
     this.componentName = componentName;
     this.alertNotification = new AlertNotification('', '');
 
+    this.loggingService.log(
+      this.componentName,
+      Severity.Information,
+      `Preparing to load [${this.componentName}] component.`,
+      [`ComponentId:${this.id}`]
+    );
     this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.googleAnalyticsPageview(event);
@@ -48,7 +64,12 @@ export class ComponentBase {
    * More information at: https://support.google.com/analytics/answer/1033068
    * or https://developers.google.com/analytics/devguides/collection/analyticsjs/events
    */
-  public googleAnalyticsSendEvent(category: string, action: string, label: string, value: number) {
+  public googleAnalyticsSendEvent(
+    category: string,
+    action: string,
+    label: string,
+    value: number
+  ) {
     (<any>window).gtag('event', action, {
       event_category: category,
       event_label: label,
@@ -80,7 +101,11 @@ export class ComponentBase {
    * @param message The message to display to the user.
    */
   createErrorResponse(message: string): ErrorResponse {
-    this.loggingService.log(this.componentName, Severity.Information, `Preparing to create error response for component.`);
+    this.loggingService.log(
+      this.componentName,
+      Severity.Information,
+      `Preparing to create error response for component.`
+    );
     const errorResponse: ErrorResponse = new ErrorResponse();
     errorResponse.Message = message;
     return errorResponse;
@@ -96,8 +121,15 @@ export class ComponentBase {
    * Errors: Array<ServiceError> = new Array<ServiceError>();
    * Exception: any;
    */
-  handleServiceErrors(errorResponse: ErrorResponse, serviceContext?: ServiceContext) {
-    this.loggingService.log(this.componentName, Severity.Information, `Preparing to handle service errors for component.`);
+  handleServiceErrors(
+    errorResponse: ErrorResponse,
+    serviceContext?: ServiceContext
+  ) {
+    this.loggingService.log(
+      this.componentName,
+      Severity.Information,
+      `Preparing to handle service errors for component.`
+    );
     if (serviceContext && serviceContext.hasErrors()) {
       this.loggingService.log(
         this.componentName,
@@ -105,13 +137,31 @@ export class ComponentBase {
         `Retrieving error messages from the ServiceContext/ValidationContext;`
       );
       const messages = this.retrieveServiceContextErrorMessages(serviceContext);
-      this.alertNotification = new AlertNotification('Errors', errorResponse.Message, messages, AlertTypes.Warning);
+      this.alertNotification = new AlertNotification(
+        'Errors',
+        errorResponse.Message,
+        messages,
+        AlertTypes.Warning
+      );
     } else {
       if (errorResponse && errorResponse.Message) {
-        this.loggingService.log(this.componentName, Severity.Information, `Retrieving error messages from the [ErrorResponse].`);
+        this.loggingService.log(
+          this.componentName,
+          Severity.Information,
+          `Retrieving error messages from the [ErrorResponse].`
+        );
         const errors = this.retrieveResponseErrorMessages(errorResponse);
-        this.alertNotification = new AlertNotification('Error', errorResponse.Message, errors, AlertTypes.Warning);
-        this.loggingService.log(this.componentName, Severity.Error, `Error: ${errorResponse.Message}`);
+        this.alertNotification = new AlertNotification(
+          'Error',
+          errorResponse.Message,
+          errors,
+          AlertTypes.Warning
+        );
+        this.loggingService.log(
+          this.componentName,
+          Severity.Error,
+          `Error: ${errorResponse.Message}`
+        );
       }
     }
   }
@@ -121,7 +171,9 @@ export class ComponentBase {
    *
    * @parm: serviceContext: A context object containing messages for the specified request.
    */
-  retrieveServiceContextErrorMessages(serviceContext: ServiceContext): Array<string> {
+  retrieveServiceContextErrorMessages(
+    serviceContext: ServiceContext
+  ): Array<string> {
     const messages = Array<string>();
     serviceContext.Messages.forEach(e => {
       if (e.MessageType === MessageType.Error && e.DisplayToUser) {
@@ -165,7 +217,9 @@ export class ComponentBase {
       this.loggingService.log(
         this.componentName,
         Severity.Error,
-        `Error while attempting to navigate to [${routeName}] route from ${this.componentName}. Error: ${error.toString()}`
+        `Error while attempting to navigate to [${routeName}] route from ${
+          this.componentName
+        }. Error: ${error.toString()}`
       );
     }
   }
@@ -178,7 +232,11 @@ export class ComponentBase {
   }
 
   finishRequest(message: string): void {
-    this.loggingService.log(this.componentName, Severity.Information, `${this.componentName}: ${message}`);
+    this.loggingService.log(
+      this.componentName,
+      Severity.Information,
+      `${this.componentName}: ${message}`
+    );
   }
 
   protected showAlertMessage(message: string): void {

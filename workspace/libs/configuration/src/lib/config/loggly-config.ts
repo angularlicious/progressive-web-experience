@@ -1,8 +1,8 @@
 import { IConfiguration } from '@angularlicious/configuration';
 import { ILogglyConfig } from './i-loggly-config';
 
-export class LogglyConfig implements IConfiguration {
+export class LogglyConfig implements ILogglyConfig {
   applicationName: string;
-  version: string;
-  logglyConfig: ILogglyConfig;
+  apiKey: string;
+  sendConsoleErrors: boolean;
 }

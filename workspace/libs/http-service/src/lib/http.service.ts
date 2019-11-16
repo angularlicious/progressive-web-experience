@@ -1,6 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpRequestMethod } from './http-request-methods.enum';
-import { HttpHeaders, HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/http';
+import {
+  HttpHeaders,
+  HttpClient,
+  HttpResponse,
+  HttpErrorResponse,
+} from '@angular/common/http';
 import { HttpRequestOptions } from './http-request-options';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
@@ -21,7 +26,13 @@ export class HttpService {
    * @param body Use to provide a JSON object with the payload for the request.
    * @param withCredentials Use to indicate if request will include credentials (cookies), default value is [true].
    */
-  createOptions(method: HttpRequestMethod, headers: HttpHeaders, url: string, body: any, withCredentials: boolean = true): HttpRequestOptions {
+  createOptions(
+    method: HttpRequestMethod,
+    headers: HttpHeaders,
+    url: string,
+    body: any,
+    withCredentials: boolean = true
+  ): HttpRequestOptions {
     let options: HttpRequestOptions;
     options = new HttpRequestOptions();
     options.requestMethod = method;
@@ -46,17 +57,23 @@ export class HttpService {
    * @param requestOptions
    */
   execute<T>(requestOptions: HttpRequestOptions): Observable<ApiResponse<T>> {
-    console.log(`Preparing to perform request to: ${requestOptions.requestUrl}`);
+    console.log(
+      `Preparing to perform request to: ${requestOptions.requestUrl}`
+    );
     return this.httpClient
-      .request<T>(requestOptions.requestMethod.toString(), requestOptions.requestUrl, {
-        body: requestOptions.body,
-        headers: requestOptions.headers,
-        reportProgress: requestOptions.reportProgress,
-        observe: requestOptions.observe,
-        params: requestOptions.params,
-        responseType: requestOptions.responseType,
-        withCredentials: requestOptions.withCredentials,
-      })
+      .request<T>(
+        requestOptions.requestMethod.toString(),
+        requestOptions.requestUrl,
+        {
+          body: requestOptions.body,
+          headers: requestOptions.headers,
+          reportProgress: requestOptions.reportProgress,
+          observe: requestOptions.observe,
+          params: requestOptions.params,
+          responseType: requestOptions.responseType,
+          withCredentials: requestOptions.withCredentials,
+        }
+      )
       .pipe(
         retry(1),
         catchError((errorResponse: any) => {
@@ -65,6 +82,14 @@ export class HttpService {
       );
   }
 
+  /**
+   * Use to handle errors during HTTP/Web API operations. The caller expects
+   * an Observable response - this method will either return the response from
+   * the server or a new [ErrorApiResponse] as an Observable for the client to
+   * handle.
+   *
+   * @param error The error from the HTTP response.
+   */
   protected handleError(error: HttpErrorResponse): Observable<any> {
     const apiErrorResponse = new ErrorApiResponse();
     apiErrorResponse.IsSuccess = false;
@@ -73,8 +98,13 @@ export class HttpService {
 
     if (error.error instanceof ErrorEvent) {
       // A client-side or network error occurred. Handle it accordingly.
-      // TODO: MIGHT WANT TO LOG THE INFORMATION FROM error.error;
-      apiErrorResponse.Errors.push(new ApiErrorMessage(`A client-side or network error occurred. Handle it accordingly.`, true, null, null));
+      apiErrorResponse.Errors.push(
+        new ApiErrorMessage(
+          `A client-side or network error occurred. Handle it accordingly.`,
+          true,
+          null
+        )
+      );
       return throwError(apiErrorResponse);
     } else {
       // The API returned an unsuccessful response.
@@ -85,7 +115,11 @@ export class HttpService {
         // An unhandled error/exception - may not want to lead/display this information to an end-user.
         // TODO: MIGHT WANT TO LOG THE INFORMATION FROM error.error;
         apiErrorResponse.Errors.push(
-          new ApiErrorMessage(`The API returned an unsuccessful response. ${error.status}: ${error.statusText}. ${error.message}`, false, null, error.status.toString())
+          new ApiErrorMessage(
+            `The API returned an unsuccessful response. ${error.status}: ${error.statusText}. ${error.message}`,
+            false,
+            null
+          )
         );
         return throwError(apiErrorResponse);
       }

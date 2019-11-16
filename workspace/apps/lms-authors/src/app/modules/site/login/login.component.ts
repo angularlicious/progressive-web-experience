@@ -1,6 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ComponentBase } from '@angularlicious/foundation';
-import { AuthenticationService, User, AuthProviderDialogComponent } from '@angularlicious/security';
+import {
+  AuthenticationService,
+  User,
+  AuthProviderDialogComponent,
+} from '@angularlicious/security';
 import { LoggingService, Severity } from '@angularlicious/logging';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogConfig } from '@angular/material';
@@ -26,7 +30,11 @@ export class LoginComponent extends ComponentBase implements OnInit {
   ngOnInit() {}
 
   login() {
-    this.loggingService.log(this.componentName, Severity.Information, `Preparing to load the provider(s) for authentication.`);
+    this.loggingService.log(
+      this.componentName,
+      Severity.Information,
+      `Preparing to load the provider(s) for authentication.`
+    );
 
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;
@@ -35,10 +43,18 @@ export class LoginComponent extends ComponentBase implements OnInit {
     dialogConfig.hasBackdrop = true;
     dialogConfig.data = { redirectUrl: '' };
 
-    const dialogRef = this.dialog.open(AuthProviderDialogComponent, dialogConfig);
+    const dialogRef = this.dialog.open(
+      AuthProviderDialogComponent,
+      dialogConfig
+    );
 
     dialogRef.afterClosed().subscribe(result => {
-      this.loggingService.log(this.componentName, Severity.Information, `${result}`, ['security']);
+      this.loggingService.log(
+        this.componentName,
+        Severity.Information,
+        `${result}`,
+        ['security']
+      );
     });
   }
 

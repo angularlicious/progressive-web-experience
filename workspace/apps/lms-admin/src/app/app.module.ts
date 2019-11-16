@@ -10,7 +10,13 @@ import { CrossCuttingModule } from './modules/cross-cutting/cross-cutting.module
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
-  imports: [CrossCuttingModule, SharedModule, SiteModule, AppRoutingModule, BrowserAnimationsModule],
+  imports: [
+    CrossCuttingModule.forRoot(),
+    SharedModule,
+    SiteModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+  ],
   declarations: [AppComponent, AdminLayoutComponent],
   exports: [],
   providers: [],
