@@ -24,10 +24,7 @@ const routes: Routes = [
       {
         path: '',
         // loadChildren: './features/documentation/documentation.module#DocumentationModule',
-        loadChildren: () =>
-          import(`./features/documentation/documentation.module`).then(
-            module => module.DocumentationModule
-          ),
+        loadChildren: () => import(`./features/documentation/documentation.module`).then(module => module.DocumentationModule),
       },
     ],
   },

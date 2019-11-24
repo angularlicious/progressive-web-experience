@@ -12,8 +12,8 @@ import { UiService } from './../ui-service.service';
   styleUrls: ['./index.component.scss'],
 })
 export class IndexComponent extends ComponentBase implements OnInit {
-  public readonly latestCourses$: Observable<Course[]> = this.uiService.latestCourses$.asObservable();
-  public readonly showCourses$: Observable<boolean> = this.uiService.showCourses$.asObservable();
+  public readonly latestCourses$: Observable<Course[]> = this.uiService.latestCourses$;
+  public readonly showCourses$: Observable<boolean> = this.uiService.showCourses$;
 
   constructor(private uiService: UiService, loggingService: LoggingService, router: Router) {
     super('IndexComponent', loggingService, router);

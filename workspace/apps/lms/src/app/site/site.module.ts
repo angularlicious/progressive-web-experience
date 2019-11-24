@@ -11,6 +11,7 @@ import { LicenseComponent } from './license/license.component';
 import { SharedModule } from '../modules/shared/shared.module';
 import { UserImageComponent } from './user-image/user-image.component';
 import { ErrorComponent } from './error/error.component';
+import { LayoutComponent } from './layout/layout.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ErrorComponent } from './error/error.component';
     LicenseComponent,
     UserImageComponent,
     ErrorComponent,
+    LayoutComponent,
   ],
   exports: [NavbarComponent, SidebarComponent, FooterComponent],
   imports: [CommonModule, SharedModule],

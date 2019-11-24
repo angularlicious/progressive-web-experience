@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EnumKeysPipe } from './pipes/enum-keys.pipe';
-import { LoginComponent } from '../../../security/src/lib/components/login/login.component';
+// import { LoginComponent } from '../../../security/src/lib/components/login/login.component';
 
 @NgModule({
   imports: [CommonModule],
-  declarations: [EnumKeysPipe, LoginComponent],
+  declarations: [EnumKeysPipe],
   exports: [EnumKeysPipe],
 })
 export class ComponentsModule {}

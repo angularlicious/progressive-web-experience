@@ -11,9 +11,13 @@ export class UiService extends ServiceBase {
   private courses: Course[] = [];
 
   // setup for [Course] collection Observable
-  latestCoursesSubscription: Subscription;
-  latestCourses$: ReplaySubject<Course[]> = new ReplaySubject<Course[]>(1);
-  showCourses$: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
+  // latestCoursesSubscription: Subscription;
+
+  private latestCoursesSubject: ReplaySubject<Course[]> = new ReplaySubject<Course[]>(1);
+  public readonly latestCourses$: Observable<Course[]> = this.latestCoursesSubject.asObservable();
+
+  private showCoursesSubject: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
+  public readonly showCourses$: Observable<boolean> = this.showCoursesSubject.asObservable();
 
   constructor(loggingService: LoggingService, private coursesService: CoursesService) {
     super('UiServiceService', loggingService);
@@ -23,7 +27,7 @@ export class UiService extends ServiceBase {
 
   private initialize() {
     this.loggingService.log(this.serviceName, Severity.Information, `Preparing to initialize the [UI] observables.`);
-    this.showCourses$.next(false);
+    this.showCoursesSubject.next(false);
 
     this.coursesService.retrieveLatestCourses<Course[]>().subscribe(
       response => this.handleLatestCoursesResponse<Observable<Course[]>>(response),
@@ -43,12 +47,12 @@ export class UiService extends ServiceBase {
     if (response && response.length > 0) {
       this.loggingService.log(this.serviceName, Severity.Information, `Processing valid response with [${response.length}] videos.`);
       this.courses = response;
-      this.latestCourses$.next(this.courses);
-      this.showCourses$.next(true);
+      this.latestCoursesSubject.next(this.courses);
+      this.showCoursesSubject.next(true);
     } else {
       this.loggingService.log(this.serviceName, Severity.Warning, `The response does not contain any videos.`);
-      this.showCourses$.next(false);
-      this.latestCourses$.next([]);
+      this.showCoursesSubject.next(false);
+      this.latestCoursesSubject.next([]);
     }
   }
 }

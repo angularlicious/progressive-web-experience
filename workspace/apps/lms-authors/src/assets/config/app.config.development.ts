@@ -1,7 +1,4 @@
-import { IConfiguration } from '@angularlicious/configuration';
-import { ILoggingConfig } from '@angularlicious/logging';
-import { IErrorHandingConfig } from '@angularlicious/error-handling';
-import { ILogglyConfig } from '@angularlicious/logging';
+import { IConfiguration, ILoggingConfig, IErrorHandingConfig, ILogglyConfig } from '@angularlicious/configuration';
 
 export class AppConfig implements IConfiguration {
   applicationName: 'Angularlicious.LMS';
@@ -9,7 +6,6 @@ export class AppConfig implements IConfiguration {
   loggingConfig: ILoggingConfig = {
     applicationName: this.applicationName,
     isProduction: false,
-    version: this.version,
   };
   errorHandlingConfig: IErrorHandingConfig = {
     applicationName: this.applicationName,
