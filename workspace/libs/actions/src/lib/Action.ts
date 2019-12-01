@@ -2,7 +2,6 @@
 import { ValidationContextState } from '@angularlicious/rules-engine';
 import { IAction } from './IAction';
 import { ActionResult } from './ActionResult';
-import { Observable, of } from 'rxjs';
 
 /**
  * This is the framework Action class that provides the pipeline of pre/post
@@ -24,7 +23,7 @@ import { Observable, of } from 'rxjs';
  *		9. validateActionResult();
  *		10. finish();
  */
-export abstract class Action implements IAction {
+export class Action implements IAction {
   /**
    * Indicates if the action is allowed execution. If there are any rule
    * violations in the validation context, the action is not allowed to
@@ -84,24 +83,10 @@ export abstract class Action implements IAction {
     console.log('Starting action.');
     this.start();
     this.audit();
-    this.processPreValidationAsync();
-    // this.preValidateAction();
+    this.preValidateAction();
     this.evaluateRules();
     this.postValidateAction();
     this.preExecuteAction();
-  }
-
-  /**
-   * A helper method to process [preValidation] with async/await.
-   */
-  async processPreValidationAsync() {
-    const result = await this.preValidateAction().toPromise();
-    console.log(`Finished pre-validate async/await...ValidationContext contains ${result.rules.length} rules.`);
-  }
-
-  preValidateActionAwait(): Observable<void> {
-    this.preValidateAction();
-    return of(null);
   }
 
   /**
@@ -140,29 +125,31 @@ export abstract class Action implements IAction {
    * This function belongs to the pre-execute functions of the action pipeline.
    */
   start() {
-    console.log('1. Action pipeline [start] action.');
+    console.log('Starting action.');
   }
 
   /**
-   * Implement this function to perform any auditing features during the pre-execution of the
+   * Implement this function to perform any auditing features during the pre-exectuion of the
    * business logic.
    */
   audit() {
-    console.log('2. Action pipeline [audit] action.');
+    console.log('Auditing action.');
   }
 
   /**
    * Use this function to setup any validation rules before the validation happens. This
    * function is called before [evaluateRules].
    */
-  abstract preValidateAction(): Observable<ValidationContext>;
+  preValidateAction() {
+    console.log('Pre-validating action.');
+  }
 
   /**
    * Use this function to implement the execution of the validation and business rules. This
    * function is called after [preValidateAction].
    */
   evaluateRules() {
-    console.log('4. Action pipeline [Evaluating action rules].');
+    console.log('Evaluating action rules.');
     const context = this.validateAction();
     if (context.isValid) {
       this.allowExecution = true;
@@ -174,34 +161,33 @@ export abstract class Action implements IAction {
   }
 
   /**
-   * Use to determine or handle the results of the rule evaluation. This
+   * Use to determine or handle the results of the rule evalation. This
    * function is called after the [evaluateRules].
    */
   postValidateAction() {
-    console.log('5. Action pipeline [Post-Validation] of action.');
+    console.log('Post-Validation of action.');
   }
 
   /**
    * Use this function to perform any setup before the action is executed.
    */
   preExecuteAction() {
-    console.log('6. Action pipeline [Pre-execution] of action.');
+    console.log('Pre-execution of action.');
   }
 
   /**
-   * Use this function to evaluate the action after the the business logic within
+   * Use this funciton to evaluate the action after the the business logic within
    * the [performAction] has executed.
    */
   postExecuteAction() {
-    console.log('7. Action pipeline [Post-execution] of action');
+    console.log('Post-execution of action');
   }
 
   /**
-   * This function requires implementation to determine the state and result of the action.
+   * This function requires implementation to determin the state and result of the action.
    * Use this opportunity to validate the results.
    */
   validateActionResult(): ActionResult {
-    console.log(`8. Action pipeline [ValidateActionResult] of action.`);
     throw new Error('Concrete actions required to implement this method.');
   }
 
@@ -210,7 +196,7 @@ export abstract class Action implements IAction {
    * by the action. This is the last function called during the pipeline.
    */
   finish() {
-    console.log('9. Action pipeline [Finish] action.');
+    console.log('Finish action.');
   }
 
   /**

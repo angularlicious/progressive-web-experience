@@ -7,7 +7,6 @@ import { AddCourseAction } from './actions/add-course.action';
 import { FirestoreCourseRepositoryService } from './firestore-course-repository.service';
 import { Course } from '@angularlicious/lms-core/common';
 import { RetrieveCourseVideosAction } from './actions/retrieve-course-videos.action';
-import { IsGoodAction } from './actions/is-good-action';
 
 /**
  * This is the coordinator of business operations for the core domain module. It will
@@ -15,14 +14,11 @@ import { IsGoodAction } from './actions/is-good-action';
  */
 @Injectable()
 export class BusinessProviderService extends BusinessProviderBase {
-  constructor(@Inject(FirestoreCourseRepositoryService) public apiService: FirestoreCourseRepositoryService, loggingService: LoggingService) {
+  constructor(
+    @Inject(FirestoreCourseRepositoryService) public apiService: FirestoreCourseRepositoryService,
+    loggingService: LoggingService
+  ) {
     super('BusinessProviderService', loggingService);
-  }
-
-  async isGoodAsync(isGoodInput: boolean) {
-    const action = new IsGoodAction(isGoodInput);
-    action.Do(this);
-    return action.response;
   }
 
   addCourse<T>(course: Course) {

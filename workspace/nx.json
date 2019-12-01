@@ -61,15 +61,6 @@
     },
     "lms-authors-e2e": {
       "tags": []
-    },
-    "lms-core-common": {
-      "tags": ""
-    },
-    "lms-core-courses": {
-      "tags": ""
-    },
-    "lms-core-authors": {
-      "tags": ""
     }
   }
 }
