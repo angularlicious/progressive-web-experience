@@ -1,4 +1,4 @@
-import { IConfiguration } from './../i-configuration';
+import { IConfiguration } from '@angularlicious/configuration';
 import { ILogglyConfig } from './i-loggly-config';
 
 export class LogglyConfig implements ILogglyConfig {

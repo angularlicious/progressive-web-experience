@@ -1,8 +1,11 @@
 import { Injectable, ErrorHandler } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { LoggingService, Severity } from '@angularlicious/logging';
-import { ConfigurationService, IConfiguration } from '@angularlicious/configuration';
-import { ErrorHandlingConfig } from '@angularlicious/configuration';
+import {
+  ConfigurationService,
+  IConfiguration,
+} from '@angularlicious/configuration';
+import { ErrorHandlingConfig } from '../../../configuration/src/lib/config/error-handling-config';
 import { noop } from 'rxjs';
 import { take } from 'rxjs/operators';
 
@@ -14,7 +17,10 @@ export class ErrorHandlingService extends ErrorHandler {
   config: ErrorHandlingConfig;
   hasSettings: boolean;
 
-  constructor(private configService: ConfigurationService, private loggingService: LoggingService) {
+  constructor(
+    private configService: ConfigurationService,
+    private loggingService: LoggingService
+  ) {
     super();
 
     this.init();
@@ -31,7 +37,9 @@ export class ErrorHandlingService extends ErrorHandler {
     this.config.includeDefaultErrorHandling = false;
     console.warn(`Application [ErrorHandler] is using default settings`);
 
-    this.configService.settings$.pipe(take(1)).subscribe(settings => this.handleSettings(settings));
+    this.configService.settings$
+      .pipe(take(1))
+      .subscribe(settings => this.handleSettings(settings));
   }
 
   handleSettings(settings: IConfiguration) {
@@ -39,7 +47,11 @@ export class ErrorHandlingService extends ErrorHandler {
       this.config = settings.errorHandlingConfig;
       this.hasSettings = true;
 
-      this.loggingService.log(this.config.applicationName, Severity.Information, `Application [ErrorHandler] using configuration settings.`);
+      this.loggingService.log(
+        this.config.applicationName,
+        Severity.Information,
+        `Application [ErrorHandler] using configuration settings.`
+      );
     }
   }
 
@@ -61,7 +73,11 @@ export class ErrorHandlingService extends ErrorHandler {
         if (error.error instanceof ErrorEvent) {
           // A.1: A client-side or network error occurred. Handle it accordingly.
           const formattedError = `${error.name}; ${error.message}`;
-          this.loggingService.log(this.config.applicationName, Severity.Error, `${formattedError}`);
+          this.loggingService.log(
+            this.config.applicationName,
+            Severity.Error,
+            `${formattedError}`
+          );
         } else {
           // A.2: The API returned an unsuccessful response (i.e., 400, 401, 403, etc.).
           /**
@@ -74,7 +90,11 @@ export class ErrorHandlingService extends ErrorHandler {
       } else {
         // B. HANDLE A GENERALIZED ERROR FROM THE APPLICATION/CLIENT;
         const formattedError = `${error.name}; ${error.message}`;
-        this.loggingService.log(this.config.applicationName, Severity.Error, `${formattedError}`);
+        this.loggingService.log(
+          this.config.applicationName,
+          Severity.Error,
+          `${formattedError}`
+        );
       }
     }
   }
