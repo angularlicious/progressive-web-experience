@@ -3,17 +3,17 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { AuthProviderDialogComponent } from './auth-provider-dialog.component';
 
 describe('AuthProviderDialogComponentComponent', () => {
-  let component: AuthProviderDialogComponentComponent;
-  let fixture: ComponentFixture<AuthProviderDialogComponentComponent>;
+  let component: AuthProviderDialogComponent;
+  let fixture: ComponentFixture<AuthProviderDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [AuthProviderDialogComponentComponent],
+      declarations: [AuthProviderDialogComponent],
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AuthProviderDialogComponentComponent);
+    fixture = TestBed.createComponent(AuthProviderDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

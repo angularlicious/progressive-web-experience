@@ -1,7 +1,4 @@
-import { IConfiguration } from '@angularlicious/configuration';
-import { ILoggingConfig } from '@angularlicious/logging';
-import { IErrorHandingConfig } from '@angularlicious/error-handling';
-import { ILogglyConfig } from '@angularlicious/logging';
+import { IConfiguration, ILogglyConfig, IErrorHandingConfig, ILoggingConfig } from '@angularlicious/configuration';
 
 export class AppConfig implements IConfiguration {
   applicationName: 'BuildMotion';
@@ -9,13 +6,13 @@ export class AppConfig implements IConfiguration {
   loggingConfig: ILoggingConfig = {
     applicationName: this.applicationName,
     isProduction: false,
-    version: this.version,
   };
   errorHandlingConfig: IErrorHandingConfig = {
-    applicationName: this.applicationName,
+    applicationName: 'Angularlicious.LMS',
     includeDefaultErrorHandling: true,
   };
   logglyConfig: ILogglyConfig = {
+    applicationName: 'Angularlicious.LMS',
     apiKey: '01e4b3aa-f301-43e7-bf60-40ba5d0729d4',
     sendConsoleErrors: true,
   };

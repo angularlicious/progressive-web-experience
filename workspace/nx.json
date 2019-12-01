@@ -38,10 +38,28 @@
     "lms-common": {
       "tags": []
     },
-    "lms-business-courses": {
+    "lms-courses": {
       "tags": []
     },
     "security": {
+      "tags": []
+    },
+    "components": {
+      "tags": []
+    },
+    "lms-authors": {
+      "tags": []
+    },
+    "lms-feature-courses": {
+      "tags": []
+    },
+    "lms-admin-e2e": {
+      "tags": []
+    },
+    "lms-admin": {
+      "tags": []
+    },
+    "lms-authors-e2e": {
       "tags": []
     }
   }

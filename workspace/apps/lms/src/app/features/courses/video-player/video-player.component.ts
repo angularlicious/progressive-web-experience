@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { VideoCourse } from '@angularlicious/lms-common';
+import { Video } from '@angularlicious/lms-core/common';
 import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
 import { ComponentBase } from '@angularlicious/foundation';
 import { LoggingService, Severity } from '@angularlicious/logging';
@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./video-player.component.css'],
 })
 export class VideoPlayerComponent extends ComponentBase implements OnInit {
-  @Input() course: VideoCourse;
+  @Input() video: Video;
   safeUrl: SafeResourceUrl;
 
   constructor(private sanitizer: DomSanitizer, loggingService: LoggingService, router: Router) {
@@ -19,11 +19,19 @@ export class VideoPlayerComponent extends ComponentBase implements OnInit {
   }
 
   ngOnInit() {
-    if (this.course && this.course.videoUrl) {
-      this.loggingService.log(this.componentName, Severity.Information, `Video input is valid for course: ${this.course.title}`);
-      this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.course.videoUrl);
+    if (this.video && this.video.id) {
+      this.loggingService.log(
+        this.componentName,
+        Severity.Information,
+        `Video input is valid for course: ${this.video.title}`
+      );
+      this.safeUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.video.url);
     } else {
-      this.loggingService.log(this.componentName, Severity.Error, `The video course input is not valid. Cannot load course video.`);
+      this.loggingService.log(
+        this.componentName,
+        Severity.Error,
+        `The video course input is not valid. Cannot load course video.`
+      );
     }
   }
 }

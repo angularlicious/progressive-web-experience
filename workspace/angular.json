@@ -22,26 +22,21 @@
             "main": "apps/lms/src/main.ts",
             "polyfills": "apps/lms/src/polyfills.ts",
             "tsConfig": "apps/lms/tsconfig.app.json",
-            "assets": ["apps/lms/src/favicon.ico", "apps/lms/src/assets"],
+            "assets": ["apps/lms/src/assets", "apps/lms/src/favicon.ico"],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
-              "apps/lms/src/styles.scss",
-              "apps/lms/src/assets/css/nucleo-icons.css",
-              "apps/lms/src/assets/css/blk-design-system.css",
-              "apps/lms/src/assets/demo/demo.css"
+              "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
+              "apps/lms/src/assets/scss/material-dashboard.scss",
+              "apps/lms/src/assets/css/demo.css"
             ],
             "scripts": [
-              "apps/lms/src/assets/js/core/jquery.min.js",
-              "apps/lms/src/assets/js/core/popper.min.js",
-              "apps/lms/src/assets/js/core/bootstrap.min.js",
-              "apps/lms/src/assets/js/plugins/perfect-scrollbar.jquery.min.js",
-              "apps/lms/src/assets/js/plugins/bootstrap-switch.js",
-              "apps/lms/src/assets/js/plugins/nouislider.min.js",
-              "apps/lms/src/assets/js/plugins/chartjs.min.js",
-              "apps/lms/src/assets/js/plugins/moment.min.js",
-              "apps/lms/src/assets/js/plugins/bootstrap-datetimepicker.js",
-              "apps/lms/src/assets/demo/demo.js",
-              "apps/lms/src/assets/js/blk-design-system.min.js"
+              "node_modules/jquery/dist/jquery.js",
+              "node_modules/popper.js/dist/umd/popper.js",
+              "node_modules/bootstrap-material-design/dist/js/bootstrap-material-design.min.js",
+              "node_modules/arrive/src/arrive.js",
+              "node_modules/moment/moment.js",
+              "node_modules/perfect-scrollbar/dist/perfect-scrollbar.min.js",
+              "node_modules/bootstrap-notify/bootstrap-notify.js",
+              "node_modules/chartist/dist/chartist.js"
             ]
           },
           "configurations": {
@@ -91,7 +86,10 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["apps/lms/tsconfig.app.json", "apps/lms/tsconfig.spec.json"],
+            "tsConfig": [
+              "apps/lms/tsconfig.app.json",
+              "apps/lms/tsconfig.spec.json"
+            ],
             "exclude": ["**/node_modules/**", "!apps/lms/**"]
           }
         },
@@ -148,7 +146,10 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/logging/tsconfig.lib.json", "libs/logging/tsconfig.spec.json"],
+            "tsConfig": [
+              "libs/logging/tsconfig.lib.json",
+              "libs/logging/tsconfig.spec.json"
+            ],
             "exclude": ["**/node_modules/**", "!libs/logging/**"]
           }
         },
@@ -183,7 +184,10 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/error-handling/tsconfig.lib.json", "libs/error-handling/tsconfig.spec.json"],
+            "tsConfig": [
+              "libs/error-handling/tsconfig.lib.json",
+              "libs/error-handling/tsconfig.spec.json"
+            ],
             "exclude": ["**/node_modules/**", "!libs/error-handling/**"]
           }
         },
@@ -218,7 +222,10 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/configuration/tsconfig.lib.json", "libs/configuration/tsconfig.spec.json"],
+            "tsConfig": [
+              "libs/configuration/tsconfig.lib.json",
+              "libs/configuration/tsconfig.spec.json"
+            ],
             "exclude": ["**/node_modules/**", "!libs/configuration/**"]
           }
         },
@@ -253,7 +260,10 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/rules-engine/tsconfig.lib.json", "libs/rules-engine/tsconfig.spec.json"],
+            "tsConfig": [
+              "libs/rules-engine/tsconfig.lib.json",
+              "libs/rules-engine/tsconfig.spec.json"
+            ],
             "exclude": ["**/node_modules/**", "!libs/rules-engine/**"]
           }
         },
@@ -288,7 +298,10 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/actions/tsconfig.lib.json", "libs/actions/tsconfig.spec.json"],
+            "tsConfig": [
+              "libs/actions/tsconfig.lib.json",
+              "libs/actions/tsconfig.spec.json"
+            ],
             "exclude": ["**/node_modules/**", "!libs/actions/**"]
           }
         },
@@ -323,7 +336,10 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/http-service/tsconfig.lib.json", "libs/http-service/tsconfig.spec.json"],
+            "tsConfig": [
+              "libs/http-service/tsconfig.lib.json",
+              "libs/http-service/tsconfig.spec.json"
+            ],
             "exclude": ["**/node_modules/**", "!libs/http-service/**"]
           }
         },
@@ -358,7 +374,10 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/foundation/tsconfig.lib.json", "libs/foundation/tsconfig.spec.json"],
+            "tsConfig": [
+              "libs/foundation/tsconfig.lib.json",
+              "libs/foundation/tsconfig.spec.json"
+            ],
             "exclude": ["**/node_modules/**", "!libs/foundation/**"]
           }
         },
@@ -377,25 +396,28 @@
         }
       }
     },
-    "lms-common": {
+    "lms-core-common": {
       "projectType": "library",
-      "root": "libs/lms-common",
-      "sourceRoot": "libs/lms-common/src",
+      "root": "libs/lms-core/common",
+      "sourceRoot": "libs/lms-core/common/src",
       "prefix": "angularlicious",
       "architect": {
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/lms-common/tsconfig.lib.json", "libs/lms-common/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!libs/lms-common/**"]
+            "tsConfig": [
+              "libs/lms-core/common/tsconfig.lib.json",
+              "libs/lms-core/common/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/lms-core/common/**"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/lms-common/jest.config.js",
-            "tsConfig": "libs/lms-common/tsconfig.spec.json",
-            "setupFile": "libs/lms-common/src/test-setup.ts"
+            "jestConfig": "libs/lms-core/common/jest.config.js",
+            "tsConfig": "libs/lms-core/common/tsconfig.spec.json",
+            "setupFile": "libs/lms-core/common/src/test-setup.ts"
           }
         }
       },
@@ -405,25 +427,28 @@
         }
       }
     },
-    "lms-business-courses": {
+    "lms-core-courses": {
       "projectType": "library",
-      "root": "libs/lms/business/courses",
-      "sourceRoot": "libs/lms/business/courses/src",
+      "root": "libs/lms-core/courses",
+      "sourceRoot": "libs/lms-core/courses/src",
       "prefix": "angularlicious",
       "architect": {
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/lms/business/courses/tsconfig.lib.json", "libs/lms/business/courses/tsconfig.spec.json"],
-            "exclude": ["**/node_modules/**", "!libs/lms/business/courses/**"]
+            "tsConfig": [
+              "libs/lms-core/courses/tsconfig.lib.json",
+              "libs/lms-core/courses/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/lms-core/courses/**"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/lms/business/courses/jest.config.js",
-            "tsConfig": "libs/lms/business/courses/tsconfig.spec.json",
-            "setupFile": "libs/lms/business/courses/src/test-setup.ts"
+            "jestConfig": "libs/lms-core/courses/jest.config.js",
+            "tsConfig": "libs/lms-core/courses/tsconfig.spec.json",
+            "setupFile": "libs/lms-core/courses/src/test-setup.ts"
           }
         }
       },
@@ -449,7 +474,10 @@
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
-            "tsConfig": ["libs/security/tsconfig.lib.json", "libs/security/tsconfig.spec.json"],
+            "tsConfig": [
+              "libs/security/tsconfig.lib.json",
+              "libs/security/tsconfig.spec.json"
+            ],
             "exclude": ["**/node_modules/**", "!libs/security/**"]
           }
         },
@@ -465,6 +493,358 @@
       "schematics": {
         "@nrwl/angular:component": {
           "styleext": "scss"
+        }
+      }
+    },
+    "components": {
+      "projectType": "library",
+      "root": "libs/components",
+      "sourceRoot": "libs/components/src",
+      "prefix": "angularlicious",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/components/tsconfig.lib.json",
+            "project": "libs/components/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/components/tsconfig.lib.json",
+              "libs/components/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/components/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/components/jest.config.js",
+            "tsConfig": "libs/components/tsconfig.spec.json",
+            "setupFile": "libs/components/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "lms-core-authors": {
+      "projectType": "library",
+      "root": "libs/lms-core/authors",
+      "sourceRoot": "libs/lms-core/authors/src",
+      "prefix": "angularlicious",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/lms-core/authors/tsconfig.lib.json",
+              "libs/lms-core/authors/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/lms-core/authors/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/lms-core/authors/jest.config.js",
+            "tsConfig": "libs/lms-core/authors/tsconfig.spec.json",
+            "setupFile": "libs/lms-core/authors/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "lms-feature-courses": {
+      "projectType": "library",
+      "root": "libs/lms-feature/courses",
+      "sourceRoot": "libs/lms-feature/courses/src",
+      "prefix": "angularlicious",
+      "architect": {
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "libs/lms-feature/courses/tsconfig.lib.json",
+              "libs/lms-feature/courses/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/lms-feature/courses/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/lms-feature/courses/jest.config.js",
+            "tsConfig": "libs/lms-feature/courses/tsconfig.spec.json",
+            "setupFile": "libs/lms-feature/courses/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
+    },
+    "lms-admin": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/workspace:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/lms-admin",
+      "sourceRoot": "apps/lms-admin/src",
+      "prefix": "angularlicious",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/lms-admin",
+            "index": "apps/lms-admin/src/index.html",
+            "main": "apps/lms-admin/src/main.ts",
+            "polyfills": "apps/lms-admin/src/polyfills.ts",
+            "tsConfig": "apps/lms-admin/tsconfig.app.json",
+            "assets": [
+              "apps/lms-admin/src/favicon.ico",
+              "apps/lms-admin/src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
+              "apps/lms-admin/src/styles.scss",
+              "node_modules/ngx-toastr/toastr.css",
+              "apps/lms-admin/src/assets/scss/black-dashboard.scss",
+              "apps/lms-admin/src/assets/css/nucleo-icons.css",
+              "apps/lms-admin/src/assets/demo/demo.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/lms-admin/src/environments/environment.ts",
+                  "with": "apps/lms-admin/src/environments/environment.prod.ts"
+                },
+                {
+                  "replace": "apps/lms-admin/src/assets/app-config.ts",
+                  "with": "apps/lms-admin/src/assets/app-config.production.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "lms-admin:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "lms-admin:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "lms-admin:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/lms-admin/tsconfig.app.json",
+              "apps/lms-admin/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/lms-admin/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/lms-admin/jest.config.js",
+            "tsConfig": "apps/lms-admin/tsconfig.spec.json",
+            "setupFile": "apps/lms-admin/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "lms-admin-e2e": {
+      "root": "apps/lms-admin-e2e",
+      "sourceRoot": "apps/lms-admin-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/lms-admin-e2e/cypress.json",
+            "tsConfig": "apps/lms-admin-e2e/tsconfig.e2e.json",
+            "devServerTarget": "lms-admin:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "lms-admin:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/lms-admin-e2e/tsconfig.e2e.json",
+            "exclude": ["**/node_modules/**", "!apps/lms-admin-e2e/**"]
+          }
+        }
+      }
+    },
+    "lms-authors": {
+      "projectType": "application",
+      "schematics": {
+        "@nrwl/workspace:component": {
+          "style": "scss"
+        }
+      },
+      "root": "apps/lms-authors",
+      "sourceRoot": "apps/lms-authors/src",
+      "prefix": "angularlicious",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/apps/lms-authors",
+            "index": "apps/lms-authors/src/index.html",
+            "main": "apps/lms-authors/src/main.ts",
+            "polyfills": "apps/lms-authors/src/polyfills.ts",
+            "tsConfig": "apps/lms-authors/tsconfig.app.json",
+            "assets": [
+              "apps/lms-authors/src/favicon.ico",
+              "apps/lms-authors/src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/purple-green.css",
+              "apps/lms-authors/src/styles.scss",
+              "node_modules/ngx-toastr/toastr.css",
+              "apps/lms-authors/src/assets/scss/black-dashboard.scss",
+              "apps/lms-authors/src/assets/css/nucleo-icons.css",
+              "apps/lms-authors/src/assets/demo/demo.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/lms-authors/src/environments/environment.ts",
+                  "with": "apps/lms-authors/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "lms-authors:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "lms-authors:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "lms-authors:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "apps/lms-authors/tsconfig.app.json",
+              "apps/lms-authors/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/lms-authors/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/lms-authors/jest.config.js",
+            "tsConfig": "apps/lms-authors/tsconfig.spec.json",
+            "setupFile": "apps/lms-authors/src/test-setup.ts"
+          }
+        }
+      }
+    },
+    "lms-authors-e2e": {
+      "root": "apps/lms-authors-e2e",
+      "sourceRoot": "apps/lms-authors-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/lms-authors-e2e/cypress.json",
+            "tsConfig": "apps/lms-authors-e2e/tsconfig.e2e.json",
+            "devServerTarget": "lms-authors:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "lms-authors:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "apps/lms-authors-e2e/tsconfig.e2e.json",
+            "exclude": ["**/node_modules/**", "!apps/lms-authors-e2e/**"]
+          }
         }
       }
     }

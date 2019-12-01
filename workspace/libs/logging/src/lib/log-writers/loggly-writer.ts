@@ -4,23 +4,30 @@ import { ConfigurationService } from '@angularlicious/configuration';
 import { Optional } from '@angular/core';
 import { LogglyService } from 'ngx-loggly-logger';
 import { LoggingService } from '../logging.service';
-import { IConfiguration } from '@angularlicious/configuration';
-import { LogglyConfig } from './../config/loggly-config';
+import { IConfiguration, LogglyConfig } from '@angularlicious/configuration';
 
 export class LogglyWriter extends LogWriter {
   config: LogglyConfig;
 
-  constructor(@Optional() private configService: ConfigurationService, private loggingService: LoggingService, private loggly: LogglyService) {
+  constructor(
+    @Optional() private configService: ConfigurationService,
+    private loggingService: LoggingService,
+    private loggly: LogglyService
+  ) {
     super();
     if (this.configService && this.loggingService) {
-      this.configService.settings$.subscribe(settings => this.handleSettings(settings));
-      this.loggingService.logEntries$.subscribe(entry => this.handleLogEntry(entry));
+      this.configService.settings$.subscribe(settings =>
+        this.handleSettings(settings)
+      );
+      this.loggingService.logEntries$.subscribe(entry =>
+        this.handleLogEntry(entry)
+      );
     }
   }
 
   handleSettings(settings: IConfiguration) {
     if (settings) {
-      this.config = settings as LogglyConfig;
+      this.config = settings.logglyConfig;
       this.hasWriter = true;
       console.log(`Initializing Loggly writer for messages.`);
     }
@@ -47,8 +54,8 @@ export class LogglyWriter extends LogWriter {
     if (this.hasWriter) {
       try {
         this.loggly.push({
-          logglyKey: this.config.logglyConfig.apiKey,
-          sendConsoleErrors: this.config.logglyConfig.sendConsoleErrors,
+          logglyKey: this.config.apiKey,
+          sendConsoleErrors: this.config.sendConsoleErrors,
         });
 
         if (this.targetEntry.tags && this.targetEntry.tags.length > 0) {
@@ -56,7 +63,9 @@ export class LogglyWriter extends LogWriter {
           this.loggly.push({ tag: tags });
         }
       } catch (error) {
-        const message = `${this.targetEntry.application}.LogglyWriter: ${{ ...error }}`;
+        const message = `${this.targetEntry.application}.LogglyWriter: ${{
+          ...error,
+        }}`;
         console.error(message);
       }
     }
@@ -77,6 +86,10 @@ export class LogglyWriter extends LogWriter {
    * @param logEntry
    */
   formatEntry(logEntry: ILogEntry): string {
-    return `application:${logEntry.application}; source:${logEntry.source}; timestamp:${logEntry.timestamp.toUTCString()}; message:${logEntry.message}`;
+    return `application:${logEntry.application}; source:${
+      logEntry.source
+    }; timestamp:${logEntry.timestamp.toUTCString()}; message:${
+      logEntry.message
+    }`;
   }
 }

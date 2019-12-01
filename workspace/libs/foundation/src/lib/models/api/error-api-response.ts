@@ -1,5 +1,5 @@
 import { ApiResponse } from './api-response';
-import { ApiErrorMessage } from './api-error-message';
+import { ApiMessage } from './api-message';
 
 /**
  * Use to provide error information from an API. You can also
@@ -10,5 +10,5 @@ import { ApiErrorMessage } from './api-error-message';
  * errors for the specified request.
  */
 export class ErrorApiResponse<T> extends ApiResponse<T> {
-  Errors: ApiErrorMessage[] = [];
+  Errors: ApiMessage[] = [];
 }

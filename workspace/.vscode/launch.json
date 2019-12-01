@@ -7,6 +7,26 @@
     {
       "type": "chrome",
       "request": "launch",
+      "name": "LMS Admin",
+      "url": "http://localhost:8484",
+      "webRoot": "${workspaceFolder}",
+      "pathMapping": {
+        "/": "${workspaceFolder}"
+      }
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "LMS Authors",
+      "url": "http://localhost:8787",
+      "webRoot": "${workspaceFolder}",
+      "pathMapping": {
+        "/": "${workspaceFolder}"
+      }
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
       "name": "LMS",
       "url": "http://localhost:4200",
       "webRoot": "${workspaceFolder}",

@@ -1,4 +1,4 @@
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 // // import { Response } from '@angular/http';
 
 import { Action } from '@angularlicious/actions';
@@ -14,7 +14,6 @@ import { LoggingService } from '@angularlicious/logging';
 import { Severity } from '@angularlicious/logging';
 import { HttpBaseService } from './http-base.service';
 import { ErrorResponse } from './models/error-response.model';
-import { ServiceError } from './models/service-error.model';
 
 /**
  * This is the application's base Action class that provides implementation of pipeline methods - pre/post
@@ -91,7 +90,7 @@ export class ActionBase extends Action {
       const errorResponse = new ErrorResponse();
       errorResponse.IsSuccess = false;
       errorResponse.Message = `Validation errors exist.`;
-      this.response = Observable.throw(errorResponse);
+      this.response = throwError(errorResponse);
     }
     this.actionResult = this.serviceContext.isGood() ? ActionResult.Success : ActionResult.Fail;
     return this.actionResult;

@@ -4,9 +4,11 @@ import { Severity } from './severity.enum';
 import { IConfiguration } from '@angularlicious/configuration';
 import { ConfigurationService } from '@angularlicious/configuration';
 import { LogEntry } from './log-entry';
-import { Subject, ReplaySubject } from 'rxjs';
+import { ReplaySubject, Observable } from 'rxjs';
 import { ILogEntry } from './i-log-entry';
-import { LoggingConfig } from '@angularlicious/logging';
+import { LoggingConfig } from '@angularlicious/configuration';
+import { Guid } from 'guid-typescript';
+import { take } from 'rxjs/operators';
 
 @Injectable()
 export class LoggingService {
@@ -14,31 +16,61 @@ export class LoggingService {
   source: string;
   severity: Severity;
   message: string;
-  timestamp: Date;
-  applicationName = 'application';
-  version = '0.0.0';
+  timestamp: Date = new Date();
+  applicationName: string;
+  version: string;
   isProduction: boolean;
   config: LoggingConfig;
+  id: Guid = Guid.create();
 
-  logEntries$: Subject<ILogEntry> = new ReplaySubject<ILogEntry>(1);
+  private logEntriesSubject: ReplaySubject<ILogEntry> = new ReplaySubject<
+    ILogEntry
+  >(1);
+  logEntries$: Observable<ILogEntry> = this.logEntriesSubject.asObservable();
 
   /**
    * The [LoggingService] constructor.
    */
   constructor(@Optional() public configService: ConfigurationService) {
-    this.timestamp = new Date(Date.now());
-    this.log(this.serviceName, Severity.Information, `Starting logging service at: ${this.timestamp}`);
+    this.log(
+      this.serviceName,
+      Severity.Information,
+      `Starting logging service [${this.id.toString()}] at: ${this.timestamp}`
+    );
+    this.initializeService(configService);
+  }
 
+  /**
+   * Use to initialize the logging service. Retrieves
+   * application configuration settings.
+   *
+   * @param configService contains the configuration settings for the application
+   */
+  private initializeService(configService: ConfigurationService) {
     if (configService) {
-      this.configService.settings$.subscribe(settings => this.handleSettings(settings));
+      this.configService.settings$
+        .pipe(take(1))
+        .subscribe(settings => this.handleSettings(settings));
     }
   }
 
+  /**
+   * Use to handle settings from the configuration service.
+   * @param settings
+   */
   handleSettings(settings: IConfiguration) {
-    this.config = settings as LoggingConfig;
-    this.applicationName = this.config && this.config.loggingConfig.applicationName ? this.config.loggingConfig.applicationName : 'application';
-    this.version = this.config && this.config.loggingConfig.version ? this.config.loggingConfig.version : '0.0.0';
-    this.isProduction = this.config && this.config.loggingConfig.isProduction ? this.config.loggingConfig.isProduction : false;
+    if (settings) {
+      this.config = settings.loggingConfig;
+
+      this.applicationName =
+        this.config && this.config.applicationName
+          ? this.config.applicationName
+          : 'Angular';
+      this.isProduction =
+        this.config && this.config.isProduction
+          ? this.config.isProduction
+          : false;
+    }
   }
 
   /**
@@ -58,7 +90,19 @@ export class LoggingService {
     this.message = message;
     this.timestamp = new Date(Date.now());
 
-    const logEntry = new LogEntry(this.applicationName, this.source, this.severity, this.message, tags);
-    this.logEntries$.next(logEntry);
+    if (tags) {
+      tags.push(`LoggerId:${this.id.toString()}`);
+    } else {
+      tags = [`LoggerId:${this.id.toString()}`];
+    }
+
+    const logEntry = new LogEntry(
+      this.applicationName,
+      this.source,
+      this.severity,
+      this.message,
+      tags
+    );
+    this.logEntriesSubject.next(logEntry);
   }
 }
