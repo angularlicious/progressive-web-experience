@@ -1,0 +1,45 @@
+{
+  // Use IntelliSense to learn about possible attributes.
+  // Hover to view descriptions of existing attributes.
+  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "LMS Admin",
+      "url": "http://localhost:8484",
+      "webRoot": "${workspaceFolder}",
+      "pathMapping": {
+        "/": "${workspaceFolder}"
+      }
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "LMS Authors",
+      "url": "http://localhost:8787",
+      "webRoot": "${workspaceFolder}",
+      "pathMapping": {
+        "/": "${workspaceFolder}"
+      }
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "LMS",
+      "url": "http://localhost:4200",
+      "webRoot": "${workspaceFolder}",
+      "pathMapping": {
+        "/": "${workspaceFolder}"
+      },
+      "sourceMapPathOverrides": {
+        "webpack:///./*": "${webRoot}/*",
+        "webpack:///src/*": "${webRoot}/*",
+        "webpack:///*": "*",
+        "webpack:///./~/*": "${webRoot}/node_modules/*",
+        "meteor://💻app/*": "${webRoot}/*"
+      }
+    }
+  ]
+}

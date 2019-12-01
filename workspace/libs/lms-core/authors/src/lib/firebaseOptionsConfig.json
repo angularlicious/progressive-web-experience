@@ -1,0 +1,8 @@
+{
+  "apiKey": "AIzaSyCcPPAdpUUuO3Kczc3LWyrYmwC8Ghxiwr0",
+  "authDomain": "angular-architecture-web.web.app",
+  "databaseURL": "https://angular-architecture-web.firebaseio.com",
+  "projectId": "angular-architecture-web",
+  "storageBucket": "angular-architecture-web.appspot.com",
+  "messagingSenderId": ""
+}
