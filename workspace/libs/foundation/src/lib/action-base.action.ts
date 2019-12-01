@@ -36,7 +36,7 @@ import { ErrorResponse } from './models/error-response.model';
  *		3. finish();
  */
 
-export class ActionBase extends Action {
+export abstract class ActionBase extends Action {
   serviceContext: ServiceContext;
   response: Observable<any>;
   httpBase: HttpBaseService;
