@@ -789,6 +789,41 @@
           }
         }
       }
+    },
+    "material-design": {
+      "projectType": "library",
+      "root": "libs/material-design",
+      "sourceRoot": "libs/material-design/src",
+      "prefix": "angularlicious",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "libs/material-design/tsconfig.lib.json",
+            "project": "libs/material-design/ng-package.json"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": ["libs/material-design/tsconfig.lib.json", "libs/material-design/tsconfig.spec.json"],
+            "exclude": ["**/node_modules/**", "!libs/material-design/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/material-design/jest.config.js",
+            "tsConfig": "libs/material-design/tsconfig.spec.json",
+            "setupFile": "libs/material-design/src/test-setup.ts"
+          }
+        }
+      },
+      "schematics": {
+        "@nrwl/angular:component": {
+          "styleext": "scss"
+        }
+      }
     }
   },
   "cli": {

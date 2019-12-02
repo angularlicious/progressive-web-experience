@@ -25,6 +25,25 @@ export class UiService extends ServiceBase {
     this.initialize();
   }
 
+  addCourse(course: Course) {
+    this.coursesService
+      .addCourse<Course>(course)
+      .subscribe(
+        response => this.handleAddCourseResponse(response),
+        error => this.coursesService.writeMessages(),
+        () => this.finishRequest(`Finished processing request to create a new course.`)
+      );
+  }
+
+  handleAddCourseResponse(response: Course): void {
+    if (response) {
+      this.loggingService.log(this.serviceName, Severity.Information, `Successfully created new course.`, ['Course']);
+    }
+    {
+      this.loggingService.log(this.serviceName, Severity.Warning, `Something is not right, expected a valid course..`, ['Course']);
+    }
+  }
+
   private initialize() {
     this.loggingService.log(this.serviceName, Severity.Information, `Preparing to initialize the [UI] observables.`);
     this.showCoursesSubject.next(false);
