@@ -16,8 +16,6 @@ export class AddCourseComponent extends ComponentBase implements OnInit {
   formGroup: FormGroup;
   categories = CourseCategory;
 
-  // course$: Observable<Course> = this.courseUIService.course$.asObservable();
-
   constructor(private courseUIService: UiService, private formBuilder: FormBuilder, loggingService: LoggingService, router: Router) {
     super('AddCourseComponent', loggingService, router);
   }

@@ -30,10 +30,12 @@ export class CoursesService extends ServiceBase {
   }
 
   addCourse<T>(course: Course): Observable<T> {
+    this.resetServiceContext();
     return this.businessProvider.addCourse<T>(course);
   }
 
   retrieveLatestCourses<T>(): Observable<T> {
+    this.resetServiceContext();
     return this.businessProvider.retrieveLatestCourses<T>();
   }
 
@@ -42,6 +44,7 @@ export class CoursesService extends ServiceBase {
    * @param course
    */
   retrieveCourseVideos<T>(course: Course): Observable<T> {
+    this.resetServiceContext();
     return this.businessProvider.retrieveCourseVideos<T>(course);
   }
 }

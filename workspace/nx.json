@@ -64,6 +64,9 @@
     },
     "material-design": {
       "tags": []
+    },
+    "notifications": {
+      "tags": []
     }
   }
 }
