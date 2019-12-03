@@ -1,5 +1,5 @@
 /**
- * Use to indicate the result of the action (i.e., Sucess, Fail, or Unknown).
+ * Use to indicate the result of the action (i.e., Success, Fail, or Unknown).
  */
 export enum ActionResult {
   /**
