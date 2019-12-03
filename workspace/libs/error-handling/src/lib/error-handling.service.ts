@@ -1,8 +1,7 @@
 import { Injectable, ErrorHandler } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { LoggingService, Severity } from '@angularlicious/logging';
-import { ConfigurationService, IConfiguration } from '@angularlicious/configuration';
-import { ErrorHandlingConfig } from '../../../configuration/src/lib/config/error-handling-config';
+import { ConfigurationService, ErrorHandlingConfig, IConfiguration } from '@angularlicious/configuration';
 import { noop } from 'rxjs';
 import { take } from 'rxjs/operators';
 

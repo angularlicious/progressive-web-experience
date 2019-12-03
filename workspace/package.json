@@ -38,6 +38,7 @@
     "package:error-handling": "ng build error-handling && npm link dist/libs/error-handling",
     "package:foundation": "ng build foundation && npm link dist/libs/foundation",
     "package:http-service": "ng build http-service && npm link dist/libs/http-service",
+    "package:notifications": "ng build notifications && npm link dist/libs/notifications",
     "package:components": "ng build components && npm link dist/libs/components",
     "update": "ng update @nrwl/workspace",
     "update:check": "ng update",

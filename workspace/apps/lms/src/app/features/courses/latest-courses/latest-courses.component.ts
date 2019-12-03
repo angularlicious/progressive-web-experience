@@ -13,8 +13,8 @@ import { Course } from '@angularlicious/lms-core/common';
   styleUrls: ['./latest-courses.component.css'],
 })
 export class LatestCoursesComponent extends ComponentBase implements OnInit {
-  public readonly latestCourses$: Observable<Course[]> = this.uiService.latestCourses$.asObservable();
-  public readonly showCourses$: Observable<boolean> = this.uiService.showCourses$.asObservable();
+  public readonly latestCourses$: Observable<Course[]> = this.uiService.latestCourses$;
+  public readonly showCourses$: Observable<boolean> = this.uiService.showCourses$;
 
   constructor(private uiService: CoursesUIService, loggingService: LoggingService, router: Router) {
     super('LatestCoursesComponent', loggingService, router);

@@ -29,7 +29,9 @@
       "@angularlicious/logging": ["libs/logging/src/index.ts"],
       "@angularlicious/rules-engine": ["libs/rules-engine/src/index.ts"],
       "@angularlicious/security": ["libs/security/src/index.ts"],
-      "@angularlicious/lms-features/courses": ["libs/lms-feature/courses/src/index.ts"]
+      "@angularlicious/lms-features/courses": ["libs/lms-feature/courses/src/index.ts"],
+      "@angularlicious/material-design": ["libs/material-design/src/index.ts"],
+      "@angularlicious/notifications": ["libs/notifications/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
