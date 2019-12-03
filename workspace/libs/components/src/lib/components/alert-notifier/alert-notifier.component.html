@@ -1,0 +1,6 @@
+<ng-container *ngIf="notification$ | async as notification">
+  <h3>{{ notification.title }}</h3>
+  <ul>
+    <li *ngFor="let item of notification.messages">{{ item }}</li>
+  </ul>
+</ng-container>
