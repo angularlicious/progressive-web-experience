@@ -4,14 +4,13 @@ import { LoggingService, Severity } from '@angularlicious/logging';
 import { Course } from '@angularlicious/lms-core/common';
 import { Subscription, ReplaySubject, Observable } from 'rxjs';
 import { CoursesService } from '@angularlicious/lms-core/courses';
+import { ServiceContext } from '@angularlicious/rules-engine';
+import { NotificationsService, Notification } from '@angularlicious/notifications';
 
 @Injectable()
 export class UiService extends ServiceBase {
   // use to manage state for the [course] collection and item(s);
   private courses: Course[] = [];
-
-  // setup for [Course] collection Observable
-  // latestCoursesSubscription: Subscription;
 
   private latestCoursesSubject: ReplaySubject<Course[]> = new ReplaySubject<Course[]>(1);
   public readonly latestCourses$: Observable<Course[]> = this.latestCoursesSubject.asObservable();
@@ -19,10 +18,48 @@ export class UiService extends ServiceBase {
   private showCoursesSubject: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
   public readonly showCourses$: Observable<boolean> = this.showCoursesSubject.asObservable();
 
-  constructor(loggingService: LoggingService, private coursesService: CoursesService) {
+  constructor(loggingService: LoggingService, private notifications: NotificationsService, private coursesService: CoursesService) {
     super('UiServiceService', loggingService);
 
     this.initialize();
+  }
+
+  /**
+   * Use to add a new [Course] to the database collection.
+   * @param course
+   */
+  addCourse(course: Course) {
+    this.notifications.reset();
+    this.coursesService
+      .addCourse<Course>(course)
+      .subscribe(
+        response => this.handleAddCourseResponse(response),
+        error => this.handleAddCourseErrors(this.coursesService.serviceContext),
+        () => this.finishRequest(`Finished processing request to create a new course.`)
+      );
+  }
+
+  /**
+   * Use to retrieve any error messages from the service. Handle by
+   * putting messages on the notifications service.
+   */
+  handleAddCourseErrors(serviceContext: ServiceContext): void {
+    const messages = this.retrieveErrorMessages(serviceContext);
+    const notification = new Notification('Problem adding new course...', messages);
+
+    this.notifications.add(notification);
+  }
+
+  /**
+   * Use to handle the response for adding a course.
+   */
+  handleAddCourseResponse(response: Course): void {
+    if (response) {
+      this.loggingService.log(this.serviceName, Severity.Information, `Successfully created new course.`, ['Course']);
+    }
+    {
+      this.loggingService.log(this.serviceName, Severity.Warning, `Something is not right, expected a valid course..`, ['Course']);
+    }
   }
 
   private initialize() {

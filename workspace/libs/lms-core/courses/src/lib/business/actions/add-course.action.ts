@@ -8,7 +8,7 @@ export class AddCourseAction<T> extends BusinessActionBase<T> {
   }
 
   preValidateAction() {
-    this.validationContext.addRule(new CourseIsValidRule('CourseIsNotNull', 'The course information is not valid.', this.course, this.showRuleMessages));
+    this.validationContext.addRule(new CourseIsValidRule('CourseIsValid', 'The course information is not valid.', this.course, this.showRuleMessages));
   }
 
   performAction() {

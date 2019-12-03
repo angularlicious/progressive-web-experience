@@ -180,4 +180,19 @@ export class ServiceBase {
       });
     }
   }
+
+  /**
+   * Use to retrieve the error messages from the specified [ServiceContext].
+   *
+   * @parm: serviceContext: A context object containing messages for the specified request.
+   */
+  retrieveErrorMessages(serviceContext: ServiceContext): Array<string> {
+    const messages = Array<string>();
+    serviceContext.Messages.forEach(e => {
+      if (e.MessageType === MessageType.Error && e.DisplayToUser) {
+        messages.push(e.Message);
+      }
+    });
+    return messages;
+  }
 }

@@ -37,8 +37,10 @@ export class CoursesUIService extends ServiceBase {
 
   // setup for [Course] collection Observable
   latestCoursesSubscription: Subscription;
-  latestCourses$: ReplaySubject<Course[]> = new ReplaySubject<Course[]>(1);
-  showCourses$: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
+  private latestCoursesSubject: ReplaySubject<Course[]> = new ReplaySubject<Course[]>(1);
+  public readonly latestCourses$: Observable<Course[]> = this.latestCoursesSubject.asObservable();
+  private showCoursesSubject: ReplaySubject<boolean> = new ReplaySubject<boolean>(1);
+  public readonly showCourses$: Observable<boolean> = this.showCoursesSubject.asObservable();
 
   // setup for [Video] collection Observable
   videos$: ReplaySubject<Video[]> = new ReplaySubject<Video[]>(1);
@@ -96,7 +98,7 @@ export class CoursesUIService extends ServiceBase {
 
   private initialize() {
     this.loggingService.log(this.serviceName, Severity.Information, `Preparing to initialize the [UI] observables.`);
-    this.showCourses$.next(false);
+    this.showCoursesSubject.next(false);
     this.showCourse$.next(false);
 
     this.coursesService.retrieveLatestCourses<Course[]>().subscribe(
@@ -198,12 +200,12 @@ export class CoursesUIService extends ServiceBase {
     if (response && response.length > 0) {
       this.loggingService.log(this.serviceName, Severity.Information, `Processing valid response with [${response.length}] videos.`);
       this.courses = response;
-      this.latestCourses$.next(this.courses);
-      this.showCourses$.next(true);
+      this.latestCoursesSubject.next(this.courses);
+      this.showCoursesSubject.next(true);
     } else {
       this.loggingService.log(this.serviceName, Severity.Warning, `The response does not contain any videos.`);
-      this.showCourses$.next(false);
-      this.latestCourses$.next([]);
+      this.showCoursesSubject.next(false);
+      this.latestCoursesSubject.next([]);
     }
   }
 }

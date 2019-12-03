@@ -61,6 +61,12 @@
     },
     "lms-authors-e2e": {
       "tags": []
+    },
+    "material-design": {
+      "tags": []
+    },
+    "notifications": {
+      "tags": []
     }
   }
 }

@@ -44,6 +44,8 @@ export class FirestoreCourseRepositoryService extends ServiceBase {
     this.course$ = this.courseDocument.valueChanges();
 
     return this.course$;
+
+    // this.firestore.collection(this.COURSES).doc(courseId).ref.get().then()
   }
 
   public retrieveLatestCourses<T>(): Observable<T> {
