@@ -67,6 +67,9 @@
     },
     "notifications": {
       "tags": []
+    },
+    "console-logger": {
+      "tags": []
     }
   }
 }

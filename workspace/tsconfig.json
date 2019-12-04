@@ -32,6 +32,7 @@
       "@angularlicious/lms-features/courses": ["libs/lms-feature/courses/src/index.ts"],
       "@angularlicious/material-design": ["libs/material-design/src/index.ts"],
       "@angularlicious/notifications": ["libs/notifications/src/index.ts"]
+      // "@angularlicious/console-logger": ["libs/console-logger/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
