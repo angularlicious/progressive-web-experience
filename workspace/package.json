@@ -40,6 +40,7 @@
     "package:http-service": "ng build http-service && npm link dist/libs/http-service",
     "package:notifications": "ng build notifications && npm link dist/libs/notifications",
     "package:components": "ng build components && npm link dist/libs/components",
+    "package:console": "ng build console-logger && npm link dist/libs/console-logger",
     "update": "ng update @nrwl/workspace",
     "update:check": "ng update",
     "workspace-schematic": "nx workspace-schematic",
