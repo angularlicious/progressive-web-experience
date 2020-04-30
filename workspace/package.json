@@ -79,7 +79,7 @@
     "googleapis": "40.0.0",
     "guid-typescript": "^1.0.9",
     "hammerjs": "2.0.8",
-    "jquery": "3.4.1",
+    "jquery": "3.5.0",
     "moment": "2.24.0",
     "ngx-loggly-logger": "7.0.3",
     "ngx-toastr": "10.0.4",
